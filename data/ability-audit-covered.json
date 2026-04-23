@@ -1,0 +1,449 @@
+[
+  {
+    "god": "Agni",
+    "slot": "A01",
+    "name": "Noxious Fumes",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Amaterasu",
+    "slot": "A04",
+    "name": "Dazzling Offensive",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Anhur",
+    "slot": "A01",
+    "name": null,
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Anhur",
+    "slot": "A04",
+    "name": null,
+    "coverage": [
+      "AttackCount token covered by custom handler/hit-count override",
+      "channel hit count covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Anubis",
+    "slot": "A01",
+    "name": "Plague Of Locusts",
+    "coverage": [
+      "AttackCount token covered by custom handler/hit-count override",
+      "channel hit count covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Anubis",
+    "slot": "A03",
+    "name": "Grasping Hands",
+    "coverage": [
+      "AttackCount token covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Anubis",
+    "slot": "A04",
+    "name": "Death Gaze",
+    "coverage": [
+      "AttackCount token covered by custom handler/hit-count override",
+      "channel hit count covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Ares",
+    "slot": "A03",
+    "name": "Searing Flesh",
+    "coverage": [
+      "channel hit count covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Ares",
+    "slot": "A04",
+    "name": "No Escape",
+    "coverage": [
+      "phase damage rows are handled by the generic resolver; Channel text is pull/CC timing"
+    ]
+  },
+  {
+    "god": "Artemis",
+    "slot": "A01",
+    "name": "Transgressor's Fate",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Artio",
+    "slot": "A03",
+    "name": "Life Tap ",
+    "coverage": [
+      "channel hit count covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Athena",
+    "slot": "A03",
+    "name": "Shield Wall",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Athena",
+    "slot": "A04",
+    "name": "Defender Of Olympus",
+    "coverage": [
+      "channel hit count covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Bacchus",
+    "slot": "A01",
+    "name": "Chug",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Bacchus",
+    "slot": "A03",
+    "name": "Belch Of The Gods",
+    "coverage": [
+      "AttackCount token covered by custom handler/hit-count override",
+      "channel hit count covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Bari",
+    "slot": "A04",
+    "name": "Spirit's Cadence",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Cabrakan",
+    "slot": "A03",
+    "name": "Tremors",
+    "coverage": [
+      "channel hit count covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Cernunnos",
+    "slot": "A02",
+    "name": "Bramble Blast",
+    "coverage": [
+      "AttackCount token covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Cernunnos",
+    "slot": "A03",
+    "name": "Horn Charge",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Chiron",
+    "slot": "A02",
+    "name": "Masterful Shot",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Cupid",
+    "slot": "A01",
+    "name": "Heart Bomb",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Danzaburou",
+    "slot": "A01",
+    "name": "Fool's Gold",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Danzaburou",
+    "slot": "A04",
+    "name": "Uproarious Rocket",
+    "coverage": [
+      "channel hit count covered by custom handler/hit-count override",
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Fenrir",
+    "slot": "A03",
+    "name": "Brutalize",
+    "coverage": [
+      "channel hit count covered by custom handler/hit-count override",
+      "multi-phase shape covered by custom handler",
+      "tooltip hit count 4 covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Ganesha",
+    "slot": "A02",
+    "name": "Ohm",
+    "coverage": [
+      "channel hit count covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Gilgamesh",
+    "slot": "A01",
+    "name": "Sun-forged Scimitar",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Gilgamesh",
+    "slot": "A02",
+    "name": "Drop Kick",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Gilgamesh",
+    "slot": "A04",
+    "name": "Winds of Shamash",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Hades",
+    "slot": "A04",
+    "name": "Pillar Of Agony",
+    "coverage": [
+      "channel hit count covered by custom handler/hit-count override",
+      "tooltip hit count 8 covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Hecate",
+    "slot": "A04",
+    "name": "Open the Gates",
+    "coverage": [
+      "channel hit count covered by custom handler/hit-count override",
+      "multi-phase rows covered by generic phase resolver",
+      "tooltip hit count 3 covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Ishtar",
+    "slot": "A03",
+    "name": "Jolt",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Ishtar",
+    "slot": "A04",
+    "name": "Blades of Retribution",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Kali",
+    "slot": "A03",
+    "name": "Incense",
+    "coverage": [
+      "rupture passive bonus rows are consumed by the engine with local rank values"
+    ]
+  },
+  {
+    "god": "Khepri",
+    "slot": "A02",
+    "name": "Rising Dawn",
+    "coverage": [
+      "tooltip hit count 11 covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Kukulkan",
+    "slot": "A03",
+    "name": "Whirlwind",
+    "coverage": [
+      "tooltip hit count 6 covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Loki",
+    "slot": "A01",
+    "name": "Vanish",
+    "coverage": [
+      "tooltip hit count 4 covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Loki",
+    "slot": "A02",
+    "name": "Agonizing Visions",
+    "coverage": [
+      "AttackCount token covered by custom handler/hit-count override",
+      "stack-like rows covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Loki",
+    "slot": "A03",
+    "name": "Flurry Strike",
+    "coverage": [
+      "channel hit count covered by custom handler/hit-count override",
+      "multi-phase shape covered by custom handler",
+      "tooltip hit count 6 covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Loki",
+    "slot": "A04",
+    "name": "Assassinate",
+    "coverage": [
+      "multi-phase shape covered by custom handler"
+    ]
+  },
+  {
+    "god": "Mercury",
+    "slot": "A02",
+    "name": "Maximum Velocity",
+    "coverage": [
+      "passive movement-speed row is non-damage and the active attack-speed buff is generic"
+    ]
+  },
+  {
+    "god": "Mordred",
+    "slot": "A04",
+    "name": "Heart Slash",
+    "coverage": [
+      "channel hit count covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Ne_Zha",
+    "slot": "A01",
+    "name": null,
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Ne_Zha",
+    "slot": "A04",
+    "name": null,
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Neith",
+    "slot": "A04",
+    "name": "World Weaver",
+    "coverage": [
+      "channel hit count covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Nut",
+    "slot": "A04",
+    "name": "Skyfall",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Pele",
+    "slot": "A01",
+    "name": "Pyroclast",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Poseidon",
+    "slot": "A03",
+    "name": "Whirlpool",
+    "coverage": [
+      "tooltip hit count 6 covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Rama",
+    "slot": "A03",
+    "name": "Rolling Assault",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Sol",
+    "slot": "A01",
+    "name": "Radiance",
+    "coverage": [
+      "AttackCount token covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Thor",
+    "slot": "A03",
+    "name": "Berserker Barrage",
+    "coverage": [
+      "channel hit count covered by custom handler/hit-count override",
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Tsukuyomi",
+    "slot": "A02",
+    "name": "Kusarigama",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Ymir",
+    "slot": "A04",
+    "name": "Shards Of Ice",
+    "coverage": [
+      "channel hit count covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "Zeus",
+    "slot": "A03",
+    "name": "Detonate Charge",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
+    "god": "Zeus",
+    "slot": "A04",
+    "name": "Lightning Storm",
+    "coverage": [
+      "AttackCount token covered by custom handler/hit-count override",
+      "channel hit count covered by custom handler/hit-count override"
+    ]
+  }
+]

@@ -1,0 +1,5179 @@
+{
+  "_schema": {
+    "description": "Per-ability cast/damage timing data for the sim engine. Generated from tools/SmiteAssetProbe/out/anim-timings.json via scripts/build-ability-timings.py. Durations are mined from the ACL TracksHeader in each AnimSequence's compressed bone data. Manual overrides in _manualOverrides merge on top.",
+    "fields": {
+      "animDuration": "Full AnimSequence length in seconds (from ACL NumSamples/SampleRate)",
+      "castDuration": "Seconds until the attacker can take the next action. For most abilities this equals animDuration.",
+      "damageApplyOffset": "Seconds from cast start until first damage lands",
+      "channelDuration": "Total channel time for multi-hit channels",
+      "hitInterval": "Seconds between hits in a channel",
+      "finalHitOffset": "When the last/heavy hit lands, for phase abilities",
+      "_source": "Provenance note",
+      "_altAnims": "Alternative animation variants found for this slot"
+    }
+  },
+  "_genericDefaults": {
+    "direct": {
+      "castDuration": 0.35,
+      "damageApplyOffset": 0.2
+    },
+    "dot": {
+      "castDuration": 0.35,
+      "damageApplyOffset": 0.5
+    },
+    "channel": {
+      "castDuration": 2.0,
+      "hitInterval": 0.4,
+      "damageApplyOffset": 0.4
+    },
+    "burst": {
+      "castDuration": 0.5,
+      "damageApplyOffset": 0.0
+    }
+  },
+  "Achilles": {
+    "A01": {
+      "animDuration": 0.733,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.433,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.433,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03_B (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_F",
+          "duration": 0.433
+        },
+        {
+          "name": "Offhand_03_L",
+          "duration": 0.433
+        },
+        {
+          "name": "Offhand_03_R",
+          "duration": 0.433
+        },
+        {
+          "name": "Offhand_03_Fire",
+          "duration": 0.567
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 0.233,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04_Outro (fallback)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Outro_Miss",
+          "duration": 0.267
+        },
+        {
+          "name": "Offhand_04_Loop",
+          "duration": 0.333
+        },
+        {
+          "name": "Offhand_04_Intro",
+          "duration": 0.967
+        }
+      ]
+    },
+    "_basicChain": [
+      1.0,
+      1.033,
+      1.033
+    ]
+  },
+  "Agni": {
+    "A01": {
+      "animDuration": 0.9,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 1.167,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.967,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 0.667,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      0.467,
+      0.467,
+      0.467
+    ]
+  },
+  "Aladdin": {
+    "A01": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A02": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A03": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A04": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    }
+  },
+  "Amaterasu": {
+    "A01": {
+      "animDuration": 0.467,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.333,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02_Idle (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_02_Intro",
+          "duration": 0.1
+        },
+        {
+          "name": "Offhand_02_Outro",
+          "duration": 0.133
+        },
+        {
+          "name": "Offhand_02_Fire",
+          "duration": 0.5
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 0.367,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03_Fire (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Intro",
+          "duration": 0.367
+        },
+        {
+          "name": "Offhand_03_Miss",
+          "duration": 0.4
+        },
+        {
+          "name": "Offhand_03_Outro",
+          "duration": 0.433
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 1.033,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04_Fire_01 (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Intro",
+          "duration": 0.5
+        },
+        {
+          "name": "Offhand_04_Fire_01_Alt",
+          "duration": 1.033
+        },
+        {
+          "name": "Offhand_04_Fire_02",
+          "duration": 1.033
+        },
+        {
+          "name": "Offhand_04_Fire_02_Alt",
+          "duration": 1.033
+        },
+        {
+          "name": "Offhand_04_Fire_03",
+          "duration": 1.2
+        }
+      ]
+    },
+    "_basicChain": [
+      1.0,
+      0.533,
+      1.033
+    ]
+  },
+  "Anhur": {
+    "A01": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A02": {
+      "animDuration": 0.0,
+      "castDuration": 0.336,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A03": {
+      "animDuration": 0.0,
+      "castDuration": 0.039,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A04": {
+      "animDuration": 0.0,
+      "castDuration": 0.407,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    }
+  },
+  "Anubis": {
+    "A01": {
+      "animDuration": 3.467,
+      "castDuration": 0.05,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_Moving",
+          "duration": 3.467
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 1.4,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 1.833,
+      "castDuration": 0.05,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 2.4,
+      "castDuration": 0.6,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_04 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Intro",
+          "duration": 0.633
+        },
+        {
+          "name": "Offhand_04_Outro",
+          "duration": 0.733
+        }
+      ]
+    }
+  },
+  "Aphrodite": {
+    "A01": {
+      "animDuration": 0.8,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.9,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 1.167,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 1.267,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Leap_Intro",
+          "duration": 0.133
+        },
+        {
+          "name": "Offhand_04_Leap_Loop",
+          "duration": 0.367
+        },
+        {
+          "name": "Offhand_04_Leap_Outro",
+          "duration": 0.4
+        }
+      ]
+    },
+    "_basicChain": [
+      1.033,
+      1.033
+    ]
+  },
+  "Apollo": {
+    "A01": {
+      "animDuration": 1.2,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 1.1,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 1.2,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 0.667,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04_MovementLoop (fallback)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Outro",
+          "duration": 1.633
+        },
+        {
+          "name": "Offhand_04_Intro",
+          "duration": 2.533
+        }
+      ]
+    },
+    "_basicChain": [
+      1.033,
+      1.033,
+      1.033,
+      1.033
+    ]
+  },
+  "Ares": {
+    "A01": {
+      "animDuration": 0.533,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_Moving",
+          "duration": 0.533
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 1.267,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 1.3,
+      "castDuration": 0.05,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Outro",
+          "duration": 0.7
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 2.9,
+      "castDuration": 2.572,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      1.033,
+      0.833,
+      1.067,
+      1.267
+    ]
+  },
+  "Artemis": {
+    "A01": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A02": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A03": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A04": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    }
+  },
+  "Artio": {
+    "A01": {
+      "animDuration": 0.7,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.4,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.2,
+      "castDuration": 0.05,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03_Intro (fallback)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Outro",
+          "duration": 0.2
+        },
+        {
+          "name": "Offhand_03_Loop",
+          "duration": 1.0
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "_basicChain": [
+      1.033,
+      1.033,
+      1.033
+    ]
+  },
+  "Athena": {
+    "A01": {
+      "animDuration": 0.533,
+      "castDuration": 0.5,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_01_Fire (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_Loop",
+          "duration": 0.633
+        },
+        {
+          "name": "Offhand_01_Intro",
+          "duration": 0.833
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 0.833,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.867,
+      "castDuration": 0.563,
+      "shape": "strike",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 0.033,
+      "castDuration": 0.05,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04__Aim_CC (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04__Aim_LC",
+          "duration": 0.033
+        },
+        {
+          "name": "Offhand_04__Aim_RC",
+          "duration": 0.033
+        },
+        {
+          "name": "Offhand_04_TurnL90",
+          "duration": 0.4
+        },
+        {
+          "name": "Offhand_04_TurnR90",
+          "duration": 0.4
+        },
+        {
+          "name": "Offhand_04_Land",
+          "duration": 1.0
+        },
+        {
+          "name": "Offhand_04_Jump",
+          "duration": 3.0
+        },
+        {
+          "name": "Offhand_04_Idle",
+          "duration": 6.6
+        }
+      ]
+    },
+    "_basicChain": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "Atlas": {
+    "A01": {
+      "animDuration": 0.067,
+      "castDuration": 0.967,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_01_Aim_CC (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_Aim_LC",
+          "duration": 0.067
+        },
+        {
+          "name": "Offhand_01_Aim_RC",
+          "duration": 0.067
+        },
+        {
+          "name": "Offhand_01_Run_F_Lean_F",
+          "duration": 0.067
+        },
+        {
+          "name": "Offhand_01_Run_F_Lean_L",
+          "duration": 0.067
+        },
+        {
+          "name": "Offhand_01_Run_F_Lean_R",
+          "duration": 0.067
+        },
+        {
+          "name": "Offhand_01_Deploy_Recall",
+          "duration": 0.233
+        },
+        {
+          "name": "Offhand_01_Turn_L90",
+          "duration": 0.4
+        },
+        {
+          "name": "Offhand_01_Turn_R90",
+          "duration": 0.4
+        },
+        {
+          "name": "Offhand_01_Deploy_Outro",
+          "duration": 0.433
+        },
+        {
+          "name": "Offhand_01_Generic_Channel_Outro",
+          "duration": 0.433
+        },
+        {
+          "name": "Offhand_01_Generic_Channel_Intro",
+          "duration": 0.5
+        },
+        {
+          "name": "Offhand_01_Offhand_04",
+          "duration": 0.5
+        },
+        {
+          "name": "Offhand_01_Jump_InAir",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_01_Jump_InAir_Run_B",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_01_Jump_InAir_Run_F",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_01_Jump_InAir_Run_L",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_01_Jump_InAir_Run_R",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_01_Offhand_02_Outro",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_01_Offhand_02_Throw",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_01_Deploy_Intro",
+          "duration": 0.6
+        },
+        {
+          "name": "Offhand_01_Offhand_03_Hit",
+          "duration": 0.6
+        },
+        {
+          "name": "Offhand_01_Offhand_04_Land",
+          "duration": 0.633
+        },
+        {
+          "name": "Offhand_01_Offhand_04_Refire",
+          "duration": 0.733
+        },
+        {
+          "name": "Offhand_01_Offhand_02_Intro",
+          "duration": 0.9
+        },
+        {
+          "name": "Offhand_01_Run_B",
+          "duration": 0.967
+        },
+        {
+          "name": "Offhand_01_Run_F",
+          "duration": 0.967
+        },
+        {
+          "name": "Offhand_01_Run_L",
+          "duration": 0.967
+        },
+        {
+          "name": "Offhand_01_Run_R",
+          "duration": 0.967
+        },
+        {
+          "name": "Offhand_01_Fire_01",
+          "duration": 1.033
+        },
+        {
+          "name": "Offhand_01_Fire_02",
+          "duration": 1.033
+        },
+        {
+          "name": "Offhand_01_Fire_03",
+          "duration": 1.033
+        },
+        {
+          "name": "Offhand_01_Generic_Channel_Loop",
+          "duration": 1.267
+        },
+        {
+          "name": "Offhand_01_Offhand_02_Loop",
+          "duration": 1.5
+        },
+        {
+          "name": "Offhand_01_Jump_Landing",
+          "duration": 1.633
+        },
+        {
+          "name": "Offhand_01_Jump_Run_B_Landing",
+          "duration": 1.633
+        },
+        {
+          "name": "Offhand_01_Jump_Run_F_Landing",
+          "duration": 1.633
+        },
+        {
+          "name": "Offhand_01_Jump_Run_L_Landing",
+          "duration": 1.633
+        },
+        {
+          "name": "Offhand_01_Jump_Run_R_Landing",
+          "duration": 1.633
+        },
+        {
+          "name": "Offhand_01_Offhand_03_Charge",
+          "duration": 3.0
+        },
+        {
+          "name": "Offhand_01_Idle",
+          "duration": 5.633
+        },
+        {
+          "name": "Offhand_01_Recall",
+          "duration": 6.367
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 0.533,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02_Throw (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_02_Outro",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_02_Intro",
+          "duration": 0.933
+        },
+        {
+          "name": "Offhand_02_Loop",
+          "duration": 1.033
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 0.7,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03_Hit (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Charge",
+          "duration": 2.967
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 0.5,
+      "castDuration": 1.1,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_04 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Land",
+          "duration": 0.667
+        },
+        {
+          "name": "Offhand_04_Refire",
+          "duration": 0.733
+        }
+      ]
+    },
+    "_basicChain": [
+      1.267,
+      1.267,
+      1.267
+    ]
+  },
+  "Awilix": {
+    "A01": {
+      "animDuration": 0.033,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01_Aim_Com_CC (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_Aim_Com_RC",
+          "duration": 0.033
+        },
+        {
+          "name": "Offhand_01_Hit_Reaction_Large_FromRight",
+          "duration": 0.033
+        },
+        {
+          "name": "Offhand_01_Hit_Reaction_Small_FromFront",
+          "duration": 0.033
+        },
+        {
+          "name": "Offhand_01_Hit_Reaction_Small_FromLeft",
+          "duration": 0.033
+        },
+        {
+          "name": "Offhand_01_Hit_Reaction_Small_FromRight",
+          "duration": 0.033
+        },
+        {
+          "name": "Offhand_01_Invulnerable",
+          "duration": 0.033
+        },
+        {
+          "name": "Offhand_01_Run_Com_F_Lean_C",
+          "duration": 0.033
+        },
+        {
+          "name": "Offhand_01_Run_Com_F_Lean_L",
+          "duration": 0.033
+        },
+        {
+          "name": "Offhand_01_Run_Com_F_Lean_R",
+          "duration": 0.033
+        },
+        {
+          "name": "Offhand_01_Aim_Com_LC",
+          "duration": 0.067
+        },
+        {
+          "name": "Offhand_01_Hit_Reaction_Large_FromBack",
+          "duration": 0.067
+        },
+        {
+          "name": "Offhand_01_Hit_Reaction_Large_FromFront",
+          "duration": 0.067
+        },
+        {
+          "name": "Offhand_01_Hit_Reaction_Large_FromLeft",
+          "duration": 0.067
+        },
+        {
+          "name": "Offhand_01_Hit_Reaction_Small_FromBack",
+          "duration": 0.067
+        },
+        {
+          "name": "Offhand_01_EyeBlink",
+          "duration": 0.3
+        },
+        {
+          "name": "Offhand_01_Turn_Com_L90",
+          "duration": 0.367
+        },
+        {
+          "name": "Offhand_01_Turn_Com_R90",
+          "duration": 0.367
+        },
+        {
+          "name": "Offhand_01_GenericChannel_Outro",
+          "duration": 0.433
+        },
+        {
+          "name": "Offhand_01_Dismount",
+          "duration": 0.5
+        },
+        {
+          "name": "Offhand_01_GenericChannel_Intro",
+          "duration": 0.5
+        },
+        {
+          "name": "Offhand_01_Jump_Com",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_01_Jump_Com_Run_B",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_01_Jump_Com_Run_BL",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_01_Jump_Com_Run_BR",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_01_Jump_Com_Run_F",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_01_Jump_Com_Run_FL",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_01_Jump_Com_Run_FR",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_01_Jump_Com_Run_L",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_01_Jump_Com_Run_R",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_01_Feared",
+          "duration": 0.567
+        },
+        {
+          "name": "Offhand_01_Run_Com_F",
+          "duration": 0.667
+        },
+        {
+          "name": "Offhand_01_Mount",
+          "duration": 0.7
+        },
+        {
+          "name": "Offhand_01_Run_Com_B",
+          "duration": 0.7
+        },
+        {
+          "name": "Offhand_01_Run_Com_BL",
+          "duration": 0.7
+        },
+        {
+          "name": "Offhand_01_Run_Com_BR",
+          "duration": 0.7
+        },
+        {
+          "name": "Offhand_01_Run_Com_FL",
+          "duration": 0.7
+        },
+        {
+          "name": "Offhand_01_Run_Com_FR",
+          "duration": 0.7
+        },
+        {
+          "name": "Offhand_01_Run_Com_L",
+          "duration": 0.7
+        },
+        {
+          "name": "Offhand_01_Run_Com_R",
+          "duration": 0.7
+        },
+        {
+          "name": "Offhand_01_KnockedUp_DownState",
+          "duration": 0.967
+        },
+        {
+          "name": "Offhand_01_KnockedUp_UpState",
+          "duration": 0.967
+        },
+        {
+          "name": "Offhand_01_DismountAttack",
+          "duration": 1.033
+        },
+        {
+          "name": "Offhand_01_Jump_Com_Landing",
+          "duration": 1.1
+        },
+        {
+          "name": "Offhand_01_Jump_Com_Run_BL_Landing",
+          "duration": 1.1
+        },
+        {
+          "name": "Offhand_01_Jump_Com_Run_BR_Landing",
+          "duration": 1.1
+        },
+        {
+          "name": "Offhand_01_Jump_Com_Run_B_Landing",
+          "duration": 1.1
+        },
+        {
+          "name": "Offhand_01_Jump_Com_Run_FL_Landing",
+          "duration": 1.1
+        },
+        {
+          "name": "Offhand_01_Jump_Com_Run_FR_Landing",
+          "duration": 1.1
+        },
+        {
+          "name": "Offhand_01_Jump_Com_Run_F_Landing",
+          "duration": 1.1
+        },
+        {
+          "name": "Offhand_01_Jump_Com_Run_L_Landing",
+          "duration": 1.1
+        },
+        {
+          "name": "Offhand_01_Jump_Com_Run_R_Landing",
+          "duration": 1.1
+        },
+        {
+          "name": "Offhand_01_GenericChannel_Loop",
+          "duration": 1.3
+        },
+        {
+          "name": "Offhand_01_Idle_Com",
+          "duration": 2.5
+        },
+        {
+          "name": "Offhand_01_Idle_Com_Var_02",
+          "duration": 2.533
+        },
+        {
+          "name": "Offhand_01_Stunned",
+          "duration": 2.667
+        },
+        {
+          "name": "Offhand_01_Idle_Com_Var_01",
+          "duration": 3.333
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 0.6,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.6,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Mounted",
+          "duration": 0.6
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 1.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Pull",
+          "duration": 1.1
+        }
+      ]
+    },
+    "_basicChain": [
+      1.033,
+      1.033,
+      1.033
+    ]
+  },
+  "Bacchus": {
+    "A01": {
+      "animDuration": 2.2,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_1_Sober-ish (shortest-primary)"
+    },
+    "A02": {
+      "animDuration": 1.0,
+      "castDuration": 0.237,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_2_Fitshaced (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_2_Sober-ish",
+          "duration": 1.0
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 1.0,
+      "castDuration": 0.17,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_3_Fitshaced (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_3_Sober-ish",
+          "duration": 1.3
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 1.067,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_4_Fitshaced (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_4_Sober-ish",
+          "duration": 1.067
+        }
+      ]
+    }
+  },
+  "Bari": {
+    "A01": {
+      "animDuration": 0.5,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01_Lob (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_Trans_Lob_to_Idle",
+          "duration": 0.5
+        },
+        {
+          "name": "Offhand_01_Serve",
+          "duration": 0.933
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 0.967,
+      "castDuration": 0.778,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_02_Fire (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_02_Intro",
+          "duration": 0.667
+        },
+        {
+          "name": "Offhand_02_Charge",
+          "duration": 2.033
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 1.167,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_B",
+          "duration": 1.133
+        },
+        {
+          "name": "Offhand_03_F",
+          "duration": 1.133
+        },
+        {
+          "name": "Offhand_03_L",
+          "duration": 1.133
+        },
+        {
+          "name": "Offhand_03_R",
+          "duration": 1.133
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 1.6,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Ghost01",
+          "duration": 1.133
+        },
+        {
+          "name": "Offhand_04_Ghost02",
+          "duration": 1.2
+        },
+        {
+          "name": "Offhand_04_Ghost03",
+          "duration": 1.2
+        },
+        {
+          "name": "Offhand_04_Bell",
+          "duration": 2.5
+        }
+      ]
+    },
+    "_basicChain": [
+      0.633,
+      0.7,
+      0.967
+    ]
+  },
+  "Baron_Samedi": {
+    "A01": {
+      "animDuration": 0.667,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.467,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.733,
+      "castDuration": 0.058,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 1.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04_Loop (fallback)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Intro",
+          "duration": 1.033
+        },
+        {
+          "name": "Offhand_04_Outro_Hit",
+          "duration": 1.033
+        },
+        {
+          "name": "Offhand_04_Outro_Miss",
+          "duration": 1.033
+        }
+      ]
+    },
+    "_basicChain": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "Bellona": {
+    "A01": {
+      "animDuration": 0.0,
+      "castDuration": 0.01,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A02": {
+      "animDuration": 0.0,
+      "castDuration": 0.979,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A03": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A04": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    }
+  },
+  "Cabrakan": {
+    "A01": {
+      "animDuration": 1.067,
+      "castDuration": 0.12,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_01 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_Moving",
+          "duration": 1.067
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 1.133,
+      "castDuration": 0.108,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_02 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_02_Still",
+          "duration": 1.133
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 1.233,
+      "castDuration": 0.235,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_03 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_ReFire",
+          "duration": 1.133
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 0.967,
+      "castDuration": 0.01,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_04 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Moving",
+          "duration": 0.967
+        }
+      ]
+    },
+    "_basicChain": [
+      1.667,
+      1.233,
+      1.2
+    ]
+  },
+  "Cerberus": {
+    "A01": {
+      "animDuration": 0.5,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01_AllActiveHeads (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_IndividualHeads",
+          "duration": 0.5
+        },
+        {
+          "name": "Offhand_01_JustTail",
+          "duration": 0.5
+        },
+        {
+          "name": "Offhand_01_JustTail_Moving",
+          "duration": 0.5
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 2.867,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_02_Intro",
+          "duration": 0.167
+        },
+        {
+          "name": "Offhand_02_Outro",
+          "duration": 0.367
+        },
+        {
+          "name": "Offhand_02_Loop",
+          "duration": 2.333
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 0.2,
+      "castDuration": 1.067,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_03_Pre (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Post",
+          "duration": 0.233
+        },
+        {
+          "name": "Offhand_03_Leap",
+          "duration": 0.733
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 1.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      1.0,
+      0.867,
+      0.867
+    ]
+  },
+  "Cernunnos": {
+    "A01": {
+      "animDuration": 0.3,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.8,
+      "castDuration": 0.05,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.867,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 1.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      0.967,
+      1.0,
+      1.0
+    ]
+  },
+  "Chaac": {
+    "A01": {
+      "animDuration": 0.767,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_Still",
+          "duration": 0.8
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 0.967,
+      "castDuration": 0.148,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_02 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_02_Still",
+          "duration": 0.967
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 1.3,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 2.167,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      1.967,
+      1.0,
+      1.0
+    ]
+  },
+  "Charon": {
+    "A01": {
+      "animDuration": 1.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.567,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.1,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03_Intro (fallback)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Loop",
+          "duration": 2.567
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 2.133,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      0.967,
+      1.033,
+      1.033
+    ]
+  },
+  "Chiron": {
+    "A01": {
+      "animDuration": 0.633,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.733,
+      "castDuration": 0.05,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.333,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03_Fire (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Outro",
+          "duration": 0.233
+        },
+        {
+          "name": "Offhand_03_Idle",
+          "duration": 2.0
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 0.633,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04_Fire (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Outro",
+          "duration": 0.433
+        },
+        {
+          "name": "Offhand_04_Intro",
+          "duration": 0.5
+        },
+        {
+          "name": "Offhand_04_Run_BL",
+          "duration": 1.333
+        },
+        {
+          "name": "Offhand_04_Idle",
+          "duration": 1.367
+        },
+        {
+          "name": "Offhand_04_Run_B",
+          "duration": 1.367
+        },
+        {
+          "name": "Offhand_04_Run_BR",
+          "duration": 1.367
+        },
+        {
+          "name": "Offhand_04_Run_F",
+          "duration": 1.367
+        },
+        {
+          "name": "Offhand_04_Run_FL",
+          "duration": 1.367
+        },
+        {
+          "name": "Offhand_04_Run_FR",
+          "duration": 1.367
+        },
+        {
+          "name": "Offhand_04_Run_L",
+          "duration": 1.367
+        },
+        {
+          "name": "Offhand_04_Run_R",
+          "duration": 1.367
+        }
+      ]
+    },
+    "_basicChain": [
+      1.033,
+      1.033,
+      1.033
+    ]
+  },
+  "Cupid": {
+    "A01": {
+      "animDuration": 0.5,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.833,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.7,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 0.633,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      0.533,
+      0.533,
+      0.533
+    ]
+  },
+  "DaJi": {
+    "A01": {
+      "animDuration": 0.4,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 2.4,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_02_Aspect_Outro",
+          "duration": 0.367
+        },
+        {
+          "name": "Offhand_02_Aspect",
+          "duration": 1.033
+        },
+        {
+          "name": "Offhand_02_Aspect_Intro",
+          "duration": 1.033
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 0.2,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03_Hit (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Outro",
+          "duration": 0.367
+        },
+        {
+          "name": "Offhand_03_Intro",
+          "duration": 0.7
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 0.533,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04_Fire (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Outro",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_04_Intro",
+          "duration": 0.8
+        },
+        {
+          "name": "Offhand_04_Idle",
+          "duration": 1.4
+        }
+      ]
+    }
+  },
+  "Danzaburou": {
+    "A01": {
+      "animDuration": 0.933,
+      "castDuration": 0.9,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.933,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.433,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Outro",
+          "duration": 0.533
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 1.8,
+      "castDuration": 0.05,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Rocket_Lean_C",
+          "duration": 0.067
+        },
+        {
+          "name": "Offhand_04_Rocket_Lean_L",
+          "duration": 0.067
+        },
+        {
+          "name": "Offhand_04_Rocket_Lean_R",
+          "duration": 0.067
+        },
+        {
+          "name": "Offhand_04_Outro",
+          "duration": 0.5
+        }
+      ]
+    },
+    "_basicChain": [
+      1.0
+    ]
+  },
+  "Discordia": {
+    "A01": {
+      "animDuration": 0.5,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.5,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.8,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03_Leap (shortest-primary)"
+    },
+    "A04": {
+      "animDuration": 1.2,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      0.967,
+      1.0,
+      1.0
+    ]
+  },
+  "Eset": {
+    "A01": {
+      "animDuration": 2.333,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.567,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 1.2,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 0.833,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      0.467,
+      0.5,
+      0.4
+    ]
+  },
+  "Fenrir": {
+    "A01": {
+      "animDuration": 1.0,
+      "castDuration": 0.77,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_01_Leap1 (shortest-primary)"
+    },
+    "A02": {
+      "animDuration": 0.667,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.5,
+      "castDuration": 0.05,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03_Attack1 (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Attack2",
+          "duration": 0.5
+        },
+        {
+          "name": "Offhand_03_Attack3",
+          "duration": 0.5
+        },
+        {
+          "name": "Offhand_03_Attack4",
+          "duration": 0.5
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 0.067,
+      "castDuration": 1.067,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_04_Additive (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Grow",
+          "duration": 0.5
+        },
+        {
+          "name": "Offhand_04_Grow_Still",
+          "duration": 0.5
+        },
+        {
+          "name": "Offhand_04_Bite",
+          "duration": 0.667
+        },
+        {
+          "name": "Offhand_04_MinionBite",
+          "duration": 0.667
+        },
+        {
+          "name": "Offhand_04_ThrowDown",
+          "duration": 0.667
+        },
+        {
+          "name": "Offhand_04_MovementBL",
+          "duration": 0.8
+        },
+        {
+          "name": "Offhand_04_MovementBR",
+          "duration": 0.8
+        },
+        {
+          "name": "Offhand_04_MovementFL",
+          "duration": 0.8
+        },
+        {
+          "name": "Offhand_04_MovementFR",
+          "duration": 0.8
+        },
+        {
+          "name": "Offhand_04_MovementB",
+          "duration": 0.833
+        },
+        {
+          "name": "Offhand_04_MovementF",
+          "duration": 0.833
+        },
+        {
+          "name": "Offhand_04_MovementL",
+          "duration": 0.833
+        },
+        {
+          "name": "Offhand_04_MovementR",
+          "duration": 0.833
+        },
+        {
+          "name": "Offhand_04_IdleHolding",
+          "duration": 4.333
+        }
+      ]
+    }
+  },
+  "Ganesha": {
+    "A01": {
+      "animDuration": 1.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.333,
+      "castDuration": 0.667,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_02_Intro (fallback)",
+      "_altAnims": [
+        {
+          "name": "Offhand_02_Outro",
+          "duration": 0.7
+        },
+        {
+          "name": "Offhand_02_Loop",
+          "duration": 2.5
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 0.433,
+      "castDuration": 2.11,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_03_Miss (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Intro",
+          "duration": 0.067
+        },
+        {
+          "name": "Offhand_03_Charge",
+          "duration": 0.667
+        },
+        {
+          "name": "Offhand_03_Hit",
+          "duration": 1.233
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 1.4,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      1.033,
+      0.8,
+      0.8,
+      1.533,
+      0.933
+    ]
+  },
+  "Geb": {
+    "A01": {
+      "animDuration": 0.333,
+      "castDuration": 0.933,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_01_Intro (fallback)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_Outro",
+          "duration": 0.9
+        },
+        {
+          "name": "Offhand_01_OutroHit",
+          "duration": 0.967
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 0.767,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.833,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 1.167,
+      "castDuration": 0.065,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      1.0,
+      1.0,
+      1.0,
+      1.033
+    ]
+  },
+  "Gilgamesh": {
+    "A01": {
+      "animDuration": 0.3,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_Moving",
+          "duration": 0.3
+        },
+        {
+          "name": "Offhand_01_Outro",
+          "duration": 1.233
+        },
+        {
+          "name": "Offhand_01_Outro_Moving",
+          "duration": 1.233
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 1.1,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 1.2,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 0.867,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Outro",
+          "duration": 0.3
+        }
+      ]
+    },
+    "_basicChain": [
+      1.067,
+      1.067,
+      1.067
+    ]
+  },
+  "Guan_Yu": {
+    "A01": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A02": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A03": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A04": {
+      "animDuration": 0.0,
+      "castDuration": 0.514,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    }
+  },
+  "Hades": {
+    "A01": {
+      "animDuration": 0.5,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01_Fire (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_Intro",
+          "duration": 0.3
+        },
+        {
+          "name": "Offhand_01_Outro",
+          "duration": 0.767
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 1.5,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.9,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 4.267,
+      "castDuration": 0.05,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    }
+  },
+  "Hecate": {
+    "A01": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "no montage found (deployable/instant — 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A02": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A03": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A04": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    }
+  },
+  "Hercules": {
+    "A01": {
+      "animDuration": 0.267,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "no montage found (deployable/instant — 0.05s floor)",
+      "_animSource": "Offhand_01_Intro (fallback)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_Outro",
+          "duration": 0.5
+        },
+        {
+          "name": "Offhand_01_TranslateLoop",
+          "duration": 0.6
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 0.567,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "no montage found (deployable/instant — 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.533,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "no montage found (deployable/instant — 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 0.9,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "no montage found (deployable/instant — 0.05s floor)",
+      "_animSource": "Offhand_04_Throw (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Intro",
+          "duration": 0.7
+        }
+      ]
+    },
+    "_basicChain": [
+      1.033,
+      1.033,
+      1.533
+    ]
+  },
+  "HouYi": {
+    "A01": {
+      "animDuration": 0.567,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01_Fire (shortest-primary)"
+    },
+    "A02": {
+      "animDuration": 0.5,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.4,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03_Intro (fallback)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Outro",
+          "duration": 1.1
+        },
+        {
+          "name": "Offhand_03_Loop",
+          "duration": 1.6
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 0.967,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    }
+  },
+  "Hun_Batz": {
+    "A01": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A02": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A03": {
+      "animDuration": 0.0,
+      "castDuration": 0.077,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A04": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "_basicChain": [
+      0.8,
+      1.033,
+      0.8
+    ]
+  },
+  "Ishtar": {
+    "A01": {
+      "animDuration": 1.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01_A_Fire (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_A_Outro",
+          "duration": 0.133
+        },
+        {
+          "name": "Offhand_01_B_Outro",
+          "duration": 0.133
+        },
+        {
+          "name": "Offhand_01_C_Outro",
+          "duration": 0.133
+        },
+        {
+          "name": "Offhand_01_A_Intro",
+          "duration": 0.4
+        },
+        {
+          "name": "Offhand_01_B_Intro",
+          "duration": 0.4
+        },
+        {
+          "name": "Offhand_01_C_Intro",
+          "duration": 0.4
+        },
+        {
+          "name": "Offhand_01_B_Fire",
+          "duration": 1.0
+        },
+        {
+          "name": "Offhand_01_C_Fire",
+          "duration": 1.0
+        },
+        {
+          "name": "Offhand_01_A_Idle",
+          "duration": 1.6
+        },
+        {
+          "name": "Offhand_01_B_Idle",
+          "duration": 1.6
+        },
+        {
+          "name": "Offhand_01_C_Idle",
+          "duration": 1.6
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 0.567,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.367,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03_Root (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Outro",
+          "duration": 0.333
+        },
+        {
+          "name": "Offhand_03_Dash",
+          "duration": 0.8
+        },
+        {
+          "name": "Offhand_03_Flip",
+          "duration": 1.0
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 1.5,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Recall",
+          "duration": 0.333
+        }
+      ]
+    },
+    "_basicChain": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "Izanami": {
+    "A01": {
+      "animDuration": 0.667,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.5,
+      "castDuration": 0.1,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.633,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03_Fire (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Intro",
+          "duration": 0.367
+        },
+        {
+          "name": "Offhand_03_Outro",
+          "duration": 0.4
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 0.833,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "Janus": {
+    "A01": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A02": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A03": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A04": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    }
+  },
+  "JingWei": {
+    "A01": {
+      "animDuration": 0.667,
+      "castDuration": 0.026,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.933,
+      "castDuration": 0.153,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_02 (exact)",
+      "_altAnims": [
+        {
+          "name": "offhand_02_Fire_01",
+          "duration": 0.8
+        },
+        {
+          "name": "Offhand_02_Fire_02",
+          "duration": 0.833
+        },
+        {
+          "name": "Offhand_02_Reload",
+          "duration": 1.0
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 1.167,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 0.933,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04_Dash_Refire (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Intro",
+          "duration": 0.733
+        },
+        {
+          "name": "Offhand_04_Dash",
+          "duration": 0.967
+        },
+        {
+          "name": "Offhand_04_Outro",
+          "duration": 1.033
+        },
+        {
+          "name": "Offhand_04_Hover",
+          "duration": 2.2
+        }
+      ]
+    },
+    "_basicChain": [
+      0.8,
+      0.833
+    ]
+  },
+  "Jormungandr": {
+    "A01": {
+      "animDuration": 0.5,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 1.7,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 1.667,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03_Idle (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Outro",
+          "duration": 0.433
+        },
+        {
+          "name": "Offhand_03_Intro",
+          "duration": 1.033
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 0.067,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04_Idle (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Outro",
+          "duration": 0.5
+        },
+        {
+          "name": "Offhand_04_Intro",
+          "duration": 1.5
+        }
+      ]
+    },
+    "_basicChain": [
+      2.733
+    ]
+  },
+  "Kali": {
+    "A01": {
+      "animDuration": 1.1,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.5,
+      "castDuration": 0.005,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.667,
+      "castDuration": 0.016,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_03 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Aspect_01",
+          "duration": 0.7
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 1.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      1.1,
+      2.167,
+      0.833
+    ]
+  },
+  "Khepri": {
+    "A01": {
+      "animDuration": 0.233,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01_Fire (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_Outro",
+          "duration": 0.333
+        },
+        {
+          "name": "Offhand_01_Intro",
+          "duration": 0.467
+        },
+        {
+          "name": "Offhand_01_Pull",
+          "duration": 0.633
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 0.633,
+      "castDuration": 0.05,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.6,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 0.467,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "Kukulkan": {
+    "A01": {
+      "animDuration": 0.967,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 1.067,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02_Run_B (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_02_Intro",
+          "duration": 0.667
+        },
+        {
+          "name": "Offhand_02_Outro",
+          "duration": 0.667
+        },
+        {
+          "name": "Offhand_02_Run_BL",
+          "duration": 1.067
+        },
+        {
+          "name": "Offhand_02_Run_BR",
+          "duration": 1.067
+        },
+        {
+          "name": "Offhand_02_Run_F",
+          "duration": 1.067
+        },
+        {
+          "name": "Offhand_02_Run_FL",
+          "duration": 1.067
+        },
+        {
+          "name": "Offhand_02_Run_FR",
+          "duration": 1.067
+        },
+        {
+          "name": "Offhand_02_Run_L",
+          "duration": 1.067
+        },
+        {
+          "name": "Offhand_02_Run_R",
+          "duration": 1.067
+        },
+        {
+          "name": "Offhand_02_Idle",
+          "duration": 2.167
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 0.967,
+      "castDuration": 0.05,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 2.267,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "Loki": {
+    "A01": {
+      "animDuration": 0.967,
+      "castDuration": 0.05,
+      "shape": "dot",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_Intro",
+          "duration": 0.233
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 0.733,
+      "castDuration": 0.183,
+      "shape": "channel",
+      "damageApplyOffset": 0.5,
+      "_castSource": "measured (user timecode 11 frames @ 60fps)",
+      "_animSource": "Offhand_02_DecoyDeploy (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_02_DecoyDeploy_Still",
+          "duration": 0.733
+        },
+        {
+          "name": "Offhand_02_Decoy_Floating",
+          "duration": 1.567
+        },
+        {
+          "name": "Offhand_02_Decoy",
+          "duration": 4.5
+        }
+      ],
+      "deployableDuration": 4.0,
+      "channelDuration": 4.0,
+      "hitInterval": 0.5,
+      "_comment": "DEPLOYABLE (GA_Loki_A02 has OnDeployableSpawned). cast = 0.183s user-measured; deployable ticks independently for ~4s with 8 hits at 0.5s intervals."
+    },
+    "A03": {
+      "animDuration": 2.033,
+      "castDuration": 1.833,
+      "shape": "channel",
+      "damageApplyOffset": 0.305,
+      "_castSource": "measured (user timecode 22:47→24:37 = 110 frames @ 60fps)",
+      "_animSource": "Offhand_03 (exact)",
+      "channelDuration": 1.833,
+      "hitInterval": 0.305,
+      "finalHitOffset": 1.833,
+      "_comment": "5 flurry + 1 final = 6 hits (BP AmountOfWeakSlashes=5). Interval = cast / 6. cast = 1.833s user-measured."
+    },
+    "A04": {
+      "animDuration": 1.667,
+      "castDuration": 0.931,
+      "shape": "strike",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_04 (exact)",
+      "finalHitOffset": 0.466,
+      "_comment": "Two-strike ult: cripple + heavy. Heavy at cast midpoint."
+    },
+    "_basicChain": [
+      1.0,
+      0.633,
+      0.633,
+      0.633,
+      1.533
+    ]
+  },
+  "Medusa": {
+    "A01": {
+      "animDuration": 0.4,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_Fire_01",
+          "duration": 0.533
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 0.7,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.667,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03_Fire (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Intro",
+          "duration": 0.1
+        },
+        {
+          "name": "Offhand_03_Loop",
+          "duration": 0.633
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 1.8,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      0.533,
+      0.533,
+      0.533
+    ]
+  },
+  "Mercury": {
+    "A01": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A02": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A03": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A04": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    }
+  },
+  "Merlin": {
+    "A01": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A02": {
+      "animDuration": 0.0,
+      "castDuration": 0.034,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A03": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A04": {
+      "animDuration": 0.0,
+      "castDuration": 0.039,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    }
+  },
+  "Mordred": {
+    "A01": {
+      "animDuration": 0.0,
+      "castDuration": 0.774,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A02": {
+      "animDuration": 0.0,
+      "castDuration": 0.205,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A03": {
+      "animDuration": 0.0,
+      "castDuration": 0.033,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A04": {
+      "animDuration": 0.0,
+      "castDuration": 0.6,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    }
+  },
+  "MorganLeFay": {
+    "A01": {
+      "animDuration": 0.7,
+      "castDuration": 0.025,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.833,
+      "castDuration": 0.178,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.8,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 0.033,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04_Aim_B (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Aim_C",
+          "duration": 0.033
+        },
+        {
+          "name": "Offhand_04_Aim_F",
+          "duration": 0.033
+        },
+        {
+          "name": "Offhand_04_Aim_L",
+          "duration": 0.033
+        },
+        {
+          "name": "Offhand_04_Aim_R",
+          "duration": 0.033
+        },
+        {
+          "name": "Offhand_04_Intro_A04",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_04_Outro_01",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_04_Outro_02",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_04_Outro_02_B04",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_04_Outro_03",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_04_Outro_03_B04",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_04_Outro_A04",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_04_Outro_04",
+          "duration": 0.667
+        },
+        {
+          "name": "Offhand_04_Outro_04_B04",
+          "duration": 0.667
+        },
+        {
+          "name": "Offhand_04_Fire_01",
+          "duration": 0.833
+        },
+        {
+          "name": "Offhand_04_Fire_01_B04",
+          "duration": 0.833
+        },
+        {
+          "name": "Offhand_04_Fire_02",
+          "duration": 0.833
+        },
+        {
+          "name": "Offhand_04_Fire_02_B04",
+          "duration": 0.833
+        },
+        {
+          "name": "Offhand_04_Fire_03",
+          "duration": 0.833
+        },
+        {
+          "name": "Offhand_04_Fire_03_B04",
+          "duration": 0.833
+        },
+        {
+          "name": "Offhand_04_Intro",
+          "duration": 1.033
+        },
+        {
+          "name": "Offhand_04_Idle_03",
+          "duration": 2.8
+        },
+        {
+          "name": "Offhand_04_Idle_03_B04",
+          "duration": 2.8
+        },
+        {
+          "name": "Offhand_04_Idle_02",
+          "duration": 3.633
+        },
+        {
+          "name": "Offhand_04_Idle_02_B04",
+          "duration": 3.633
+        },
+        {
+          "name": "Offhand_04_Idle_01",
+          "duration": 4.433
+        }
+      ]
+    },
+    "_basicChain": [
+      0.7,
+      0.7,
+      0.7
+    ]
+  },
+  "Mulan": {
+    "A01": {
+      "animDuration": 0.833,
+      "castDuration": 0.813,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_01_A (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_B",
+          "duration": 1.167
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 0.533,
+      "castDuration": 0.116,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_02_A (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_02_B",
+          "duration": 1.067
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 1.567,
+      "castDuration": 0.367,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_03 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_IntroHit",
+          "duration": 0.4
+        },
+        {
+          "name": "Offhand_03_ShortWall",
+          "duration": 0.433
+        },
+        {
+          "name": "Offhand_03_Miss",
+          "duration": 0.633
+        },
+        {
+          "name": "Offhand_03_LongWall",
+          "duration": 0.733
+        },
+        {
+          "name": "Offhand_03_Intro",
+          "duration": 1.0
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 0.533,
+      "castDuration": 2.799,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_04_spear (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_bow",
+          "duration": 0.633
+        },
+        {
+          "name": "Offhand_04_Outro",
+          "duration": 0.667
+        },
+        {
+          "name": "Offhand_04_sword",
+          "duration": 1.3
+        }
+      ]
+    },
+    "_basicChain": [
+      1.033,
+      1.033,
+      0.7
+    ]
+  },
+  "Ne_Zha": {
+    "A01": {
+      "animDuration": 1.0,
+      "castDuration": 0.068,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.733,
+      "castDuration": 0.433,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_02_Miss (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_02_Intro",
+          "duration": 0.233
+        },
+        {
+          "name": "Offhand_02_ThrowLoop",
+          "duration": 0.267
+        },
+        {
+          "name": "Offhand_02_Finish",
+          "duration": 1.133
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 0.7,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 0.167,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04_Dash_Start (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_DownTravel",
+          "duration": 0.2
+        },
+        {
+          "name": "Offhand_04_Dash_Loop",
+          "duration": 0.3
+        },
+        {
+          "name": "Offhand_04_LaunchSelfLoop",
+          "duration": 0.3
+        },
+        {
+          "name": "Offhand_04_KnockDown",
+          "duration": 0.467
+        },
+        {
+          "name": "Offhand_04_Dash_Miss",
+          "duration": 0.7
+        },
+        {
+          "name": "Offhand_04_Finish",
+          "duration": 0.7
+        },
+        {
+          "name": "Offhand_04_LaunchEnemy",
+          "duration": 0.767
+        },
+        {
+          "name": "Offhand_04_MeleeBarrage",
+          "duration": 2.6
+        }
+      ]
+    }
+  },
+  "Neith": {
+    "A01": {
+      "animDuration": 1.067,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.8,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 1.4,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 0.067,
+      "castDuration": 0.05,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04_AimCC (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_AimLC",
+          "duration": 0.067
+        },
+        {
+          "name": "Offhand_04_AimRC",
+          "duration": 0.067
+        },
+        {
+          "name": "Offhand_04_Turn_L90",
+          "duration": 0.4
+        },
+        {
+          "name": "Offhand_04_Turn_R90",
+          "duration": 0.4
+        },
+        {
+          "name": "Offhand_04_Abort",
+          "duration": 0.5
+        },
+        {
+          "name": "Offhand_04_Fire",
+          "duration": 0.5
+        },
+        {
+          "name": "Offhand_04_Idle",
+          "duration": 0.7
+        },
+        {
+          "name": "Offhand_04_Intro",
+          "duration": 2.0
+        }
+      ]
+    },
+    "_basicChain": [
+      0.533,
+      0.533,
+      0.533
+    ]
+  },
+  "Nemesis": {
+    "A01": {
+      "animDuration": 0.367,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01_Dash (shortest-primary)"
+    },
+    "A02": {
+      "animDuration": 0.833,
+      "castDuration": 0.089,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_02 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_02_Still",
+          "duration": 0.833
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 1.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 1.733,
+      "castDuration": 1.396,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      1.0,
+      1.033,
+      1.033,
+      1.033
+    ]
+  },
+  "Nu_Wa": {
+    "A01": {
+      "animDuration": 0.967,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 1.167,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.833,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 4.333,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      1.033,
+      1.033,
+      1.033
+    ]
+  },
+  "Nut": {
+    "A01": {
+      "animDuration": 0.4,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01_Fire (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_Outro",
+          "duration": 0.333
+        },
+        {
+          "name": "Offhand_01_Intro",
+          "duration": 0.5
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 0.633,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.233,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03_Intro (fallback)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Outro",
+          "duration": 0.233
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 0.2,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04_Rising (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Settling",
+          "duration": 0.233
+        },
+        {
+          "name": "Offhand_04_Fire",
+          "duration": 0.433
+        },
+        {
+          "name": "Offhand_04_Intro",
+          "duration": 0.8
+        },
+        {
+          "name": "Offhand_04_Outro",
+          "duration": 0.933
+        },
+        {
+          "name": "Offhand_04_Idle",
+          "duration": 3.033
+        },
+        {
+          "name": "Offhand_04_Run_B",
+          "duration": 3.033
+        },
+        {
+          "name": "Offhand_04_Run_F",
+          "duration": 3.033
+        },
+        {
+          "name": "Offhand_04_Run_L",
+          "duration": 3.033
+        },
+        {
+          "name": "Offhand_04_Run_R",
+          "duration": 3.033
+        }
+      ]
+    },
+    "_basicChain": [
+      1.033,
+      1.033,
+      1.033
+    ]
+  },
+  "Odin": {
+    "A01": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A02": {
+      "animDuration": 0.967,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.3,
+      "castDuration": 1.681,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_03_Intro (fallback)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Outro",
+          "duration": 0.733
+        },
+        {
+          "name": "Offhand_03_Loop",
+          "duration": 0.967
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 1.0,
+      "castDuration": 0.967,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      0.5,
+      0.533,
+      0.533,
+      0.967
+    ]
+  },
+  "Osiris": {
+    "A01": {
+      "animDuration": 0.8,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01_Still (fallback)"
+    },
+    "A02": {
+      "animDuration": 0.933,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.467,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 1.033,
+      "castDuration": 0.5,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_04 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Hit",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_04_Miss",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_04_Asp_Throw",
+          "duration": 0.767
+        },
+        {
+          "name": "Offhand_04_Asp_Projectile",
+          "duration": 0.833
+        }
+      ]
+    }
+  },
+  "Pele": {
+    "A01": {
+      "animDuration": 0.433,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.233,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02_Outro (fallback)",
+      "_altAnims": [
+        {
+          "name": "Offhand_02_Intro",
+          "duration": 0.533
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 1.733,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "no montage found (deployable/instant — 0.05s floor)",
+      "_animSource": "Offhand_03_Idle (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Run_B",
+          "duration": 1.733
+        },
+        {
+          "name": "Offhand_03_Run_F",
+          "duration": 1.733
+        },
+        {
+          "name": "Offhand_03_Run_L",
+          "duration": 1.733
+        },
+        {
+          "name": "Offhand_03_Run_R",
+          "duration": 1.733
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 0.233,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04_Outro (fallback)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Loop",
+          "duration": 0.3
+        },
+        {
+          "name": "Offhand_04_Intro",
+          "duration": 0.4
+        }
+      ]
+    },
+    "_basicChain": [
+      1.033,
+      1.033,
+      1.033
+    ]
+  },
+  "Poseidon": {
+    "A01": {
+      "animDuration": 0.667,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.7,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.7,
+      "castDuration": 0.05,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 1.133,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      1.033,
+      1.033
+    ]
+  },
+  "Ra": {
+    "A01": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A02": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A03": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A04": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "_basicChain": [
+      1.033,
+      1.033,
+      1.033,
+      1.033,
+      1.033,
+      1.033
+    ]
+  },
+  "Rama": {
+    "A01": {
+      "animDuration": 0.933,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01_Still (fallback)"
+    },
+    "A02": {
+      "animDuration": 1.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.833,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03_Roll_B (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Roll_BL",
+          "duration": 0.833
+        },
+        {
+          "name": "Offhand_03_Roll_BR",
+          "duration": 0.833
+        },
+        {
+          "name": "Offhand_03_Roll_F",
+          "duration": 0.833
+        },
+        {
+          "name": "Offhand_03_Roll_FL",
+          "duration": 0.833
+        },
+        {
+          "name": "Offhand_03_Roll_FR",
+          "duration": 0.833
+        },
+        {
+          "name": "Offhand_03_Roll_L",
+          "duration": 0.833
+        },
+        {
+          "name": "Offhand_03_Roll_R",
+          "duration": 0.833
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 0.633,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04_Fire (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Outro",
+          "duration": 0.367
+        },
+        {
+          "name": "Offhand_04_Intro",
+          "duration": 1.5
+        },
+        {
+          "name": "Offhand_04_Idle",
+          "duration": 5.033
+        }
+      ]
+    },
+    "_basicChain": [
+      0.533,
+      0.533,
+      0.533
+    ]
+  },
+  "Ratatoskr": {
+    "A01": {
+      "animDuration": 0.433,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 1.033,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_02_Aspect",
+          "duration": 0.7
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 0.533,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 0.533,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04_TreeToTree (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Idle_Intro",
+          "duration": 0.4
+        },
+        {
+          "name": "Offhand_04_Fire_ToGround",
+          "duration": 1.6
+        },
+        {
+          "name": "Offhand_04_Intro",
+          "duration": 2.0
+        },
+        {
+          "name": "Offhand_04_Idle",
+          "duration": 3.7
+        }
+      ]
+    },
+    "_basicChain": [
+      1.067,
+      0.533,
+      0.533,
+      1.3
+    ]
+  },
+  "Scylla": {
+    "A01": {
+      "animDuration": 0.633,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.633,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.633,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Teleport",
+          "duration": 1.167
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 0.067,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04_Aim_CC (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Aim_LC",
+          "duration": 0.067
+        },
+        {
+          "name": "Offhand_04_Aim_RC",
+          "duration": 0.067
+        },
+        {
+          "name": "Offhand_04_Turn_L90",
+          "duration": 0.4
+        },
+        {
+          "name": "Offhand_04_Turn_R90",
+          "duration": 0.4
+        },
+        {
+          "name": "Offhand_04_Intro",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_04_Outro",
+          "duration": 0.833
+        },
+        {
+          "name": "Offhand_04_Run_B",
+          "duration": 1.133
+        },
+        {
+          "name": "Offhand_04_Run_F",
+          "duration": 1.133
+        },
+        {
+          "name": "Offhand_04_Run_L",
+          "duration": 1.133
+        },
+        {
+          "name": "Offhand_04_Run_R",
+          "duration": 1.133
+        },
+        {
+          "name": "Offhand_04_Fire_1of6",
+          "duration": 1.2
+        },
+        {
+          "name": "Offhand_04_Fire_2of6",
+          "duration": 1.2
+        },
+        {
+          "name": "Offhand_04_Fire_3of6",
+          "duration": 1.2
+        },
+        {
+          "name": "Offhand_04_Fire_4of6",
+          "duration": 1.2
+        },
+        {
+          "name": "Offhand_04_Fire_5of6",
+          "duration": 1.2
+        },
+        {
+          "name": "Offhand_04_Fire_6of6",
+          "duration": 1.2
+        },
+        {
+          "name": "Offhand_04_Idle",
+          "duration": 2.333
+        }
+      ]
+    },
+    "_basicChain": [
+      0.967,
+      1.0,
+      1.0
+    ]
+  },
+  "Sobek": {
+    "A01": {
+      "animDuration": 0.267,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01_Miss (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_Run",
+          "duration": 0.5
+        },
+        {
+          "name": "Offhand_01_Fire",
+          "duration": 1.167
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 1.5,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.8,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_BlendTest",
+          "duration": 1.467
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 0.433,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04_Emerge (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Dive",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_04_IdleFloat",
+          "duration": 0.8
+        },
+        {
+          "name": "Offhand_04_Movement_F",
+          "duration": 0.833
+        },
+        {
+          "name": "Offhand_04_Attack",
+          "duration": 0.967
+        }
+      ]
+    }
+  },
+  "Sol": {
+    "A01": {
+      "animDuration": 0.967,
+      "castDuration": 0.05,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.4,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)",
+      "_altAnims": [
+        {
+          "name": "offhand_02_Fire_01",
+          "duration": 1.0
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 0.2,
+      "castDuration": 0.513,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_03_Intro (fallback)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Outro",
+          "duration": 0.367
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 0.767,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "Sun_Wukong": {
+    "A01": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A02": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A03": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A04": {
+      "animDuration": 0.0,
+      "castDuration": 3.533,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    }
+  },
+  "Susano": {
+    "A01": {
+      "animDuration": 0.367,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01_Fire_01 (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_Fire_02",
+          "duration": 0.4
+        },
+        {
+          "name": "Offhand_01_Fire_03",
+          "duration": 0.4
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 0.7,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_02_Still",
+          "duration": 0.7
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 0.367,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Outro",
+          "duration": 0.2
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 0.733,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      1.033,
+      1.033,
+      1.267
+    ]
+  },
+  "Sylvanus": {
+    "A01": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A02": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A03": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A04": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    }
+  },
+  "Thanatos": {
+    "A01": {
+      "animDuration": 1.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 1.0,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_02_Additive",
+          "duration": 4.0
+        },
+        {
+          "name": "Offhand_02_Additive_Moving",
+          "duration": 4.0
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 1.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 0.933,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04_Strike (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Strike_02",
+          "duration": 0.933
+        },
+        {
+          "name": "Offhand_04_Additive_Settle",
+          "duration": 1.133
+        },
+        {
+          "name": "Offhand_04_Idle",
+          "duration": 1.133
+        },
+        {
+          "name": "Offhand_04_Move_B",
+          "duration": 1.133
+        },
+        {
+          "name": "Offhand_04_Move_BL",
+          "duration": 1.133
+        },
+        {
+          "name": "Offhand_04_Move_BR",
+          "duration": 1.133
+        },
+        {
+          "name": "Offhand_04_Move_F",
+          "duration": 1.133
+        },
+        {
+          "name": "Offhand_04_Move_FL",
+          "duration": 1.133
+        },
+        {
+          "name": "Offhand_04_Move_FR",
+          "duration": 1.133
+        },
+        {
+          "name": "Offhand_04_Move_L",
+          "duration": 1.133
+        },
+        {
+          "name": "Offhand_04_Move_R",
+          "duration": 1.133
+        },
+        {
+          "name": "Offhand_04_Intro",
+          "duration": 2.033
+        }
+      ]
+    },
+    "_basicChain": [
+      1.033,
+      0.8,
+      1.533
+    ]
+  },
+  "The_Morrigan": {
+    "A01": {
+      "animDuration": 1.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01_Idle_A (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_Outro",
+          "duration": 0.367
+        },
+        {
+          "name": "Offhand_01_Intro_A",
+          "duration": 0.5
+        },
+        {
+          "name": "Offhand_01_Intro_B",
+          "duration": 0.533
+        },
+        {
+          "name": "Offhand_01_Idle_B",
+          "duration": 1.0
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A03": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A04": {
+      "animDuration": 0.1,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04_Item_Intro (fallback)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Item_Outro",
+          "duration": 0.133
+        }
+      ]
+    },
+    "_basicChain": [
+      null,
+      null,
+      1.033
+    ]
+  },
+  "Thor": {
+    "A01": {
+      "animDuration": 0.7,
+      "castDuration": 0.316,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_1 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_1_Teleported",
+          "duration": 0.7
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 0.7,
+      "castDuration": 0.189,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_2 (exact)"
+    },
+    "A03": {
+      "animDuration": 1.233,
+      "castDuration": 0.8,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "offhand_3 (exact)",
+      "_altAnims": [
+        {
+          "name": "offhand_3_end",
+          "duration": 0.4
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 1.533,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_4_Part_03 (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_4_Part_01",
+          "duration": 2.0
+        },
+        {
+          "name": "Offhand_4_Part_02",
+          "duration": 8.367
+        }
+      ]
+    }
+  },
+  "Tsukuyomi": {
+    "A01": {
+      "animDuration": 0.767,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 1.833,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_02_B",
+          "duration": 1.833
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 0.8,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 0.233,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04_Strike_02 (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_DashLoop",
+          "duration": 0.2
+        },
+        {
+          "name": "Offhand_04_Strike_03",
+          "duration": 0.233
+        },
+        {
+          "name": "Offhand_04_Strike",
+          "duration": 0.267
+        },
+        {
+          "name": "Offhand_04_Fire_04",
+          "duration": 0.3
+        },
+        {
+          "name": "Offhand_04_Fire_01",
+          "duration": 0.433
+        },
+        {
+          "name": "Offhand_04_Fire_02",
+          "duration": 0.433
+        },
+        {
+          "name": "Offhand_04_Fire_03",
+          "duration": 0.433
+        },
+        {
+          "name": "Offhand_04_Intro",
+          "duration": 0.833
+        }
+      ]
+    },
+    "_basicChain": [
+      1.033,
+      1.033
+    ]
+  },
+  "Ullr": {
+    "A01": {
+      "animDuration": 0.0,
+      "castDuration": 0.633,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A02": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A03": {
+      "animDuration": 0.0,
+      "castDuration": 0.22,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A04": {
+      "animDuration": 0.0,
+      "castDuration": 1.0,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    }
+  },
+  "Vulcan": {
+    "A01": {
+      "animDuration": 0.4,
+      "castDuration": 0.632,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_01_Part2 (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_Part1",
+          "duration": 0.5
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 0.633,
+      "castDuration": 0.509,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 0.7,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 0.667,
+      "castDuration": 0.017,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      0.833,
+      0.833
+    ]
+  },
+  "Xbalanque": {
+    "A01": {
+      "animDuration": 0.5,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.667,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)"
+    },
+    "A03": {
+      "animDuration": 1.767,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03_Main_01 (shortest-primary)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Shadow_01",
+          "duration": 1.767
+        },
+        {
+          "name": "Offhand_03_Shadow_02",
+          "duration": 1.767
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 1.167,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      0.7,
+      0.667,
+      0.667
+    ]
+  },
+  "Yemoja": {
+    "A01": {
+      "animDuration": 0.467,
+      "castDuration": 0.633,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_01 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_01_Outro",
+          "duration": 0.233
+        }
+      ]
+    },
+    "A02": {
+      "animDuration": 0.433,
+      "castDuration": 0.011,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_02 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_02_Outro",
+          "duration": 0.333
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 0.433,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_03_Outro",
+          "duration": 0.267
+        }
+      ]
+    },
+    "A04": {
+      "animDuration": 0.867,
+      "castDuration": 0.833,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "Offhand_04 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_04_Outro",
+          "duration": 0.433
+        }
+      ]
+    },
+    "_basicChain": [
+      1.033,
+      1.033,
+      1.033,
+      1.033
+    ]
+  },
+  "Ymir": {
+    "A01": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A02": {
+      "animDuration": 0.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A03": {
+      "animDuration": 0.0,
+      "castDuration": 0.013,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    },
+    "A04": {
+      "animDuration": 0.0,
+      "castDuration": 0.733,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: ANS_ForceFullBody Duration",
+      "_animSource": "(no Fire_/Offhand_ anim match) (mined-or-catalog-only)"
+    }
+  },
+  "Zeus": {
+    "A01": {
+      "animDuration": 1.0,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_01 (exact)"
+    },
+    "A02": {
+      "animDuration": 0.7,
+      "castDuration": 0.05,
+      "shape": "mobility",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_02 (exact)",
+      "_altAnims": [
+        {
+          "name": "Offhand_02_Retrieve",
+          "duration": 0.5
+        }
+      ]
+    },
+    "A03": {
+      "animDuration": 0.633,
+      "castDuration": 0.05,
+      "shape": "default",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_03 (exact)"
+    },
+    "A04": {
+      "animDuration": 1.733,
+      "castDuration": 0.05,
+      "shape": "channel",
+      "damageApplyOffset": 0.0,
+      "_castSource": "mined: no body-lock in montage (→ 0.05s floor)",
+      "_animSource": "Offhand_04 (exact)"
+    },
+    "_basicChain": [
+      1.0,
+      0.967,
+      0.967
+    ]
+  }
+}

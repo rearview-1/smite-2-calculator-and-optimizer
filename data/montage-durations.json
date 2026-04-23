@@ -1,0 +1,2047 @@
+[
+  {
+    "god": "Achilles",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Achilles_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Achilles",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Achilles_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Achilles",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Achilles_Common_Abilities_Ability3_MON_Offhand_03_Dash.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Achilles",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Achilles_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Agni",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Agni_Common_Abilities_Ability1_Montages_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Agni",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Agni_Common_Abilities_Ability2_Montages_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Agni",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Agni_Common_Abilities_Ability3_Montages_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Agni",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Agni_Common_Abilities_Ability4_Montages_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Aladdin",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Aladdin_Common_Abilities_Ability1_B01_MON_Genie_Offhand_B01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Aladdin",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Aladdin_Common_Abilities_Ability2_B02_MON_Genie_Offhand_B02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Aladdin",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Aladdin_Common_Abilities_Ability3_MON_Offhand_A03_GenieSlam.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Aladdin",
+    "slot": "A04",
+    "duration": 0.0,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 119) from Hemingway_Content_Characters_GODS_Aladdin_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json"
+  },
+  {
+    "god": "Amaterasu",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Amaterasu_Common_Abilities_Ability1_MON_Offhand_A01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Amaterasu",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Amaterasu_Common_Abilities_Ability2_MON_Offhand_A02_Refire.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Amaterasu",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Amaterasu_Common_Abilities_Ability3_MON_Offhand_A03_Fire.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Amaterasu",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Amaterasu_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Anhur",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Anhur_Common_Ablities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Anhur",
+    "slot": "A02",
+    "duration": 0.336,
+    "rate_scale": 0.0,
+    "source": "ANS_ForceFullBody @+12 (offset 339) from Hemingway_Content_Characters_GODS_Anhur_Common_Ablities_Ability2_MON_Offhand_02.uasset.structure.json"
+  },
+  {
+    "god": "Anhur",
+    "slot": "A03",
+    "duration": 0.039,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 427) from Hemingway_Content_Characters_GODS_Anhur_Common_Ablities_Ability3_MON_Offhand_03.uasset.structure.json"
+  },
+  {
+    "god": "Anhur",
+    "slot": "A04",
+    "duration": 0.407,
+    "rate_scale": 0.0,
+    "source": "ANS_ForceFullBody @+12 (offset 1298) from Hemingway_Content_Characters_GODS_Anhur_Common_Ablities_Ability4_MON_Offhand_04.uasset.structure.json"
+  },
+  {
+    "god": "Anubis",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Anubis_Common_Abilities_Ability1_Montages_Base_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Anubis",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Anubis_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Anubis",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Anubis_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Anubis",
+    "slot": "A04",
+    "duration": 0.6,
+    "rate_scale": 2.333,
+    "source": "ANS_ForceFullBody @+12 (offset 705) from Hemingway_Content_Characters_GODS_Anubis_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json"
+  },
+  {
+    "god": "Aphrodite",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Aphrodite_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Aphrodite",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Aphrodite_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Aphrodite",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Aphrodite_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Aphrodite",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Aphrodite_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Apollo",
+    "slot": "A01",
+    "duration": 0.0,
+    "rate_scale": 1.167,
+    "source": "ANS_ForceFullBody @+12 (offset 30) from Hemingway_Content_Characters_GODS_Apollo_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json"
+  },
+  {
+    "god": "Apollo",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Apollo_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Apollo",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Apollo_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Apollo",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Apollo_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ares",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Ares_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ares",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Ares_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ares",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Ares_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ares",
+    "slot": "A04",
+    "duration": 2.572,
+    "rate_scale": 0.0,
+    "source": "ANS_ForceFullBody @+12 (offset 412) from Hemingway_Content_Characters_GODS_Ares_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json"
+  },
+  {
+    "god": "Artemis",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Artemis_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Artemis",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Artemis_Common_Abilities_Ability2_MON_Offhand_02_Fire.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Artemis",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Artemis_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Artemis",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Artemis_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Artio",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Artio_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Artio",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Artio_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Artio",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Artio_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Artio",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Artio_Common_Animations_Base_Montages_MON_Offhand_C04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Athena",
+    "slot": "A01",
+    "duration": 0.5,
+    "rate_scale": 0.0,
+    "source": "ANS_ForceFullBody @+12 (offset 191) from Hemingway_Content_Characters_GODS_Athena_Common_Abilities_Ability1_MON_Offhand_01_Hit.uasset.structure.json"
+  },
+  {
+    "god": "Athena",
+    "slot": "A02",
+    "duration": 0.0,
+    "rate_scale": 0.0,
+    "source": "ANS_ForceFullBody @+12 (offset 35) from Hemingway_Content_Characters_GODS_Athena_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json"
+  },
+  {
+    "god": "Athena",
+    "slot": "A03",
+    "duration": 0.563,
+    "rate_scale": 1.0,
+    "source": "ANS_ForceFullBody @+12 (offset 403) from Hemingway_Content_Characters_GODS_Athena_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json"
+  },
+  {
+    "god": "Athena",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Athena_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Atlas",
+    "slot": "A01",
+    "duration": 0.967,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 240) from Hemingway_Content_Characters_GODS_Atlas_Common_Animations_Base_Montages_MON_Offhand_01_Deploy_Intro.uasset.structure.json"
+  },
+  {
+    "god": "Atlas",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Atlas_Common_Animations_Base_Montages_MON_Offhand_02_Intro.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Atlas",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Atlas_Common_Animations_Base_Montages_MON_Offhand_03_Charge.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Atlas",
+    "slot": "A04",
+    "duration": 1.1,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 308) from Hemingway_Content_Characters_GODS_Atlas_Common_Animations_Base_Montages_MON_Offhand_04.uasset.structure.json"
+  },
+  {
+    "god": "Awilix",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Awilix_Common_Abilities_Ability1_MON_Offhand_01_Dismount.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Awilix",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Awilix_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Awilix",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Awilix_Common_Abilities_Ability3_MON_A03_Projectile.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Awilix",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Awilix_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Bacchus",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Bacchus_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Bacchus",
+    "slot": "A02",
+    "duration": 0.237,
+    "rate_scale": 1.0,
+    "source": "ANS_ForceFullBody @+12 (offset 274) from Hemingway_Content_Characters_GODS_Bacchus_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json"
+  },
+  {
+    "god": "Bacchus",
+    "slot": "A03",
+    "duration": 0.17,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 276) from Hemingway_Content_Characters_GODS_Bacchus_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json"
+  },
+  {
+    "god": "Bacchus",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Bacchus_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Bari",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Bari_Common_Abilities_Ability1_Montages_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Bari",
+    "slot": "A02",
+    "duration": 0.778,
+    "rate_scale": 0.0,
+    "source": "ANS_ForceFullBody @+12 (offset 299) from Hemingway_Content_Characters_GODS_Bari_Common_Abilities_Ability2_Montages_MON_Offhand_02_Firing.uasset.structure.json"
+  },
+  {
+    "god": "Bari",
+    "slot": "A03",
+    "duration": 0.0,
+    "rate_scale": 1.133,
+    "source": "ANS_ForceFullBody @+12 (offset 29) from Hemingway_Content_Characters_GODS_Bari_Common_Abilities_Ability3_Montages_MON_Offhand_03_FiringMontage_1.uasset.structure.json"
+  },
+  {
+    "god": "Bari",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Bari_Common_Abilities_Ability4_Montages_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Baron_Samedi",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Baron_Samedi_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Baron_Samedi",
+    "slot": "A02",
+    "duration": 0.0,
+    "rate_scale": 0.0,
+    "source": "ANS_ForceFullBody @+12 (offset 41) from Hemingway_Content_Characters_GODS_Baron_Samedi_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json"
+  },
+  {
+    "god": "Baron_Samedi",
+    "slot": "A03",
+    "duration": 0.058,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 246) from Hemingway_Content_Characters_GODS_Baron_Samedi_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json"
+  },
+  {
+    "god": "Baron_Samedi",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Baron_Samedi_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Bellona",
+    "slot": "A01",
+    "duration": 0.01,
+    "rate_scale": 1.0,
+    "source": "ANS_ForceFullBody @+12 (offset 838) from Hemingway_Content_Characters_GODS_Bellona_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json"
+  },
+  {
+    "god": "Bellona",
+    "slot": "A02",
+    "duration": 0.979,
+    "rate_scale": 0.0,
+    "source": "ANS_ForceFullBody @+12 (offset 1613) from Hemingway_Content_Characters_GODS_Bellona_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json"
+  },
+  {
+    "god": "Bellona",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Bellona_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Bellona",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Bellona_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Cabrakan",
+    "slot": "A01",
+    "duration": 0.12,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 245) from Hemingway_Content_Characters_GODS_Cabrakan_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json"
+  },
+  {
+    "god": "Cabrakan",
+    "slot": "A02",
+    "duration": 0.108,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 305) from Hemingway_Content_Characters_GODS_Cabrakan_Common_Abilities_Ability2b_MON_Offhand_B02.uasset.structure.json"
+  },
+  {
+    "god": "Cabrakan",
+    "slot": "A03",
+    "duration": 0.235,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 345) from Hemingway_Content_Characters_GODS_Cabrakan_Common_Abilities_Ability3_MON_Offhand_03_ReFire.uasset.structure.json"
+  },
+  {
+    "god": "Cabrakan",
+    "slot": "A04",
+    "duration": 0.01,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 233) from Hemingway_Content_Characters_GODS_Cabrakan_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json"
+  },
+  {
+    "god": "Cerberus",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Cerberus_Common_Abilities_Ability1_MON_Offhand_01_All.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Cerberus",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Cerberus_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Cerberus",
+    "slot": "A03",
+    "duration": 1.067,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 482) from Hemingway_Content_Characters_GODS_Cerberus_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json"
+  },
+  {
+    "god": "Cerberus",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Cerberus_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Cernunnos",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Cernunnos_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Cernunnos",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Cernunnos_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Cernunnos",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Cernunnos_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Cernunnos",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Cernunnos_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Chaac",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Chaac_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Chaac",
+    "slot": "A02",
+    "duration": 0.148,
+    "rate_scale": 1.0,
+    "source": "ANS_ForceFullBody @+12 (offset 1334) from Hemingway_Content_Characters_GODS_Chaac_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json"
+  },
+  {
+    "god": "Chaac",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Chaac_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Chaac",
+    "slot": "A04",
+    "duration": 0.0,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 58) from Hemingway_Content_Characters_GODS_Chaac_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json"
+  },
+  {
+    "god": "Charon",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Charon_Common_Animations_Base_Montages_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Charon",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Charon_Common_Animations_Base_Montages_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Charon",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Charon_Common_Animations_Base_Montages_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Charon",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Charon_Common_Animations_Base_Montages_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Chiron",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Chiron_Common_Animations_Base_Montages_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Chiron",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Chiron_Common_Animations_Base_Montages_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Chiron",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Chiron_Common_Animations_Base_Montages_MON_Offhand_03_Fire.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Chiron",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Chiron_Common_Animations_Base_Montages_MON_Offhand_04_Fire.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Cupid",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Cupid_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Cupid",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Cupid_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Cupid",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Cupid_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Cupid",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Cupid_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "DaJi",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_DaJi_Common_Animations_Base_Montages_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "DaJi",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_DaJi_Common_Animations_Base_Montages_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "DaJi",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_DaJi_Common_Animations_Base_Montages_MON_Offhand_03_Intro.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "DaJi",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_DaJi_Common_Animations_Base_Montages_MON_Offhand_04_Intro.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Danzaburou",
+    "slot": "A01",
+    "duration": 0.9,
+    "rate_scale": 0.0,
+    "source": "ANS_ForceFullBody @+12 (offset 156) from Hemingway_Content_Characters_GODS_Danzaburou_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json"
+  },
+  {
+    "god": "Danzaburou",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Danzaburou_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Danzaburou",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Danzaburou_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Danzaburou",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Danzaburou_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Discordia",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Discordia_Common_Animations_Base_Montages_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Discordia",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Discordia_Common_Animations_Base_Montages_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Discordia",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Discordia_Common_Animations_Base_Montages_MON_Offhand_03_Leap.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Discordia",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Discordia_Common_Animations_Base_Montages_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Eset",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Eset_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Eset",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Eset_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Eset",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Eset_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Eset",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Eset_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Fenrir",
+    "slot": "A01",
+    "duration": 0.77,
+    "rate_scale": 1.0,
+    "source": "ANS_ForceFullBody @+12 (offset 347) from Hemingway_Content_Characters_GODS_Fenrir_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json"
+  },
+  {
+    "god": "Fenrir",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Fenrir_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Fenrir",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Fenrir_Common_Abilities_Ability3_MON_Offhand_03_Attack.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Fenrir",
+    "slot": "A04",
+    "duration": 1.067,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 408) from Hemingway_Content_Characters_GODS_Fenrir_Common_Abilities_Ability4_MON_Offhand_04_Bite.uasset.structure.json"
+  },
+  {
+    "god": "Ganesha",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Ganesha_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ganesha",
+    "slot": "A02",
+    "duration": 0.667,
+    "rate_scale": 2.767,
+    "source": "ANS_ForceFullBody @+12 (offset 77) from Hemingway_Content_Characters_GODS_Ganesha_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json"
+  },
+  {
+    "god": "Ganesha",
+    "slot": "A03",
+    "duration": 2.11,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 569) from Hemingway_Content_Characters_GODS_Ganesha_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json"
+  },
+  {
+    "god": "Ganesha",
+    "slot": "A04",
+    "duration": 0.0,
+    "rate_scale": 0.0,
+    "source": "ANS_ForceFullBody @+12 (offset 53) from Hemingway_Content_Characters_GODS_Ganesha_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json"
+  },
+  {
+    "god": "Geb",
+    "slot": "A01",
+    "duration": 0.933,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 259) from Hemingway_Content_Characters_GODS_Geb_Common_Abilities_Ability1_Montage_MON_Offhand_01_Hit.uasset.structure.json"
+  },
+  {
+    "god": "Geb",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Geb_Common_Abilities_Ability2_Montage_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Geb",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Geb_Common_Abilities_Ability3_Montage_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Geb",
+    "slot": "A04",
+    "duration": 0.065,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 374) from Hemingway_Content_Characters_GODS_Geb_Common_Abilities_Ability4_Montage_MON_Offhand_04.uasset.structure.json"
+  },
+  {
+    "god": "Gilgamesh",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Gilgamesh_Common_Animations_Base_Montages_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Gilgamesh",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Gilgamesh_Common_Animations_Base_Montages_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Gilgamesh",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Gilgamesh_Common_Animations_Base_Montages_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Gilgamesh",
+    "slot": "A04",
+    "duration": 0.0,
+    "rate_scale": 0.0,
+    "source": "ANS_ForceFullBody @+12 (offset 42) from Hemingway_Content_Characters_GODS_Gilgamesh_Common_Animations_Base_Montages_MON_Offhand_04.uasset.structure.json"
+  },
+  {
+    "god": "Guan_Yu",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Guan_Yu_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Guan_Yu",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Guan_Yu_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Guan_Yu",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Guan_Yu_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Guan_Yu",
+    "slot": "A04",
+    "duration": 0.514,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 438) from Hemingway_Content_Characters_GODS_Guan_Yu_Common_Abilities_Ability4_MON_Offhand_04_Dismount.uasset.structure.json"
+  },
+  {
+    "god": "Hades",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Hades_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Hades",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Hades_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Hades",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Hades_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Hades",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Hades_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Hecate",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Hecate_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Hecate",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Hecate_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Hecate",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Hecate_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Hecate",
+    "slot": "A05",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Hecate_Common_Abilities_Ability5_MON_Offhand_05.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Hecate",
+    "slot": "A06",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Hecate_Common_Abilities_Ability6_A06_Mon_Offhand_A06Pre.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "HouYi",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_HouYi_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "HouYi",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_HouYi_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "HouYi",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_HouYi_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "HouYi",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_HouYi_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Hun_Batz",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Hun_Batz_Common_Abilities_Ability1_MON_A01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Hun_Batz",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Hun_Batz_Common_Abilities_Ability2_MON_A02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Hun_Batz",
+    "slot": "A03",
+    "duration": 0.077,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 238) from Hemingway_Content_Characters_GODS_Hun_Batz_Common_Abilities_Ability3_MON_A03.uasset.structure.json"
+  },
+  {
+    "god": "Hun_Batz",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Hun_Batz_Common_Abilities_Ability4_MON_A04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ishtar",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Ishtar_Common_Animations_Base_Montages_MON_Offhand_01_A_Fire.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ishtar",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Ishtar_Common_Animations_Base_Montages_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ishtar",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Ishtar_Common_Animations_Base_Montages_MON_Offhand_03_Dash.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ishtar",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Ishtar_Common_Animations_Base_Montages_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Izanami",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Izanami_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Izanami",
+    "slot": "A02",
+    "duration": 0.1,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 307) from Hemingway_Content_Characters_GODS_Izanami_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json"
+  },
+  {
+    "god": "Izanami",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Izanami_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Izanami",
+    "slot": "A04",
+    "duration": 0.0,
+    "rate_scale": 0.8,
+    "source": "ANS_ForceFullBody @+12 (offset 28) from Hemingway_Content_Characters_GODS_Izanami_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json"
+  },
+  {
+    "god": "Janus",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Janus_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Janus",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Janus_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Janus",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Janus_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Janus",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Janus_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "JingWei",
+    "slot": "A01",
+    "duration": 0.026,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 305) from Hemingway_Content_Characters_GODS_JingWei_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json"
+  },
+  {
+    "god": "JingWei",
+    "slot": "A02",
+    "duration": 0.153,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 365) from Hemingway_Content_Characters_GODS_JingWei_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json"
+  },
+  {
+    "god": "JingWei",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_JingWei_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "JingWei",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_JingWei_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Jormungandr",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Jormungandr_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Jormungandr",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Jormungandr_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Jormungandr",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Jormungandr_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Jormungandr",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Jormungandr_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Kali",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Kali_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Kali",
+    "slot": "A02",
+    "duration": 0.005,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 254) from Hemingway_Content_Characters_GODS_Kali_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json"
+  },
+  {
+    "god": "Kali",
+    "slot": "A03",
+    "duration": 0.016,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 250) from Hemingway_Content_Characters_GODS_Kali_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json"
+  },
+  {
+    "god": "Kali",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Kali_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Khepri",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Khepri_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Khepri",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Khepri_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Khepri",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Khepri_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Khepri",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Khepri_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Kukulkan",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Kukulkan_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Kukulkan",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Kukulkan_Common_Abilities_Ability2b_MON_Offhand_02b.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Kukulkan",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Kukulkan_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Kukulkan",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Kukulkan_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Loki",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Loki_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Loki",
+    "slot": "A02",
+    "duration": 0.666,
+    "rate_scale": 1.0,
+    "source": "ANS_ForceFullBody @+12 (offset 575) from Hemingway_Content_Characters_GODS_Loki_Common_Abilities_Ability2_Mon_Offhand_02.uasset.structure.json"
+  },
+  {
+    "god": "Loki",
+    "slot": "A03",
+    "duration": 1.7,
+    "rate_scale": 1.0,
+    "source": "ANS_ForceFullBody @+12 (offset 1583) from Hemingway_Content_Characters_GODS_Loki_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json"
+  },
+  {
+    "god": "Loki",
+    "slot": "A04",
+    "duration": 0.931,
+    "rate_scale": 1.0,
+    "source": "ANS_ForceFullBody @+12 (offset 753) from Hemingway_Content_Characters_GODS_Loki_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json"
+  },
+  {
+    "god": "Medusa",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Medusa_Common_Abilities_Ability1_MON_A01_Enhanced_Fire01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Medusa",
+    "slot": "A02",
+    "duration": 0.0,
+    "rate_scale": 0.667,
+    "source": "ANS_ForceFullBody @+12 (offset 31) from Hemingway_Content_Characters_GODS_Medusa_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json"
+  },
+  {
+    "god": "Medusa",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Medusa_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Medusa",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Medusa_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Mercury",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Mercury_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Mercury",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Mercury_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Mercury",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Mercury_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Mercury",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Mercury_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Merlin",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Merlin_Common_Abilities_Ability1b_MON_Offhand_01_B.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Merlin",
+    "slot": "A02",
+    "duration": 0.034,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 366) from Hemingway_Content_Characters_GODS_Merlin_Common_Abilities_Ability2b_MON_Offhand_02_B.uasset.structure.json"
+  },
+  {
+    "god": "Merlin",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Merlin_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Merlin",
+    "slot": "A04",
+    "duration": 0.039,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 244) from Hemingway_Content_Characters_GODS_Merlin_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json"
+  },
+  {
+    "god": "Mordred",
+    "slot": "A01",
+    "duration": 0.774,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 500) from Hemingway_Content_Characters_GODS_Mordred_Common_Abilities_Ability1_Montages_MON_Offhand_01.uasset.structure.json"
+  },
+  {
+    "god": "Mordred",
+    "slot": "A02",
+    "duration": 0.205,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 361) from Hemingway_Content_Characters_GODS_Mordred_Common_Abilities_Ability2_Montages_MON_Offhand_02.uasset.structure.json"
+  },
+  {
+    "god": "Mordred",
+    "slot": "A03",
+    "duration": 0.033,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 298) from Hemingway_Content_Characters_GODS_Mordred_Common_Abilities_Ability3_Montages_MON_Offhand_03.uasset.structure.json"
+  },
+  {
+    "god": "Mordred",
+    "slot": "A04",
+    "duration": 0.6,
+    "rate_scale": 1.0,
+    "source": "ANS_ForceFullBody @+12 (offset 118) from Hemingway_Content_Characters_GODS_Mordred_Common_Abilities_Ability4_Montages_MON_Offhand_04.uasset.structure.json"
+  },
+  {
+    "god": "MorganLeFay",
+    "slot": "A01",
+    "duration": 0.025,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 246) from Hemingway_Content_Characters_GODS_MorganLeFay_Common_Animations_Base_Montages_MON_Offhand_01.uasset.structure.json"
+  },
+  {
+    "god": "MorganLeFay",
+    "slot": "A02",
+    "duration": 0.178,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 246) from Hemingway_Content_Characters_GODS_MorganLeFay_Common_Animations_Base_Montages_MON_Offhand_02.uasset.structure.json"
+  },
+  {
+    "god": "MorganLeFay",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_MorganLeFay_Common_Animations_Base_Montages_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "MorganLeFay",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_MorganLeFay_Common_Animations_Base_Montages_MON_Offhand_04_Intro.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Mulan",
+    "slot": "A01",
+    "duration": 0.813,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 582) from Hemingway_Content_Characters_GODS_Mulan_Common_Abilities_Ability1_MON_Offhand_01_Evolved.uasset.structure.json"
+  },
+  {
+    "god": "Mulan",
+    "slot": "A02",
+    "duration": 0.116,
+    "rate_scale": 1.0,
+    "source": "ANS_ForceFullBody @+12 (offset 684) from Hemingway_Content_Characters_GODS_Mulan_Common_Abilities_Ability2_MON_Offhand_02_B.uasset.structure.json"
+  },
+  {
+    "god": "Mulan",
+    "slot": "A03",
+    "duration": 0.367,
+    "rate_scale": 0.0,
+    "source": "ANS_ForceFullBody @+12 (offset 298) from Hemingway_Content_Characters_GODS_Mulan_Common_Abilities_Ability3_MON_Offhand_03_IntroHit.uasset.structure.json"
+  },
+  {
+    "god": "Mulan",
+    "slot": "A04",
+    "duration": 2.799,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 865) from Hemingway_Content_Characters_GODS_Mulan_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json"
+  },
+  {
+    "god": "Ne_Zha",
+    "slot": "A01",
+    "duration": 0.068,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 190) from Hemingway_Content_Characters_GODS_Ne_Zha_Common_Animations_Base_Montages_MON_Offhand_01.uasset.structure.json"
+  },
+  {
+    "god": "Ne_Zha",
+    "slot": "A02",
+    "duration": 0.433,
+    "rate_scale": 1.0,
+    "source": "ANS_ForceFullBody @+12 (offset 844) from Hemingway_Content_Characters_GODS_Ne_Zha_Common_Animations_Base_Montages_MON_Offhand_02_Intro.uasset.structure.json"
+  },
+  {
+    "god": "Ne_Zha",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Ne_Zha_Common_Animations_Base_Montages_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ne_Zha",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Ne_Zha_Common_Animations_Base_Montages_MON_Offhand_04_Dash_Start.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Neith",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Neith_Common_Abilities_Ability1_Montages_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Neith",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Neith_Common_Abilities_Ability2_Montages_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Neith",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Neith_Common_Abilities_Ability3_Montages_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Neith",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Neith_Common_Abilities_Ability4_Montages_MON_Offhand_04_Cancel.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Nemesis",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Nemesis_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Nemesis",
+    "slot": "A02",
+    "duration": 0.089,
+    "rate_scale": 1.0,
+    "source": "ANS_ForceFullBody @+12 (offset 402) from Hemingway_Content_Characters_GODS_Nemesis_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json"
+  },
+  {
+    "god": "Nemesis",
+    "slot": "A03",
+    "duration": 0.0,
+    "rate_scale": 0.967,
+    "source": "ANS_ForceFullBody @+12 (offset 22) from Hemingway_Content_Characters_GODS_Nemesis_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json"
+  },
+  {
+    "god": "Nemesis",
+    "slot": "A04",
+    "duration": 1.396,
+    "rate_scale": 0.0,
+    "source": "ANS_ForceFullBody @+12 (offset 338) from Hemingway_Content_Characters_GODS_Nemesis_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json"
+  },
+  {
+    "god": "Nu_Wa",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Nu_Wa_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Nu_Wa",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Nu_Wa_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Nu_Wa",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Nu_Wa_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Nu_Wa",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Nu_Wa_Common_Abilities_Ability4_Montages_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Nut",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Nut_Common_Animations_Base_Montages_MON_Offhand_01_Fire.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Nut",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Nut_Common_Animations_Base_Montages_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Nut",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Nut_Common_Animations_Base_Montages_MON_Offhand_03_Intro.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Nut",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Nut_Common_Animations_Base_Montages_MON_Offhand_04_Fire.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Odin",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Odin_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Odin",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Odin_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Odin",
+    "slot": "A03",
+    "duration": 1.681,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 603) from Hemingway_Content_Characters_GODS_Odin_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json"
+  },
+  {
+    "god": "Odin",
+    "slot": "A04",
+    "duration": 0.967,
+    "rate_scale": 0.0,
+    "source": "ANS_ForceFullBody @+12 (offset 151) from Hemingway_Content_Characters_GODS_Odin_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json"
+  },
+  {
+    "god": "Osiris",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Osiris_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Osiris",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Osiris_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Osiris",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Osiris_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Osiris",
+    "slot": "A04",
+    "duration": 0.5,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 328) from Hemingway_Content_Characters_GODS_Osiris_Common_Abilities_Ability4_MON_Offhand_Hit.uasset.structure.json"
+  },
+  {
+    "god": "Pele",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Pele_Common_Abilities_Ability1_Montages_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Pele",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Pele_Common_Abilities_Ability2_Montages_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Pele",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Pele_Common_Abilities_Ability4_Montages_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Poseidon",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Poseidon_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Poseidon",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Poseidon_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Poseidon",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Poseidon_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Poseidon",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Poseidon_Common_Abilities_Ability4_MON_Offhand04_Kraken.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ra",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Ra_Common_Abilities_Ability1_Montages_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ra",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Ra_Common_Abilities_Ability2_Montages_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ra",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Ra_Common_Abilities_Ability3_Montages_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ra",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Ra_Common_Abilities_Ability4_Montages_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Rama",
+    "slot": "A01",
+    "duration": 0.0,
+    "rate_scale": 0.9,
+    "source": "ANS_ForceFullBody @+12 (offset 30) from Hemingway_Content_Characters_GODS_Rama_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json"
+  },
+  {
+    "god": "Rama",
+    "slot": "A02",
+    "duration": 0.0,
+    "rate_scale": 0.967,
+    "source": "ANS_ForceFullBody @+12 (offset 30) from Hemingway_Content_Characters_GODS_Rama_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json"
+  },
+  {
+    "god": "Rama",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Rama_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Rama",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Rama_Common_Abilities_Ability4_MON_Offhand_04_Ascent.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ratatoskr",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Ratatoskr_Common_Animations_Base_Montages_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ratatoskr",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Ratatoskr_Common_Animations_Base_Montages_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ratatoskr",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Ratatoskr_Common_Animations_Base_Montages_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ratatoskr",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Ratatoskr_Common_Animations_Base_Montages_MON_Offhand_04_Intro.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Scylla",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Scylla_Common_Abilities_Ability1_MON_A01_Deploy.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Scylla",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Scylla_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Scylla",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Scylla_Common_Abilities_Ability3_MON_A03_Deploy.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Scylla",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Scylla_Common_Abilities_Ability4_MON_Offhand_04_Fire_1of6.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Sobek",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Sobek_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Sobek",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Sobek_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Sobek",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Sobek_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Sobek",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Sobek_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Sol",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Sol_Common_Abilities_Ability1_Montages_V2_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Sol",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Sol_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Sol",
+    "slot": "A03",
+    "duration": 0.513,
+    "rate_scale": 0.0,
+    "source": "ANS_ForceFullBody @+12 (offset 200) from Hemingway_Content_Characters_GODS_Sol_Common_Abilities_Ability3_MON_Offhand_03_Reappear.uasset.structure.json"
+  },
+  {
+    "god": "Sol",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Sol_Common_Abilities_Ability4_Montages_V2_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Sun_Wukong",
+    "slot": "A01",
+    "duration": 0.0,
+    "rate_scale": 1.0,
+    "source": "ANS_ForceFullBody @+12 (offset 329) from Hemingway_Content_Characters_GODS_Sun_Wukong_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json"
+  },
+  {
+    "god": "Sun_Wukong",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Sun_Wukong_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Sun_Wukong",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Sun_Wukong_Common_Abilities_Ability3_MON_Offhand_03_Intro.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Sun_Wukong",
+    "slot": "A04",
+    "duration": 3.533,
+    "rate_scale": 1.167,
+    "source": "ANS_ForceFullBody @+12 (offset 992) from Hemingway_Content_Characters_GODS_Sun_Wukong_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json"
+  },
+  {
+    "god": "Susano",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Susano_Common_Abilities_Ability1b_MON_Offhand_B01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Susano",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Susano_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Susano",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Susano_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Susano",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Susano_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Sylvanus",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Sylvanus_Common_Animations_Montages_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Sylvanus",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Sylvanus_Common_Animations_Montages_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Sylvanus",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Sylvanus_Common_Animations_Montages_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Sylvanus",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Sylvanus_Common_Animations_Montages_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Thanatos",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Thanatos_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Thanatos",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Thanatos_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Thanatos",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Thanatos_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Thanatos",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Thanatos_Common_Abilities_Ability4_MON_Offhand_A04_Fire.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "The_Morrigan",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_The_Morrigan_Common_Abilities_Ability1_MON_OffHand_01_Firing.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "The_Morrigan",
+    "slot": "A02",
+    "duration": 0.0,
+    "rate_scale": 0.533,
+    "source": "ANS_ForceFullBody @+12 (offset 28) from Hemingway_Content_Characters_GODS_The_Morrigan_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json"
+  },
+  {
+    "god": "The_Morrigan",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_The_Morrigan_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "The_Morrigan",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_The_Morrigan_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Thor",
+    "slot": "A01",
+    "duration": 0.316,
+    "rate_scale": 0.0,
+    "source": "ANS_ForceFullBody @+12 (offset 331) from Hemingway_Content_Characters_GODS_Thor_Common_Abilities_Ability1_MON_Offhand_1.uasset.structure.json"
+  },
+  {
+    "god": "Thor",
+    "slot": "A02",
+    "duration": 0.189,
+    "rate_scale": 1.0,
+    "source": "ANS_ForceFullBody @+12 (offset 414) from Hemingway_Content_Characters_GODS_Thor_Common_Abilities_Ability2_MON_Offhand_2.uasset.structure.json"
+  },
+  {
+    "god": "Thor",
+    "slot": "A03",
+    "duration": 0.8,
+    "rate_scale": 1.0,
+    "source": "ANS_ForceFullBody @+12 (offset 606) from Hemingway_Content_Characters_GODS_Thor_Common_Abilities_Ability3_MON_Offhand_3.uasset.structure.json"
+  },
+  {
+    "god": "Thor",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Thor_Common_Abilities_Ability4_MON_Offhand_4.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Tsukuyomi",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Tsukuyomi_Common_Animations_Base_Montages_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Tsukuyomi",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Tsukuyomi_Common_Animations_Base_Montages_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Tsukuyomi",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Tsukuyomi_Common_Animations_Base_Montages_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Tsukuyomi",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Tsukuyomi_Common_Animations_Base_Montages_MON_Offhand_04_DashLoop.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ullr",
+    "slot": "A01",
+    "duration": 0.633,
+    "rate_scale": 0.0,
+    "source": "ANS_ForceFullBody @+12 (offset 247) from Hemingway_Content_Characters_GODS_Ullr_Common_Abilities_Ability1_MON_Offhand_01_A.uasset.structure.json"
+  },
+  {
+    "god": "Ullr",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Ullr_Common_Abilities_Ability2_B_MON_Offhand_02_B.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ullr",
+    "slot": "A03",
+    "duration": 0.22,
+    "rate_scale": 1.0,
+    "source": "ANS_ForceFullBody @+12 (offset 342) from Hemingway_Content_Characters_GODS_Ullr_Common_Abilities_Ability3_B_MON_Offhand_03_B.uasset.structure.json"
+  },
+  {
+    "god": "Ullr",
+    "slot": "A04",
+    "duration": 1.0,
+    "rate_scale": 0.0,
+    "source": "ANS_ForceFullBody @+12 (offset 220) from Hemingway_Content_Characters_GODS_Ullr_Common_Abilities_Ability4_MON_Offhand_04_A.uasset.structure.json"
+  },
+  {
+    "god": "Vulcan",
+    "slot": "A01",
+    "duration": 0.632,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 284) from Hemingway_Content_Characters_GODS_Vulcan_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json"
+  },
+  {
+    "god": "Vulcan",
+    "slot": "A02",
+    "duration": 0.509,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 365) from Hemingway_Content_Characters_GODS_Vulcan_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json"
+  },
+  {
+    "god": "Vulcan",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Vulcan_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Vulcan",
+    "slot": "A04",
+    "duration": 0.017,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 233) from Hemingway_Content_Characters_GODS_Vulcan_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json"
+  },
+  {
+    "god": "Vulcan",
+    "slot": "A05",
+    "duration": 0.007,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 177) from Hemingway_Content_Characters_GODS_Vulcan_Common_Abilities_Ability5_MON_Offhand_05.uasset.structure.json"
+  },
+  {
+    "god": "Xbalanque",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Xbalanque_Common_Animations_Base_Montages_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Xbalanque",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Xbalanque_Common_Animations_Base_Montages_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Xbalanque",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Xbalanque_Common_Animations_Base_Montages_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Xbalanque",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Xbalanque_Common_Animations_Base_Montages_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Yemoja",
+    "slot": "A01",
+    "duration": 0.633,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 360) from Hemingway_Content_Characters_GODS_Yemoja_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json"
+  },
+  {
+    "god": "Yemoja",
+    "slot": "A02",
+    "duration": 0.011,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 424) from Hemingway_Content_Characters_GODS_Yemoja_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json"
+  },
+  {
+    "god": "Yemoja",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Yemoja_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Yemoja",
+    "slot": "A04",
+    "duration": 0.833,
+    "rate_scale": null,
+    "source": "ANS_ForceFullBody @+12 (offset 222) from Hemingway_Content_Characters_GODS_Yemoja_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json"
+  },
+  {
+    "god": "Ymir",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Ymir_Common_Abilities_Ability1_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ymir",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Ymir_Common_Abilities_Ability2_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Ymir",
+    "slot": "A03",
+    "duration": 0.013,
+    "rate_scale": 1.0,
+    "source": "ANS_ForceFullBody @+12 (offset 230) from Hemingway_Content_Characters_GODS_Ymir_Common_Abilities_Ability3_MON_Offhand_03.uasset.structure.json"
+  },
+  {
+    "god": "Ymir",
+    "slot": "A04",
+    "duration": 0.733,
+    "rate_scale": 2.267,
+    "source": "ANS_ForceFullBody @+12 (offset 688) from Hemingway_Content_Characters_GODS_Ymir_Common_Abilities_Ability4_MON_Offhand_04.uasset.structure.json"
+  },
+  {
+    "god": "Zeus",
+    "slot": "A01",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Zeus_Common_Abilities_Ability1_Montages_Base_MON_Offhand_01.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Zeus",
+    "slot": "A02",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Zeus_Common_Abilities_Ability2_Montages_Base_MON_Offhand_02.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Zeus",
+    "slot": "A03",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Zeus_Common_Abilities_Ability3_Montages_Base_MON_Offhand_03.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Zeus",
+    "slot": "A04",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Zeus_Common_Abilities_Ability4_Montages_Base_MON_Offhand_04.uasset.structure.json (no body-lock)"
+  },
+  {
+    "god": "Zeus",
+    "slot": "A05",
+    "duration": 0.0,
+    "source": "no ANS_ForceFullBody in Hemingway_Content_Characters_GODS_Zeus_Common_Abilities_Ability5_MON_Offhand_05.uasset.structure.json (no body-lock)"
+  }
+]

@@ -1,0 +1,51 @@
+{
+  "name": "smite-2-calculator-and-optimizer",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "check": "npm run lint && npm run build",
+    "sync:watch": "powershell -ExecutionPolicy Bypass -File scripts/watch-remote.ps1",
+    "extract:smite-assets": "node scripts/extract-smite-install-assets.mjs",
+    "probe:smite-files": "dotnet build tools\\SmiteAssetProbe\\SmiteAssetProbe.csproj -c Release && dotnet tools\\SmiteAssetProbe\\bin\\Release\\net8.0\\SmiteAssetProbe.dll",
+    "audit:sim-data": "python scripts/audit-sim-data.py",
+    "audit:final-items": "tsx scripts/audit-final-items.ts",
+    "test:sim": "tsx scripts/sim-regression-tests.ts",
+    "sim": "tsx src/sim/v3/cli.ts",
+    "sim:v2": "tsx src/sim/cliV2.ts",
+    "sim:v1": "tsx src/sim/cli.ts",
+    "collab:server": "tsx src/collab/relayServer.ts",
+    "collab:demo": "tsx src/collab/demo.ts",
+    "app": "tsx src/server/appServer.ts",
+    "app:watch": "tsx watch --clear-screen=false src/server/appServer.ts",
+    "app:build": "vite build",
+    "app:prod": "npm run app:build && npm run app"
+  },
+  "dependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "ws": "^8.20.0",
+    "y-websocket": "^3.0.0",
+    "yjs": "^13.6.30"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@types/node": "^24.12.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@types/ws": "^8.18.1",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.4.0",
+    "tsx": "^4.21.0",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.58.0",
+    "vite": "^8.0.4"
+  }
+}
