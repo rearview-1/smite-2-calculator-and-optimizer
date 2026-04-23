@@ -24,12 +24,12 @@ where node >nul 2>&1
 if errorlevel 1 (
   echo [setup] ERROR: Node.js not found.
   echo        Install LTS from https://nodejs.org/  (v20 or newer)
-  exit /b 1
+  pause & exit /b 1
 )
 for /f "tokens=*" %%v in ('node -v') do echo [setup] node  %%v
 
 where npm >nul 2>&1
-if errorlevel 1 ( echo [setup] ERROR: npm not found. & exit /b 1 )
+if errorlevel 1 ( echo [setup] ERROR: npm not found. & pause & exit /b 1 )
 
 where dotnet >nul 2>&1
 if errorlevel 1 (
@@ -59,7 +59,7 @@ if exist package-lock.json (
 ) else (
   call npm install
 )
-if errorlevel 1 ( echo [setup] ERROR: npm install failed. & exit /b 1 )
+if errorlevel 1 ( echo [setup] ERROR: npm install failed. & pause & exit /b 1 )
 
 echo.
 
@@ -129,3 +129,4 @@ echo.
 echo  See README.md for the full remote-collab guide.
 echo =====================================================================
 echo.
+pause

@@ -34,7 +34,7 @@ if /i "%MODE%"=="tunnel:ssh:dev" goto :tunnel_ssh_dev
 REM Default: prod local.
 echo [run.bat] Building React UI...
 call npm run app:build
-if errorlevel 1 ( echo [run.bat] Build failed. & exit /b 1 )
+if errorlevel 1 ( echo [run.bat] Build failed. & pause & exit /b 1 )
 
 :serve
 echo.
@@ -55,10 +55,10 @@ goto :eof
 
 
 :tunnel_prod
-call :need_cloudflared || exit /b 1
+call :need_cloudflared || pause & exit /b 1
 if not exist "%~dp0dist\index.html" (
   echo [run.bat] No dist/ - building UI first...
-  call npm run app:build || ( echo Build failed. & exit /b 1 )
+  call npm run app:build || ( echo Build failed. & pause & exit /b 1 )
 )
 echo.
 echo [run.bat] Remote PROD via Cloudflare Tunnel. Teammate opens the printed URL.
@@ -70,7 +70,7 @@ goto :eof
 
 
 :tunnel_dev
-call :need_cloudflared || exit /b 1
+call :need_cloudflared || pause & exit /b 1
 echo.
 echo [run.bat] Remote DEV via Cloudflare Tunnel.
 echo    Vite (HMR) on :%VITE_PORT%, API-watch on :%APP_PORT%.
@@ -87,7 +87,7 @@ goto :eof
 :tunnel_ssh_prod
 if not exist "%~dp0dist\index.html" (
   echo [run.bat] No dist/ - building UI first...
-  call npm run app:build || ( echo Build failed. & exit /b 1 )
+  call npm run app:build || ( echo Build failed. & pause & exit /b 1 )
 )
 start "SMITE2 API"  cmd /k "set APP_PORT=%APP_PORT% && npm run app"
 timeout /t 3 /nobreak >nul
@@ -119,6 +119,6 @@ if "%CLOUDFLARED%"=="" (
   echo   Option B: install from https://github.com/cloudflare/cloudflared/releases/latest
   echo            (download the "windows-amd64.exe" release, drop next to run.bat)
   echo.
-  exit /b 1
+  pause & exit /b 1
 )
 exit /b 0
