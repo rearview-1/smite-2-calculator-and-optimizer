@@ -36,8 +36,8 @@ Prereqs (install once):
 Then clone and bootstrap:
 
 ```bat
-git clone https://github.com/<you>/smite-2-calculator.git
-cd smite-2-calculator
+git clone https://github.com/rearview-1/smite-2-calculator-and-optimizer.git
+cd smite-2-calculator-and-optimizer
 setup.bat
 ```
 
@@ -110,7 +110,7 @@ Run `run.bat dev` on your machine, find your LAN IP (`ipconfig`), and share `htt
 ## Project layout
 
 ```
-smite-2-calculator/
+smite-2-calculator-and-optimizer/
 ├── run.bat                     Launcher — all run modes
 ├── setup.bat                   First-time bootstrap
 ├── package.json                Node deps + scripts
