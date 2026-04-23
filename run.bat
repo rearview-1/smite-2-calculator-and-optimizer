@@ -55,7 +55,7 @@ goto :eof
 
 
 :tunnel_prod
-call :need_cloudflared || pause & exit /b 1
+call :need_cloudflared || ( pause & exit /b 1 )
 if not exist "%~dp0dist\index.html" (
   echo [run.bat] No dist/ - building UI first...
   call npm run app:build || ( echo Build failed. & pause & exit /b 1 )
@@ -70,7 +70,7 @@ goto :eof
 
 
 :tunnel_dev
-call :need_cloudflared || pause & exit /b 1
+call :need_cloudflared || ( pause & exit /b 1 )
 echo.
 echo [run.bat] Remote DEV via Cloudflare Tunnel.
 echo    Vite (HMR) on :%VITE_PORT%, API-watch on :%APP_PORT%.
