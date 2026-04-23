@@ -109,21 +109,36 @@ goto :eof
 
 
 :need_cloudflared
-REM Accept either the short name or the GitHub release name, in the repo root
-REM or anywhere on PATH. Some users drop the download verbatim without renaming.
+REM Accept either the short or the GitHub release filename, in the repo root
+REM or on PATH. Plain if/goto structure — avoids cmd parser quirks some shells
+REM hit with multi-condition for-loops.
 set CLOUDFLARED=
-if exist "%~dp0cloudflared.exe"                  set CLOUDFLARED=%~dp0cloudflared.exe
-if "%CLOUDFLARED%"=="" if exist "%~dp0cloudflared-windows-amd64.exe" set CLOUDFLARED=%~dp0cloudflared-windows-amd64.exe
-if "%CLOUDFLARED%"=="" for %%P in (cloudflared.exe)                  do if not defined CLOUDFLARED if not "%%~$PATH:P"=="" set CLOUDFLARED=%%~$PATH:P
-if "%CLOUDFLARED%"=="" for %%P in (cloudflared-windows-amd64.exe)    do if not defined CLOUDFLARED if not "%%~$PATH:P"=="" set CLOUDFLARED=%%~$PATH:P
-if "%CLOUDFLARED%"=="" (
-  echo.
-  echo [run.bat] cloudflared.exe not found.
-  echo   Option A: place cloudflared.exe (or cloudflared-windows-amd64.exe) next to run.bat
-  echo   Option B: install from https://github.com/cloudflare/cloudflared/releases/latest
-  echo            (download "cloudflared-windows-amd64.exe" and drop it next to run.bat)
-  echo.
-  pause & exit /b 1
+if exist "%~dp0cloudflared.exe" (
+  set "CLOUDFLARED=%~dp0cloudflared.exe"
+  goto :have_cloudflared
 )
+if exist "%~dp0cloudflared-windows-amd64.exe" (
+  set "CLOUDFLARED=%~dp0cloudflared-windows-amd64.exe"
+  goto :have_cloudflared
+)
+where cloudflared.exe >nul 2>&1
+if not errorlevel 1 (
+  for /f "delims=" %%P in ('where cloudflared.exe') do set "CLOUDFLARED=%%P"
+  goto :have_cloudflared
+)
+where cloudflared-windows-amd64.exe >nul 2>&1
+if not errorlevel 1 (
+  for /f "delims=" %%P in ('where cloudflared-windows-amd64.exe') do set "CLOUDFLARED=%%P"
+  goto :have_cloudflared
+)
+echo.
+echo [run.bat] cloudflared not found.
+echo   Option A: place cloudflared.exe (or cloudflared-windows-amd64.exe) next to run.bat
+echo   Option B: install from https://github.com/cloudflare/cloudflared/releases/latest
+echo            (download "cloudflared-windows-amd64.exe" and drop it next to run.bat)
+echo.
+pause & exit /b 1
+
+:have_cloudflared
 echo [run.bat] Using cloudflared at: %CLOUDFLARED%
 exit /b 0
