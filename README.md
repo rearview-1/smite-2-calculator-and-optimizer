@@ -152,6 +152,8 @@ Note: game assets (`.uasset`, `.pak`, etc.) are Hi-Rez's IP and are `.gitignore`
 
 - Type-check everything: `npx tsc --noEmit -p tsconfig.app.json`
 - Sim regression: `npm run sim` should print 6 validated scenarios including Loki combo (1352.92) and team-comp.
+- Ground-truth verification: `npm run verify:ground-truth`
+- Ground-truth coverage audit: `npm run audit:ground-truth`
 - Collab demo (two CLI "users" on same machine): `npm run collab:server` then `npm run collab:demo`.
 
 ## License

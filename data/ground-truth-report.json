@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-04-24T20:03:19.478Z",
+  "fixtures": [
+    {
+      "id": "the-morrigan-basic-vs-kukulkan-l20",
+      "pass": true,
+      "checks": [
+        {
+          "label": "totals.total",
+          "pass": true,
+          "actual": 60.78125000000001,
+          "expected": 60,
+          "tolerance": 2
+        },
+        {
+          "label": "eventCount {\"label\":\"AA\",\"labelMode\":\"startsWith\",\"source\":\"basic\",\"damageType\":\"magical\"}",
+          "pass": true,
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "label": "eventValue {\"label\":\"AA\",\"labelMode\":\"startsWith\",\"source\":\"basic\",\"damageType\":\"magical\"} #1 postMitigation",
+          "pass": true,
+          "actual": 60.78125000000001,
+          "expected": 60,
+          "tolerance": 2
+        }
+      ]
+    },
+    {
+      "id": "the-morrigan-dark-omen-vs-kukulkan-l20",
+      "pass": true,
+      "checks": [
+        {
+          "label": "totals.total",
+          "pass": true,
+          "actual": 113.93229166666669,
+          "expected": 113,
+          "tolerance": 2
+        },
+        {
+          "label": "eventCount {\"label\":\"Dark Omen\",\"labelMode\":\"exact\",\"source\":\"ability\",\"damageType\":\"magical\"}",
+          "pass": true,
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "label": "eventValue {\"label\":\"Dark Omen\",\"labelMode\":\"exact\",\"source\":\"ability\",\"damageType\":\"magical\"} #1 postMitigation",
+          "pass": true,
+          "actual": 113.93229166666669,
+          "expected": 113,
+          "tolerance": 2
+        }
+      ]
+    },
+    {
+      "id": "the-morrigan-aa-a02-aa-no-pop",
+      "pass": true,
+      "checks": [
+        {
+          "label": "eventCount {\"label\":\"AA\",\"labelMode\":\"startsWith\",\"source\":\"basic\",\"damageType\":\"magical\"}",
+          "pass": true,
+          "actual": 2,
+          "expected": 2
+        },
+        {
+          "label": "eventCount {\"label\":\"Dark Omen\",\"labelMode\":\"exact\",\"source\":\"ability\",\"damageType\":\"magical\"}",
+          "pass": true,
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "label": "eventCount {\"label\":\"Dark Omen (trigger)\",\"labelMode\":\"exact\",\"damageType\":\"magical\"}",
+          "pass": true,
+          "actual": 0,
+          "expected": 0
+        }
+      ]
+    },
+    {
+      "id": "loki-a02-hit-count",
+      "pass": true,
+      "checks": [
+        {
+          "label": "eventCount {\"label\":\"Agonizing Visions\",\"labelMode\":\"startsWith\",\"source\":\"ability\",\"damageType\":\"physical\"}",
+          "pass": true,
+          "actual": 8,
+          "expected": 8
+        }
+      ]
+    },
+    {
+      "id": "loki-aa-combo-timing",
+      "pass": true,
+      "checks": [
+        {
+          "label": "comboExecutionTime",
+          "pass": true,
+          "actual": 2.914,
+          "expected": 2.83,
+          "tolerance": 0.12
+        }
+      ]
+    }
+  ]
+}

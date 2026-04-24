@@ -26,11 +26,12 @@ import * as encoding from 'lib0/encoding'
 import * as decoding from 'lib0/decoding'
 
 import { runScenario, snapshotAttacker, snapshotDefender, inferPrimaryStat } from '../sim/v3/engine.ts'
-import { loadGods, loadItems, resolveItemStatsWithOverrides } from '../catalog/loadCatalogs.ts'
+import { loadGods, loadItems, resolveItemStatsWithOverrides, getAspect, type GodCatalogEntry } from '../catalog/loadCatalogs.ts'
 import { itemDisplayName, isDeprecatedItem, shouldPreferItemRecord } from '../catalog/itemEligibility.ts'
-import { allGodLockedItems, acornAdaptiveStrength } from '../catalog/godLockedItems.ts'
+import { allGodLockedItems, acornAdaptiveStrength, godLockedItemStatTags } from '../catalog/godLockedItems.ts'
 import type { Scenario, SimResult } from '../sim/v3/types.ts'
-import { optimize, type OptimizeRequest } from '../optimizer/optimize.ts'
+import type { OptimizeRequest } from '../optimizer/optimize.ts'
+import { optimizeParallel } from '../optimizer/parallel.ts'
 
 function envPort(name: string, fallback: number): number {
   const parsed = Number(process.env[name])
@@ -38,6 +39,7 @@ function envPort(name: string, fallback: number): number {
 }
 
 const PORT = envPort('APP_PORT', 4455)
+const APP_PORT_WAS_EXPLICIT = Boolean(process.env.APP_PORT && process.env.APP_PORT.trim())
 const VITE_PORT = envPort('VITE_PORT', 5173)
 const DIST_DIR = resolve(process.cwd(), 'dist')
 const PERSIST_DIR = process.env.COLLAB_PERSIST_DIR
@@ -82,6 +84,20 @@ function logServerError(route: string, err: unknown) {
   console.error(`[api] ${route}: ${e.message}\n${e.stack ?? ''}`)
 }
 
+function godSupportsAspect(godId: string, god: GodCatalogEntry): boolean {
+  if (getAspect(godId)) return true
+  const talentKeys = Object.keys(god.talents ?? {}).filter((key) => /^talent/i.test(key))
+  const passiveVariants = Object.values(god.passive.talentVariants ?? {}).filter(Boolean)
+  return talentKeys.length > 0 || passiveVariants.length > 0
+}
+
+function godAspectDescription(godId: string, god: GodCatalogEntry): string | null {
+  const aspect = getAspect(godId)
+  if (aspect?.aspect.description) return aspect.aspect.description
+  const variants = Object.values(god.passive.talentVariants ?? {}).filter(Boolean)
+  return variants[0] ?? null
+}
+
 async function handleApi(req: IncomingMessage, res: ServerResponse, url: URL): Promise<boolean> {
   if (!url.pathname.startsWith('/api/')) return false
   // CORS for dev (Vite on VITE_PORT calling us on APP_PORT).
@@ -93,10 +109,17 @@ async function handleApi(req: IncomingMessage, res: ServerResponse, url: URL): P
   try {
     if (url.pathname === '/api/gods' && req.method === 'GET') {
       const gods = loadGods()
-      const out = Object.entries(gods).map(([id, g]) => ({
-        id, name: g.god,
-        primaryStat: inferPrimaryStat(g),
-      }))
+      const out = Object.entries(gods).map(([id, g]) => {
+        const aspectSupported = godSupportsAspect(id, g)
+        return {
+          id, name: g.god,
+          primaryStat: inferPrimaryStat(g),
+          aspectSupported,
+          aspectKey: aspectSupported ? `${id}.aspect` : null,
+          aspectLabel: aspectSupported ? 'Aspect' : null,
+          aspectDescription: godAspectDescription(id, g),
+        }
+      })
       json(res, 200, out.sort((a, b) => a.name.localeCompare(b.name)))
       return true
     }
@@ -124,6 +147,7 @@ async function handleApi(req: IncomingMessage, res: ServerResponse, url: URL): P
             storeFloats: item.storeFloats,
             totalCost: item.totalCost,
             passive: item.passive,
+            aspectPassive: null as string | null,
             godLocked: null as string | null,
             // Precomputed stats so the picker UI can show "100HP · 40STR/70INT"
             // without duplicating the inferOrderedTags heuristic client-side.
@@ -132,6 +156,12 @@ async function handleApi(req: IncomingMessage, res: ServerResponse, url: URL): P
               adaptiveStrength: resolved.adaptiveStrength,
               adaptiveIntelligence: resolved.adaptiveIntelligence,
               adaptiveChoice: resolved.adaptiveChoice ?? null,
+            },
+            aspectResolvedStats: null as null | {
+              stats: Record<string, number>
+              adaptiveStrength: number
+              adaptiveIntelligence: number
+              adaptiveChoice: null
             },
           }
         })
@@ -147,14 +177,21 @@ async function handleApi(req: IncomingMessage, res: ServerResponse, url: URL): P
           name: glItem.displayName,
           tier: `T${glItem.tier}` as string,
           categories: ['Offensive', 'GodLocked'],
-          statTags: [],
+          statTags: godLockedItemStatTags(glItem),
           storeFloats: [],
           totalCost: null,
           passive: glItem.nonAspectPassive,
+          aspectPassive: glItem.aspectPassive,
           godLocked: glItem.godId,
           resolvedStats: {
             stats: glItem.nonAspectStats,
             adaptiveStrength: adaptiveSTR,
+            adaptiveIntelligence: 0,
+            adaptiveChoice: null,
+          },
+          aspectResolvedStats: {
+            stats: glItem.aspectStats,
+            adaptiveStrength: acornAdaptiveStrength(glItem, /* aspectActive */ true),
             adaptiveIntelligence: 0,
             adaptiveChoice: null,
           },
@@ -173,6 +210,7 @@ async function handleApi(req: IncomingMessage, res: ServerResponse, url: URL): P
       const gods = loadGods()
       const god = gods[id]
       if (!god) { json(res, 404, { error: 'god not found' }); return true }
+      const aspect = getAspect(id)
       json(res, 200, {
         id, name: god.god,
         passive: god.passive,
@@ -187,6 +225,7 @@ async function handleApi(req: IncomingMessage, res: ServerResponse, url: URL): P
             } : null]
           }),
         ),
+        aspect: aspect ? aspect.aspect : null,
       })
       return true
     }
@@ -213,7 +252,7 @@ async function handleApi(req: IncomingMessage, res: ServerResponse, url: URL): P
       let request: OptimizeRequest
       try { request = JSON.parse(body) }
       catch { json(res, 400, { error: 'invalid JSON body' }); return true }
-      try { json(res, 200, optimize(request)) }
+      try { json(res, 200, await optimizeParallel(request)) }
       catch (err) {
         logServerError('/api/optimize', err)
         json(res, 500, { error: (err as Error).message })
@@ -445,13 +484,58 @@ httpServer.on('upgrade', (req, socket, head) => {
   wss.handleUpgrade(req, socket, head, (ws) => wss.emit('connection', ws, req))
 })
 
-httpServer.listen(PORT, () => {
-  console.log(`\n  SMITE 2 Calculator — local app`)
-  console.log(`  UI:       http://localhost:${PORT}/`)
-  console.log(`  API:      http://localhost:${PORT}/api/gods`)
-  console.log(`  collab:   ws://localhost:${PORT}/collab/<build-id>`)
-  console.log(`  dist:     ${existsSync(DIST_DIR) ? 'ok' : `missing — run \`npm run build\` or start Vite on ${VITE_PORT}`}\n`)
-})
+function listenOn(port: number): Promise<number> {
+  return new Promise((resolve, reject) => {
+    const onError = (err: NodeJS.ErrnoException) => {
+      httpServer.off('listening', onListening)
+      reject(err)
+    }
+    const onListening = () => {
+      httpServer.off('error', onError)
+      resolve(port)
+    }
+    httpServer.once('error', onError)
+    httpServer.once('listening', onListening)
+    httpServer.listen(port)
+  })
+}
+
+async function startServer(): Promise<number> {
+  if (APP_PORT_WAS_EXPLICIT) return listenOn(PORT)
+
+  const maxAttempts = 10
+  for (let offset = 0; offset < maxAttempts; offset++) {
+    const candidate = PORT + offset
+    try {
+      return await listenOn(candidate)
+    } catch (err) {
+      const e = err as NodeJS.ErrnoException
+      if (e.code !== 'EADDRINUSE') throw e
+    }
+  }
+  throw new Error(`No open app port found in range ${PORT}-${PORT + maxAttempts - 1}`)
+}
+
+startServer()
+  .then((boundPort) => {
+    const moved = boundPort !== PORT
+    console.log(`\n  SMITE 2 Calculator — local app`)
+    if (moved) console.log(`  note:     :${PORT} was busy, using :${boundPort} instead`)
+    console.log(`  UI:       http://localhost:${boundPort}/`)
+    console.log(`  API:      http://localhost:${boundPort}/api/gods`)
+    console.log(`  collab:   ws://localhost:${boundPort}/collab/<build-id>`)
+    console.log(`  dist:     ${existsSync(DIST_DIR) ? 'ok' : `missing — run \`npm run build\` or start Vite on ${VITE_PORT}`}\n`)
+  })
+  .catch((err: NodeJS.ErrnoException) => {
+    if (err.code === 'EADDRINUSE') {
+      console.error(`[app] port ${PORT} is already in use.`)
+      console.error(`[app] stop the existing server, or run with a different port:`)
+      console.error(`[app]   set APP_PORT=${PORT + 1} && npm run app`)
+      process.exit(1)
+    }
+    console.error(`[app] failed to start: ${(err as Error).message}`)
+    process.exit(1)
+  })
 
 process.on('SIGINT', () => {
   console.log('\n[app] SIGINT — flushing')

@@ -18,7 +18,7 @@ import {
   shouldAutoEvolveStackingItem,
   itemHasActive,
 } from '../sim/v3/engine.ts'
-import { loadItems } from '../catalog/loadCatalogs.ts'
+import { loadItems, type ItemCatalogEntry } from '../catalog/loadCatalogs.ts'
 import {
   getFinalBuildItemExclusionReason,
   isFinalBuildStarter,
@@ -26,11 +26,20 @@ import {
   shouldPreferItemRecord,
 } from '../catalog/itemEligibility.ts'
 import {
+  allGodLockedItems,
+  godLockedItemAsCatalogItem,
+  isAspectEnabled,
+} from '../catalog/godLockedItems.ts'
+import {
   buildExclusionIndex,
   comboViolatesExclusion,
   computeExclusionGroups,
 } from '../catalog/itemGroups.ts'
-import type { RotationAction, Scenario, SimResult } from '../sim/v3/types.ts'
+import { levelAt, loadRoleMetrics, minuteToReachGold, type RoleId } from '../catalog/roleMetrics.ts'
+import type { AbilitySlot, DamageEvent, RotationAction, Scenario, SimResult } from '../sim/v3/types.ts'
+
+export type DamageProfile = 'any' | 'auto' | 'ability' | 'hybrid'
+type NonAnyDamageProfile = Exclude<DamageProfile, 'any'>
 
 export interface OptimizeRequest {
   /** Base scenario. attacker.items are locked into every optimized build;
@@ -64,13 +73,32 @@ export interface OptimizeRequest {
    *              sustain weighting: CDR means more rotations in a long fight.
    *   burst    — damage / time² . More aggressive than dps: a build doing
    *              2000 in 2s beats one doing 2900 in 3.4s. Time compression
-   *              weighted heavier than raw DPS. */
-  rankBy?: 'total' | 'physical' | 'magical' | 'true' | 'dps' | 'ability' | 'brawling' | 'bruiser' | 'burst' | 'bruiserBurst'
+   *              weighted heavier than raw DPS.
+   *   powerSpike — average damage available over an average match length,
+   *              using role + mode-specific gold curves to project when each
+   *              item is bought. Prefix builds are re-simmed at their projected
+   *              minute / level windows, so early-slot spikes matter. Requires
+   *              `role` + `gameMode`. */
+  rankBy?: 'total' | 'physical' | 'magical' | 'true' | 'dps' | 'ability' | 'brawling' | 'bruiser' | 'burst' | 'bruiserBurst' | 'powerSpike'
+
+  /** Role for power-spike scoring + build-order computation. */
+  role?: RoleId
+
+  /** Queue mode for power-spike timing. Default 'casual'. */
+  gameMode?: 'casual' | 'ranked'
 
   /** When `rankBy === 'ability'`, sum damage of all events whose label includes
    *  this substring (case-insensitive). Example: "Flurry" catches all Flurry
    *  Strike hits. "A02" doesn't work — use the display label instead. */
   rankByAbilityLabel?: string
+
+  /** Optional playstyle bias layered on top of the rank metric:
+   *   any     — no bias, raw rank metric
+   *   auto    — prefer builds whose damage is driven by basics/basic-triggered procs
+   *   ability — prefer builds whose damage is driven by abilities/ability-triggered procs
+   *   hybrid  — prefer builds that keep both autos and abilities relevant
+   */
+  damageProfile?: DamageProfile
 
   /** Post-filter bounds on computed stats. Builds that violate any are dropped.
    *  Keys match AttackerSnapshot field names (adaptiveStrength, cdrPercent,
@@ -103,6 +131,11 @@ export interface OptimizeRequest {
    *  Items not listed here contribute their flat stats only — their active
    *  isn't counted. */
   activeItems?: string[]
+
+  /** Internal worker-sharding fields. Used by the server's parallel optimizer
+   *  path so shards can search disjoint build slices and merge top-N results. */
+  shardIndex?: number
+  shardCount?: number
 }
 
 export interface OptimizedBuild {
@@ -113,6 +146,35 @@ export interface OptimizedBuild {
   /** The score this build was ranked on — total damage by default, or the
    *  ability-filtered total if rank-by-ability is active. */
   rankScore: number
+  /** Items in recommended build order, earliest to latest. Present only when
+   *  `role` is set on the request. Timings / levels come from role metrics,
+   *  and damage values are re-simmed on the projected prefix state. */
+  buildOrder?: Array<{
+    name: string
+    itemCost: number
+    cumulativeCost: number
+    estimatedMinute: number
+    projectedLevel: number
+    damage: number
+    marginalDamage: number
+    spikeEfficiency: number
+  }>
+  powerSpike?: {
+    averageDamage: number
+    peakItem: string
+    peakMinute: number
+    peakLevel: number
+    peakMarginalDamage: number
+    peakEfficiency: number
+  }
+  profile?: {
+    autoDamage: number
+    abilityDamage: number
+    otherDamage: number
+    autoShare: number
+    abilityShare: number
+    dominantStyle: NonAnyDamageProfile
+  }
   /** Subset of attacker snapshot, for result-grid columns. */
   stats: {
     adaptiveStrength: number
@@ -137,6 +199,17 @@ export interface OptimizeResult {
   results: OptimizedBuild[]
   elapsedMs: number
   warnings: string[]
+  parallelismUsed?: number
+  styleLeaders?: Partial<Record<NonAnyDamageProfile, {
+    items: string[]
+    rankScore: number
+    baseScore: number
+    dps: number
+    totalDamage: number
+    autoShare: number
+    abilityShare: number
+    dominantStyle: NonAnyDamageProfile
+  }>>
 }
 
 // -- small combinatorics helpers ---------------------------------------------
@@ -198,8 +271,17 @@ function sampleK<T>(arr: T[], k: number, seen: Set<number>, rng: () => number): 
   return out
 }
 
+function sampleTryLimit(targetBuilds: number, shardCount: number): number {
+  return Math.max(targetBuilds * 20, targetBuilds * shardCount * 12)
+}
+
 function comboKey(items: string[]): string {
   return items.slice().sort().join('|')
+}
+
+function shardIndexForCombo(items: string[], shardCount: number): number {
+  if (shardCount <= 1) return 0
+  return hashString(comboKey(items)) % shardCount
 }
 
 function uniqueNames(names: string[]): string[] {
@@ -213,7 +295,13 @@ function uniqueNames(names: string[]): string[] {
   return out
 }
 
-function summarize(items: string[], result: SimResult, snapshotStats: OptimizedBuild['stats'], rankScore: number): OptimizedBuild {
+function summarize(
+  items: string[],
+  result: SimResult,
+  snapshotStats: OptimizedBuild['stats'],
+  rankScore: number,
+  profile?: OptimizedBuild['profile'],
+): OptimizedBuild {
   const dps = result.comboExecutionTime > 0 ? result.totals.total / result.comboExecutionTime : result.totals.total
   return {
     items,
@@ -226,8 +314,177 @@ function summarize(items: string[], result: SimResult, snapshotStats: OptimizedB
     comboExecutionTime: result.comboExecutionTime,
     dps,
     rankScore,
+    profile,
     stats: snapshotStats,
   }
+}
+
+type BuildOrderStep = NonNullable<OptimizedBuild['buildOrder']>[number]
+type PowerSpikeSummary = NonNullable<OptimizedBuild['powerSpike']>
+type DamageProfileSummary = NonNullable<OptimizedBuild['profile']>
+type SimDamageOptions = {
+  evolve: boolean
+  activeSet: Set<string>
+  minute?: number
+  role?: RoleId
+  mode?: 'casual' | 'ranked'
+  conservativeStacks?: boolean
+}
+
+const NON_ULT_SLOTS: AbilitySlot[] = ['A01', 'A02', 'A03']
+const ULT_RANK_LEVELS = [5, 9, 13, 17, 20]
+const NON_ANY_DAMAGE_PROFILES: NonAnyDamageProfile[] = ['auto', 'ability', 'hybrid']
+
+function classifyDamageEvent(event: DamageEvent): 'auto' | 'ability' | 'other' {
+  const notes = (event.notes ?? []).join(' ').toLowerCase()
+  if (event.source === 'basic') return 'auto'
+  if (event.source === 'ability' || event.source === 'dot') {
+    if (notes.includes('basic')) return 'auto'
+    return 'ability'
+  }
+  if (notes.includes('basic')) return 'auto'
+  if (notes.includes('ability')) return 'ability'
+  return 'other'
+}
+
+function buildDamageProfile(sim: SimResult): DamageProfileSummary {
+  let autoDamage = 0
+  let abilityDamage = 0
+  let otherDamage = 0
+  for (const event of sim.damageEvents) {
+    const bucket = classifyDamageEvent(event)
+    if (bucket === 'auto') autoDamage += event.postMitigation
+    else if (bucket === 'ability') abilityDamage += event.postMitigation
+    else otherDamage += event.postMitigation
+  }
+  const total = autoDamage + abilityDamage + otherDamage
+  const autoShare = total > 0 ? autoDamage / total : 0
+  const abilityShare = total > 0 ? abilityDamage / total : 0
+  const balanceGap = Math.abs(autoShare - abilityShare)
+  const dominantStyle: NonAnyDamageProfile =
+    autoDamage <= 0 && abilityDamage > 0 ? 'ability'
+    : abilityDamage <= 0 && autoDamage > 0 ? 'auto'
+    : balanceGap <= 0.15 ? 'hybrid'
+    : autoShare > abilityShare ? 'auto'
+    : 'ability'
+  return {
+    autoDamage,
+    abilityDamage,
+    otherDamage,
+    autoShare,
+    abilityShare,
+    dominantStyle,
+  }
+}
+
+function damageProfileMultiplier(profile: DamageProfile, summary: DamageProfileSummary): number {
+  if (profile === 'any') return 1
+  if (profile === 'auto') return Math.max(0.01, summary.autoShare + summary.otherDamage / Math.max(1, summary.autoDamage + summary.abilityDamage + summary.otherDamage) * 0.1)
+  if (profile === 'ability') return Math.max(0.01, summary.abilityShare + summary.otherDamage / Math.max(1, summary.autoDamage + summary.abilityDamage + summary.otherDamage) * 0.1)
+  return Math.max(0.01, 4 * summary.autoShare * summary.abilityShare)
+}
+
+function deriveAbilityPriority(
+  scenario: Scenario,
+): AbilitySlot[] {
+  const counts = new Map<AbilitySlot, number>()
+  for (const step of scenario.rotation) {
+    if (step.kind !== 'ability') continue
+    counts.set(step.slot, (counts.get(step.slot) ?? 0) + 1)
+  }
+  return NON_ULT_SLOTS.slice().sort((a, b) => {
+    const freqDelta = (counts.get(b) ?? 0) - (counts.get(a) ?? 0)
+    if (freqDelta !== 0) return freqDelta
+    const baseDelta = (scenario.attacker.abilityRanks[b] ?? 0) - (scenario.attacker.abilityRanks[a] ?? 0)
+    if (baseDelta !== 0) return baseDelta
+    return a.localeCompare(b)
+  })
+}
+
+function projectedAbilityRanks(
+  scenario: Scenario,
+  level: number,
+): Record<AbilitySlot, number> {
+  const clampedLevel = Math.max(1, Math.min(20, Math.floor(level)))
+  const out: Record<AbilitySlot, number> = { A01: 0, A02: 0, A03: 0, A04: 0 }
+  let remainingPoints = clampedLevel
+
+  out.A04 = Math.min(5, ULT_RANK_LEVELS.filter((threshold) => clampedLevel >= threshold).length)
+  remainingPoints -= out.A04
+
+  const maxBasicRank = Math.min(5, Math.floor((clampedLevel + 1) / 2))
+  for (const slot of deriveAbilityPriority(scenario)) {
+    if (remainingPoints <= 0) break
+    const spend = Math.min(maxBasicRank, remainingPoints)
+    out[slot] = spend
+    remainingPoints -= spend
+  }
+
+  if (remainingPoints > 0) {
+    for (const slot of deriveAbilityPriority(scenario)) {
+      if (remainingPoints <= 0) break
+      const cap = Math.min(5, maxBasicRank)
+      const room = cap - out[slot]
+      if (room <= 0) continue
+      const spend = Math.min(room, remainingPoints)
+      out[slot] += spend
+      remainingPoints -= spend
+    }
+  }
+
+  return out
+}
+
+function projectScenarioForMinute(
+  scenario: Scenario,
+  minute: number,
+  mode: 'casual' | 'ranked',
+  role?: RoleId,
+): Scenario {
+  const attackerLevel = Math.min(scenario.attacker.level, levelAt(minute, mode, role))
+  const defenderLevel = Math.min(scenario.defender.level, levelAt(minute, mode))
+  return {
+    ...scenario,
+    attacker: {
+      ...scenario.attacker,
+      level: attackerLevel,
+      abilityRanks: projectedAbilityRanks(scenario, attackerLevel),
+    },
+    defender: {
+      ...scenario.defender,
+      level: defenderLevel,
+    },
+    teamAttackers: scenario.teamAttackers?.map((ally) => {
+      const allyLevel = Math.min(ally.level, levelAt(minute, mode))
+      return {
+        ...ally,
+        level: allyLevel,
+        abilityRanks: projectedAbilityRanks({
+          ...scenario,
+          attacker: ally,
+        }, allyLevel),
+      }
+    }),
+  }
+}
+
+/** Default gold costs per tier for items whose `totalCost` isn't populated
+ *  in the catalog yet. The Python `augment-catalog-with-costs.py` script
+ *  fills the real values from game files; until it's run, these tier-based
+ *  approximations keep build-order timings directionally correct. */
+const DEFAULT_TIER_COSTS: Record<string, number> = {
+  'T1': 650,
+  'T2': 1400,
+  'T3': 2800,
+  'Starter': 600,  // upgraded starter (final-build eligible)
+}
+
+function itemGoldCost(entry: ItemCatalogEntry | undefined): number {
+  if (!entry) return 0
+  // God-locked items (Ratatoskr acorns) are spawned, not purchased.
+  if (entry.categories?.includes('GodLocked')) return 0
+  if (typeof entry.totalCost === 'number' && entry.totalCost > 0) return entry.totalCost
+  return DEFAULT_TIER_COSTS[entry.tier ?? ''] ?? 0
 }
 
 // -- main entry point --------------------------------------------------------
@@ -262,6 +519,19 @@ export function optimize(req: OptimizeRequest): OptimizeResult {
     const displayName = itemDisplayName(it)
     if (displayName && shouldPreferItemRecord(it, byName.get(displayName))) {
       byName.set(displayName, it)
+    }
+  }
+  // Inject god-locked items (Ratatoskr acorns) for the attacker god so users
+  // can lock them as part of a build. They aren't in items-catalog.json — they
+  // live alongside it, synthesized on demand. The sim engine resolves them via
+  // getItem() → findGodLockedItem() fallback.
+  const attackerGodId = req.scenario.attacker.godId
+  const aspectActive = isAspectEnabled(req.scenario.attacker.aspects)
+  for (const glItem of allGodLockedItems()) {
+    if (glItem.godId !== attackerGodId) continue
+    const synth = godLockedItemAsCatalogItem(glItem, aspectActive)
+    if (shouldPreferItemRecord(synth, byName.get(glItem.displayName))) {
+      byName.set(glItem.displayName, synth)
     }
   }
 
@@ -352,6 +622,9 @@ export function optimize(req: OptimizeRequest): OptimizeResult {
   const maxPerms = positiveInteger(req.maxPermutations, 20000)
   const topN = positiveInteger(req.topN, 100)
   const rankBy = req.rankBy ?? 'total'
+  const damageProfile = req.damageProfile ?? 'any'
+  const shardCount = Math.max(1, positiveInteger(req.shardCount, 1, 1))
+  const shardIndex = Math.max(0, Math.min(shardCount - 1, positiveInteger(req.shardIndex, 0, 0)))
   const remainingRegularSlots = buildSize - lockedRegular.length
 
   if (lockedNames.length > 0) {
@@ -413,21 +686,27 @@ export function optimize(req: OptimizeRequest): OptimizeResult {
       if (!shuffle || full <= maxPerms) {
         for (const s of starterChoices) {
           for (const combo of combinations(regularChoices, remainingRegularSlots)) {
-            yield [s, ...lockedRegular, ...combo]
+            const build = [s, ...lockedRegular, ...combo]
+            if (shardIndexForCombo(build, shardCount) !== shardIndex) continue
+            yield build
           }
         }
       } else {
         const seen = new Set<number>()
         const produced = new Set<string>()
-        for (let tries = 0; tries < maxPerms * 10 && produced.size < maxPerms; tries++) {
+        const maxTries = sampleTryLimit(maxPerms, shardCount)
+        for (let tries = 0; tries < maxTries && produced.size < maxPerms; tries++) {
           const pick = Math.floor(rng() * full)
-          const s = starterChoices[Math.floor(pick / perStarterCount)]
+          const starterIdx = Math.floor(pick / perStarterCount)
+          const s = starterChoices[starterIdx]
           const combo = sampleK(regularChoices, remainingRegularSlots, seen, rng)
           if (!combo) continue
-          const key = comboKey([s, ...lockedRegular, ...combo])
+          const build = [s, ...lockedRegular, ...combo]
+          if (shardIndexForCombo(build, shardCount) !== shardIndex) continue
+          const key = comboKey(build)
           if (produced.has(key)) continue
           produced.add(key)
-          yield [s, ...lockedRegular, ...combo]
+          yield build
         }
       }
     } else {
@@ -441,19 +720,30 @@ export function optimize(req: OptimizeRequest): OptimizeResult {
       const full = zeroStarterCount + starterChoices.length * oneStarterPerStarterCount
       if (!shuffle || full <= maxPerms) {
         if (lockedHasStarter) {
-          for (const combo of combinations(regularChoices, remainingSlots)) yield [...lockedNames, ...combo]
+          for (const combo of combinations(regularChoices, remainingSlots)) {
+            const build = [...lockedNames, ...combo]
+            if (shardIndexForCombo(build, shardCount) !== shardIndex) continue
+            yield build
+          }
         } else {
-          for (const combo of combinations(regularChoices, remainingSlots)) yield [...lockedNames, ...combo]
+          for (const combo of combinations(regularChoices, remainingSlots)) {
+            const build = [...lockedNames, ...combo]
+            if (shardIndexForCombo(build, shardCount) !== shardIndex) continue
+            yield build
+          }
           for (const s of starterChoices) {
             for (const combo of combinations(regularChoices, remainingSlots - 1)) {
-              yield [...lockedNames, s, ...combo]
+              const build = [...lockedNames, s, ...combo]
+              if (shardIndexForCombo(build, shardCount) !== shardIndex) continue
+              yield build
             }
           }
         }
       } else {
         const seen = new Set<number>()
         const produced = new Set<string>()
-        for (let tries = 0; tries < maxPerms * 10 && produced.size < maxPerms; tries++) {
+        const maxTries = sampleTryLimit(maxPerms, shardCount)
+        for (let tries = 0; tries < maxTries && produced.size < maxPerms; tries++) {
           const pick = Math.floor(rng() * full)
           const combo = lockedHasStarter
             ? [...lockedNames, ...(sampleK(regularChoices, remainingSlots, seen, rng) ?? [])]
@@ -465,6 +755,7 @@ export function optimize(req: OptimizeRequest): OptimizeResult {
                   ...(sampleK(regularChoices, remainingSlots - 1, seen, rng) ?? []),
                 ]
           if (!combo || combo.length !== buildSize) continue
+          if (shardIndexForCombo(combo, shardCount) !== shardIndex) continue
           const key = comboKey(combo)
           if (produced.has(key)) continue
           produced.add(key)
@@ -544,8 +835,11 @@ export function optimize(req: OptimizeRequest): OptimizeResult {
   // Run the search.
   let searched = 0
   let filtered = 0
+  let failedBuilds = 0
   const keep: OptimizedBuild[] = []
   let min = -Infinity  // lowest score currently in keep
+  const seenBuilds = new Set<string>()
+  const styleLeaders: NonNullable<OptimizeResult['styleLeaders']> = {}
 
   const evolve = req.evolveStackingItems ?? true
   const activeSet = new Set(req.activeItems ?? [])
@@ -558,13 +852,15 @@ export function optimize(req: OptimizeRequest): OptimizeResult {
   const exclusionIndex = buildExclusionIndex(exclusionGroups)
   let rejectedByExclusion = 0
 
-  for (const combo of builds()) {
-    if (searched >= maxPerms) break
+  function considerCombo(combo: string[]): void {
+    const seenKey = comboKey(combo)
+    if (seenBuilds.has(seenKey)) return
+    seenBuilds.add(seenKey)
     searched++
 
     if (comboViolatesExclusion(combo, exclusionIndex)) {
       rejectedByExclusion++
-      continue
+      return
     }
 
     try {
@@ -607,6 +903,7 @@ export function optimize(req: OptimizeRequest): OptimizeResult {
       }
       const sim = runScenario(scenario)
       const snap = snapshotAttacker(scenario)
+      const profile = buildDamageProfile(sim)
 
       const stats = {
         adaptiveStrength: snap.adaptiveStrength,
@@ -623,12 +920,12 @@ export function optimize(req: OptimizeRequest): OptimizeResult {
         magicalPenFlat: snap.magicalPenFlat,
         magicalPenPercent: snap.magicalPenPercent,
       }
-      if (!statsPass(stats)) { filtered++; continue }
+      if (!statsPass(stats)) { filtered++; return }
 
       const dps = sim.comboExecutionTime > 0 ? sim.totals.total / sim.comboExecutionTime : sim.totals.total
-      if (req.minTotalDamage != null && sim.totals.total < req.minTotalDamage) { filtered++; continue }
-      if (req.maxTotalDamage != null && sim.totals.total > req.maxTotalDamage) { filtered++; continue }
-      if (req.minDps != null && dps < req.minDps) { filtered++; continue }
+      if (req.minTotalDamage != null && sim.totals.total < req.minTotalDamage) { filtered++; return }
+      if (req.maxTotalDamage != null && sim.totals.total > req.maxTotalDamage) { filtered++; return }
+      if (req.minDps != null && dps < req.minDps) { filtered++; return }
 
       // Survivability metrics for bruiser/brawling scores.
       const ehpPhys = stats.maxHealth * (1 + stats.physicalProtection / 100)
@@ -646,7 +943,25 @@ export function optimize(req: OptimizeRequest): OptimizeResult {
        // hit hard in short windows while still carrying survivability.
       const bruiserBurstScore = Math.sqrt(Math.max(0, avgEHP) * (sim.totals.total * sim.totals.total) / (comboT * comboT))
 
-      const score =
+      let powerSpikeRankScore = sim.totals.total
+      let buildOrderForScore: OptimizedBuild['buildOrder'] | undefined
+      let powerSpikeSummary: OptimizedBuild['powerSpike'] | undefined
+      if (req.role && rankBy === 'powerSpike') {
+        const powerSpikePath = computePowerSpikePath({
+          items: combo,
+          byName,
+          scenario: req.scenario,
+          role: req.role,
+          mode: req.gameMode ?? 'casual',
+          evolve,
+          activeSet,
+        })
+        buildOrderForScore = powerSpikePath.buildOrder
+        powerSpikeSummary = powerSpikePath.summary
+        powerSpikeRankScore = powerSpikePath.score
+      }
+
+      const baseScore =
         rankBy === 'physical' ? sim.totals.physical
         : rankBy === 'magical' ? sim.totals.magical
         : rankBy === 'true' ? sim.totals.true
@@ -656,24 +971,89 @@ export function optimize(req: OptimizeRequest): OptimizeResult {
         : rankBy === 'brawling' ? brawlingScore
         : rankBy === 'burst' ? burstScore
         : rankBy === 'bruiserBurst' ? bruiserBurstScore
+        : rankBy === 'powerSpike' ? powerSpikeRankScore
         : sim.totals.total
+      const score = baseScore * damageProfileMultiplier(damageProfile, profile)
+
+      for (const style of NON_ANY_DAMAGE_PROFILES) {
+        const styleScore = baseScore * damageProfileMultiplier(style, profile)
+        const current = styleLeaders[style]
+        if (!current || styleScore > current.rankScore) {
+          styleLeaders[style] = {
+            items: combo.slice(),
+            rankScore: styleScore,
+            baseScore,
+            dps,
+            totalDamage: sim.totals.total,
+            autoShare: profile.autoShare,
+            abilityShare: profile.abilityShare,
+            dominantStyle: profile.dominantStyle,
+          }
+        }
+      }
 
       if (keep.length < topN || score > min) {
-        const summary = summarize(combo, sim, stats, score)
+        const summary = summarize(combo, sim, stats, score, profile)
+        if (buildOrderForScore) summary.buildOrder = buildOrderForScore
+        if (powerSpikeSummary) summary.powerSpike = powerSpikeSummary
         keep.push(summary)
         keep.sort((a, b) => b.rankScore - a.rankScore)
         if (keep.length > topN) keep.length = topN
         min = keep[keep.length - 1].rankScore
       }
     } catch {
-      // Skip builds that throw — typically item-resolution issues.
+      failedBuilds++
+    }
+  }
+
+  for (const combo of builds()) {
+    if (searched >= maxPerms) break
+    considerCombo(combo)
+  }
+
+  const sampledSearch = totalPermsEstimate > maxPerms
+  if (sampledSearch && keep.length > 0) {
+    const refineBudget = Math.min(20000, Math.max(1000, Math.floor(maxPerms * 0.25)))
+    const starterChoices = lockedStarters.length > 0 ? lockedStarters : starters
+    const starterSet = new Set(starterChoices)
+    const regularChoices = regular.filter((name) => !lockedSet.has(name))
+    const seedBuilds = keep.slice(0, Math.min(keep.length, 24))
+    const searchLimit = maxPerms + refineBudget
+
+    for (const build of seedBuilds) {
+      if (searched >= searchLimit) break
+      const starter = build.items.find((name) => starterSet.has(name)) ?? null
+      const regularItems = build.items.filter((name) => name !== starter)
+
+      if (!lockedStarters.length && starter) {
+        for (const altStarter of starterChoices) {
+          if (altStarter === starter || searched >= searchLimit) continue
+          const candidate = [altStarter, ...regularItems]
+          considerCombo(candidate)
+        }
+      }
+
+      for (let index = 0; index < regularItems.length; index++) {
+        if (lockedSet.has(regularItems[index])) continue
+        for (const replacement of regularChoices) {
+          if (replacement === regularItems[index] || build.items.includes(replacement) || searched >= searchLimit) continue
+          const swappedRegular = regularItems.slice()
+          swappedRegular[index] = replacement
+          const candidate = starter ? [starter, ...swappedRegular] : swappedRegular
+          considerCombo(candidate)
+        }
+      }
     }
   }
 
   if (shuffle && totalPermsEstimate > maxPerms && searched < maxPerms) {
     warnings.push(`Deterministic sampler produced ${searched.toLocaleString()} unique builds before retry exhaustion. Increase the item pool or lower max permutations if this persists.`)
   }
+  if (sampledSearch) {
+    warnings.push(`Optimizer sampled the full space (${totalPermsEstimate.toLocaleString()} legal builds) and then ran a local swap-refinement pass around the best sampled builds.`)
+  }
   if (filtered > 0) warnings.push(`${filtered.toLocaleString()} builds dropped by post-filters (stat bounds / damage bounds).`)
+  if (failedBuilds > 0) warnings.push(`${failedBuilds.toLocaleString()} builds failed during sim evaluation and were skipped. This can hide better builds if a god/item interaction is still broken.`)
   if (conditionalStackItems.size > 0) {
     warnings.push(
       `Conditional/temporary stack item(s) were not auto-stacked: ${[...conditionalStackItems].sort().join(', ')}. ` +
@@ -685,11 +1065,253 @@ export function optimize(req: OptimizeRequest): OptimizeResult {
     warnings.push(`${rejectedByExclusion.toLocaleString()} builds rejected: two items from the same unique-passive family (${groupLabels}).`)
   }
 
+  // Post-process: fill recommended build order on each kept build when the
+  // result was ranked by something other than powerSpike. powerSpike builds
+  // already computed a timed prefix path inside the main loop.
+  if (req.role && keep.length > 0) {
+    for (const build of keep) {
+      if (build.buildOrder && build.buildOrder.length > 0) continue
+      try {
+        const powerSpikePath = computePowerSpikePath({
+          items: build.items,
+          byName,
+          scenario: req.scenario,
+          role: req.role,
+          mode: req.gameMode ?? 'casual',
+          evolve,
+          activeSet,
+        })
+        build.buildOrder = powerSpikePath.buildOrder
+        build.powerSpike = powerSpikePath.summary
+      } catch {
+        // If the per-item sim fails (item-resolution issue), skip ordering
+        // for this build but don't kill the whole result set.
+      }
+    }
+  }
+
   return {
     searched,
-    total: Math.min(totalPermsEstimate, maxPerms),
+    total: totalPermsEstimate,
     results: keep,
     elapsedMs: Date.now() - started,
     warnings,
+    styleLeaders,
+  }
+}
+
+/** Helper: run a sim with exactly the given items and return total damage.
+ *  Can also project that build into a role/mode-specific minute window so
+ *  early powerspike ranking uses realistic levels instead of level 20. */
+function simBuildDamage(
+  items: string[],
+  byName: Map<string, ItemCatalogEntry>,
+  scenario: Scenario,
+  options: SimDamageOptions,
+): number {
+  const partialStacks: Record<string, number> = { ...(scenario.attacker.partialStacks ?? {}) }
+  const prefixSteps: RotationAction[] = []
+  const useEvolve = options.conservativeStacks ? false : options.evolve
+  if (useEvolve) {
+    for (const name of items) {
+      const entry = byName.get(name)
+      if (!entry) continue
+      if (!shouldAutoEvolveStackingItem(entry)) continue
+      const max = maxStackCountFor(entry)
+      if (max && max > 0) {
+        const internal = entry.internalKey ?? ''
+        const display = entry.displayName ?? ''
+        if (partialStacks[internal] == null && partialStacks[display] == null) {
+          if (internal) partialStacks[internal] = max
+          else if (display) partialStacks[display] = max
+        }
+      }
+    }
+  }
+  for (const name of items) {
+    const entry = byName.get(name)
+    if (entry && options.activeSet.has(name) && itemHasActive(entry)) {
+      prefixSteps.push({ kind: 'activate', itemKey: entry.internalKey ?? name })
+    }
+  }
+  const projectedScenario =
+    options.minute != null && options.mode
+      ? projectScenarioForMinute(scenario, options.minute, options.mode, options.role)
+      : scenario
+  const subScenario: Scenario = {
+    ...projectedScenario,
+    attacker: { ...projectedScenario.attacker, items, partialStacks },
+    rotation: prefixSteps.length > 0 ? [...prefixSteps, ...projectedScenario.rotation] : projectedScenario.rotation,
+  }
+  try {
+    const result = runScenario(subScenario)
+    return result.totals.total
+  } catch {
+    return 0
+  }
+}
+
+function buildStarterAndRest(
+  items: string[],
+  byName: Map<string, ItemCatalogEntry>,
+): { starter: string | null; rest: string[] } {
+  let starter: string | null = null
+  const rest: string[] = []
+  for (const name of items) {
+    const entry = byName.get(name)
+    if (!starter && entry && isFinalBuildStarter(entry)) {
+      starter = name
+      continue
+    }
+    rest.push(name)
+  }
+  return { starter, rest }
+}
+
+function summarizePowerSpike(buildOrder: BuildOrderStep[], score: number): PowerSpikeSummary {
+  const peak = buildOrder
+    .slice(1)
+    .sort((a, b) => {
+      if (b.spikeEfficiency !== a.spikeEfficiency) return b.spikeEfficiency - a.spikeEfficiency
+      if (b.marginalDamage !== a.marginalDamage) return b.marginalDamage - a.marginalDamage
+      return a.estimatedMinute - b.estimatedMinute
+    })[0] ?? buildOrder[0]
+  return {
+    averageDamage: score,
+    peakItem: peak?.name ?? '',
+    peakMinute: peak?.estimatedMinute ?? 0,
+    peakLevel: peak?.projectedLevel ?? 1,
+    peakMarginalDamage: peak?.marginalDamage ?? 0,
+    peakEfficiency: peak?.spikeEfficiency ?? 0,
+  }
+}
+
+function computePowerSpikePath(params: {
+  items: string[]
+  byName: Map<string, ItemCatalogEntry>
+  scenario: Scenario
+  role: RoleId
+  mode: 'casual' | 'ranked'
+  evolve: boolean
+  activeSet: Set<string>
+}): { buildOrder: BuildOrderStep[]; score: number; summary: PowerSpikeSummary } {
+  const { items, byName, scenario, role, mode, evolve, activeSet } = params
+  const cat = loadRoleMetrics()
+  const avgGameMinutes = cat.avgGameLengthMin[mode]
+  const { starter, rest } = buildStarterAndRest(items, byName)
+  const orderedSteps: BuildOrderStep[] = []
+  const purchased = starter ? [starter] : []
+  let cumulativeCost = 0
+  let previousDamage = 0
+
+  if (starter) {
+    const starterDamage = simBuildDamage(purchased, byName, scenario, {
+      evolve,
+      activeSet,
+      minute: 0,
+      role,
+      mode,
+      conservativeStacks: true,
+    })
+    orderedSteps.push({
+      name: starter,
+      itemCost: itemGoldCost(byName.get(starter)),
+      cumulativeCost: 0,
+      estimatedMinute: 0,
+      projectedLevel: 1,
+      damage: starterDamage,
+      marginalDamage: starterDamage,
+      spikeEfficiency: starterDamage,
+    })
+    previousDamage = starterDamage
+  }
+
+  const baseEarlyDamage = purchased.length > 0
+    ? previousDamage
+    : simBuildDamage([], byName, scenario, {
+        evolve: false,
+        activeSet,
+        minute: 0,
+        role,
+        mode,
+        conservativeStacks: true,
+      })
+
+  const scored = rest.map((name) => {
+    const itemCost = itemGoldCost(byName.get(name))
+    const projectedMinute = minuteToReachGold(role, cumulativeCost + itemCost, mode)
+    const earlyDamage = simBuildDamage([...purchased, name], byName, scenario, {
+      evolve,
+      activeSet,
+      minute: projectedMinute,
+      role,
+      mode,
+      conservativeStacks: true,
+    })
+    const baseline = purchased.length > 0
+      ? simBuildDamage(purchased, byName, scenario, {
+          evolve,
+          activeSet,
+          minute: projectedMinute,
+          role,
+          mode,
+          conservativeStacks: true,
+        })
+      : baseEarlyDamage
+    const marginalDamage = Math.max(0, earlyDamage - baseline)
+    return {
+      name,
+      itemCost,
+      earlyDamage,
+      marginalDamage,
+      spikeEfficiency: itemCost > 0 ? marginalDamage / itemCost : marginalDamage,
+    }
+  })
+
+  scored.sort((a, b) => {
+    if (b.spikeEfficiency !== a.spikeEfficiency) return b.spikeEfficiency - a.spikeEfficiency
+    if (b.marginalDamage !== a.marginalDamage) return b.marginalDamage - a.marginalDamage
+    return a.name.localeCompare(b.name)
+  })
+
+  for (const step of scored) {
+    purchased.push(step.name)
+    cumulativeCost += step.itemCost
+    const estimatedMinute = minuteToReachGold(role, cumulativeCost, mode)
+    const projectedLevel = levelAt(estimatedMinute, mode, role)
+    const damage = simBuildDamage(purchased, byName, scenario, {
+      evolve,
+      activeSet,
+      minute: estimatedMinute,
+      role,
+      mode,
+      conservativeStacks: true,
+    })
+    const marginalDamage = Math.max(0, damage - previousDamage)
+    orderedSteps.push({
+      name: step.name,
+      itemCost: step.itemCost,
+      cumulativeCost,
+      estimatedMinute,
+      projectedLevel,
+      damage,
+      marginalDamage,
+      spikeEfficiency: step.itemCost > 0 ? marginalDamage / step.itemCost : marginalDamage,
+    })
+    previousDamage = damage
+  }
+
+  let accumulated = 0
+  for (let i = 0; i < orderedSteps.length; i++) {
+    const step = orderedSteps[i]
+    const start = Math.min(avgGameMinutes, step.estimatedMinute)
+    const end = Math.min(avgGameMinutes, orderedSteps[i + 1]?.estimatedMinute ?? avgGameMinutes)
+    if (end > start) accumulated += step.damage * (end - start)
+  }
+  const score = avgGameMinutes > 0 ? accumulated / avgGameMinutes : 0
+  return {
+    buildOrder: orderedSteps,
+    score,
+    summary: summarizePowerSpike(orderedSteps, score),
   }
 }

@@ -1,9 +1,10 @@
 @echo off
-REM SMITE 2 Calculator — one-click launcher.
+REM SMITE 2 Calculator - one-click launcher.
 REM
 REM Modes (all paths support live code reload where applicable):
 REM   run.bat                 Local prod. Builds UI, serves dist on :4455, opens browser.
 REM   run.bat dev             Local dev. Vite (HMR) on :5173 + API-watch on :4455.
+REM                            Also rebuilds dist in watch mode so :4455 and :5173 stay in parity.
 REM   run.bat nobuild         Serve existing dist/ without rebuilding.
 REM   run.bat tunnel          Remote prod via Cloudflare Tunnel. Built UI, stable.
 REM   run.bat tunnel:dev      Remote DEV via Cloudflare Tunnel. Vite HMR + API-watch.
@@ -38,9 +39,13 @@ if errorlevel 1 ( echo [run.bat] Build failed. & pause & exit /b 1 )
 
 :serve
 echo.
-echo [run.bat] Serving on http://localhost:%APP_PORT%/
+echo [run.bat] Starting app server on http://localhost:%APP_PORT%/
+start "SMITE2 APP" cmd /k "set APP_PORT=%APP_PORT% && npm run app"
+call :wait_for_http http://localhost:%APP_PORT%/api/gods 20 || (
+  echo [run.bat] App server did not come up on :%APP_PORT%.
+  pause & exit /b 1
+)
 start "" "http://localhost:%APP_PORT%/"
-call npm run app
 goto :eof
 
 
@@ -48,9 +53,17 @@ goto :eof
 echo.
 echo [run.bat] Local dev mode. Vite on :%VITE_PORT% (HMR), API-watch on :%APP_PORT%.
 start "SMITE2 API"  cmd /k "set APP_PORT=%APP_PORT% && npm run app:watch"
-timeout /t 2 /nobreak >nul
+call :wait_for_http http://localhost:%APP_PORT%/api/gods 20 || (
+  echo [run.bat] API-watch server did not come up on :%APP_PORT%.
+  pause & exit /b 1
+)
+start "SMITE2 DIST" cmd /k "npm run app:build:watch"
+start "SMITE2 VITE" cmd /k "set VITE_PORT=%VITE_PORT% && npm run dev"
+call :wait_for_http http://localhost:%VITE_PORT%/ 30 || (
+  echo [run.bat] Vite dev server did not come up on :%VITE_PORT%.
+  pause & exit /b 1
+)
 start "" "http://localhost:%VITE_PORT%/"
-call npm run dev
 goto :eof
 
 
@@ -75,10 +88,18 @@ echo.
 echo [run.bat] Remote DEV via Cloudflare Tunnel.
 echo    Vite (HMR) on :%VITE_PORT%, API-watch on :%APP_PORT%.
 echo    Teammate's browser hot-reloads when you save files.
+echo    dist/ is rebuilt in watch mode too, so the app host stays in sync.
 start "SMITE2 API"  cmd /k "set APP_PORT=%APP_PORT% && npm run app:watch"
-timeout /t 2 /nobreak >nul
-start "SMITE2 VITE" cmd /k "npm run dev"
-timeout /t 3 /nobreak >nul
+call :wait_for_http http://localhost:%APP_PORT%/api/gods 20 || (
+  echo [run.bat] API-watch server did not come up on :%APP_PORT%.
+  pause & exit /b 1
+)
+start "SMITE2 DIST" cmd /k "npm run app:build:watch"
+start "SMITE2 VITE" cmd /k "set VITE_PORT=%VITE_PORT% && npm run dev"
+call :wait_for_http http://localhost:%VITE_PORT%/ 30 || (
+  echo [run.bat] Vite dev server did not come up on :%VITE_PORT%.
+  pause & exit /b 1
+)
 echo.
 "%CLOUDFLARED%" tunnel --url http://localhost:%VITE_PORT%
 goto :eof
@@ -99,18 +120,38 @@ goto :eof
 
 :tunnel_ssh_dev
 start "SMITE2 API"  cmd /k "set APP_PORT=%APP_PORT% && npm run app:watch"
-timeout /t 2 /nobreak >nul
-start "SMITE2 VITE" cmd /k "npm run dev"
-timeout /t 3 /nobreak >nul
+call :wait_for_http http://localhost:%APP_PORT%/api/gods 20 || (
+  echo [run.bat] API-watch server did not come up on :%APP_PORT%.
+  pause & exit /b 1
+)
+start "SMITE2 DIST" cmd /k "npm run app:build:watch"
+start "SMITE2 VITE" cmd /k "set VITE_PORT=%VITE_PORT% && npm run dev"
+call :wait_for_http http://localhost:%VITE_PORT%/ 30 || (
+  echo [run.bat] Vite dev server did not come up on :%VITE_PORT%.
+  pause & exit /b 1
+)
 echo.
 echo [run.bat] Remote DEV via localhost.run. Copy the https:// URL it prints.
 ssh -R 80:localhost:%VITE_PORT% -o "StrictHostKeyChecking=accept-new" nokey@localhost.run
 goto :eof
 
 
+:wait_for_http
+set "_WAIT_URL=%~1"
+set "_WAIT_TRIES=%~2"
+if "%_WAIT_TRIES%"=="" set "_WAIT_TRIES=20"
+for /l %%I in (1,1,%_WAIT_TRIES%) do (
+  powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+    "try { $r = Invoke-WebRequest -UseBasicParsing '%_WAIT_URL%' -TimeoutSec 2; if ($r.StatusCode -ge 200 -and $r.StatusCode -lt 500) { exit 0 } else { exit 1 } } catch { exit 1 }" >nul 2>&1
+  if not errorlevel 1 exit /b 0
+  timeout /t 1 /nobreak >nul
+)
+exit /b 1
+
+
 :need_cloudflared
 REM Accept either the short or the GitHub release filename, in the repo root
-REM or on PATH. Plain if/goto structure — avoids cmd parser quirks some shells
+REM or on PATH. Plain if/goto structure - avoids cmd parser quirks some shells
 REM hit with multi-condition for-loops.
 set CLOUDFLARED=
 if exist "%~dp0cloudflared.exe" (

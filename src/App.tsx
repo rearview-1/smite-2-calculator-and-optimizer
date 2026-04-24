@@ -4,9 +4,18 @@ import type { AbilitySlot, RotationAction, Scenario, SimResult } from './sim/v3/
 import { useCollabBuild } from './collab/useCollabBuild.ts'
 import { buildToScenario } from './collab/buildDoc.ts'
 import { getFinalBuildItemExclusionReason, isRelicItem } from './catalog/itemEligibility.ts'
+import { itemMatchesStrictOffensePreset } from './catalog/itemPool.ts'
 
 // ---- API types ----
-interface GodRef { id: string; name: string; primaryStat?: 'STR' | 'INT' | 'hybrid' }
+interface GodRef {
+  id: string
+  name: string
+  primaryStat?: 'STR' | 'INT' | 'hybrid'
+  aspectSupported?: boolean
+  aspectKey?: string | null
+  aspectLabel?: string | null
+  aspectDescription?: string | null
+}
 interface ResolvedItemStats {
   stats: Record<string, number>
   adaptiveStrength: number
@@ -17,6 +26,8 @@ interface ItemRef {
   key: string; internalKey: string | null; name: string | null; tier: string | null;
   totalCost: number | null; categories?: string[]; statTags?: string[]; storeFloats?: number[]; passive?: string | null;
   resolvedStats?: ResolvedItemStats;
+  aspectPassive?: string | null;
+  aspectResolvedStats?: ResolvedItemStats | null;
   /** If set, this item only appears in the picker / optimizer pool when the
    *  attacker's godId matches. Used for Ratatoskr's acorns (god-locked gear). */
   godLocked?: string | null;
@@ -40,6 +51,33 @@ interface OptimizedBuild {
   items: string[]
   totals: { total: number; physical: number; magical: number; true: number }
   comboExecutionTime: number; dps: number; rankScore: number
+  /** Items in recommended purchase order; present when `role` was supplied. */
+  buildOrder?: Array<{
+    name: string
+    itemCost: number
+    cumulativeCost: number
+    estimatedMinute: number
+    projectedLevel: number
+    damage: number
+    marginalDamage: number
+    spikeEfficiency: number
+  }>
+  powerSpike?: {
+    averageDamage: number
+    peakItem: string
+    peakMinute: number
+    peakLevel: number
+    peakMarginalDamage: number
+    peakEfficiency: number
+  }
+  profile?: {
+    autoDamage: number
+    abilityDamage: number
+    otherDamage: number
+    autoShare: number
+    abilityShare: number
+    dominantStyle: 'auto' | 'ability' | 'hybrid'
+  }
   stats: {
     adaptiveStrength: number; adaptiveIntelligence: number; totalAttackSpeed: number
     inhandPower: number; cdrPercent: number; critChance: number
@@ -48,11 +86,133 @@ interface OptimizedBuild {
     magicalPenFlat: number; magicalPenPercent: number
   }
 }
-interface OptimizeResult { searched: number; total: number; results: OptimizedBuild[]; elapsedMs: number; warnings: string[] }
+interface OptimizeResult {
+  searched: number
+  total: number
+  results: OptimizedBuild[]
+  elapsedMs: number
+  warnings: string[]
+  parallelismUsed?: number
+  styleLeaders?: Partial<Record<'auto' | 'ability' | 'hybrid', {
+    items: string[]
+    rankScore: number
+    baseScore: number
+    dps: number
+    totalDamage: number
+    autoShare: number
+    abilityShare: number
+    dominantStyle: 'auto' | 'ability' | 'hybrid'
+  }>>
+}
+
+function finiteNumber(value: unknown, fallback = 0): number {
+  return typeof value === 'number' && Number.isFinite(value) ? value : fallback
+}
+
+function sanitizeOptimizedBuild(build: OptimizedBuild): OptimizedBuild {
+  return {
+    items: Array.isArray(build.items) ? build.items.filter((item): item is string => typeof item === 'string') : [],
+    totals: {
+      total: finiteNumber(build.totals?.total),
+      physical: finiteNumber(build.totals?.physical),
+      magical: finiteNumber(build.totals?.magical),
+      true: finiteNumber(build.totals?.true),
+    },
+    comboExecutionTime: finiteNumber(build.comboExecutionTime),
+    dps: finiteNumber(build.dps),
+    rankScore: finiteNumber(build.rankScore),
+    buildOrder: Array.isArray(build.buildOrder)
+      ? build.buildOrder.map((step) => ({
+          name: typeof step?.name === 'string' ? step.name : '',
+          itemCost: finiteNumber(step?.itemCost),
+          cumulativeCost: finiteNumber(step?.cumulativeCost),
+          estimatedMinute: finiteNumber(step?.estimatedMinute),
+          projectedLevel: finiteNumber(step?.projectedLevel, 1),
+          damage: finiteNumber(step?.damage),
+          marginalDamage: finiteNumber(step?.marginalDamage),
+          spikeEfficiency: finiteNumber(step?.spikeEfficiency),
+        }))
+      : undefined,
+    powerSpike: build.powerSpike ? {
+      averageDamage: finiteNumber(build.powerSpike.averageDamage),
+      peakItem: typeof build.powerSpike.peakItem === 'string' ? build.powerSpike.peakItem : '',
+      peakMinute: finiteNumber(build.powerSpike.peakMinute),
+      peakLevel: finiteNumber(build.powerSpike.peakLevel, 1),
+      peakMarginalDamage: finiteNumber(build.powerSpike.peakMarginalDamage),
+      peakEfficiency: finiteNumber(build.powerSpike.peakEfficiency),
+    } : undefined,
+    profile: build.profile ? {
+      autoDamage: finiteNumber(build.profile.autoDamage),
+      abilityDamage: finiteNumber(build.profile.abilityDamage),
+      otherDamage: finiteNumber(build.profile.otherDamage),
+      autoShare: finiteNumber(build.profile.autoShare),
+      abilityShare: finiteNumber(build.profile.abilityShare),
+      dominantStyle: build.profile.dominantStyle === 'auto' || build.profile.dominantStyle === 'ability' || build.profile.dominantStyle === 'hybrid'
+        ? build.profile.dominantStyle
+        : 'hybrid',
+    } : undefined,
+    stats: {
+      adaptiveStrength: finiteNumber(build.stats?.adaptiveStrength),
+      adaptiveIntelligence: finiteNumber(build.stats?.adaptiveIntelligence),
+      totalAttackSpeed: finiteNumber(build.stats?.totalAttackSpeed),
+      inhandPower: finiteNumber(build.stats?.inhandPower),
+      cdrPercent: finiteNumber(build.stats?.cdrPercent),
+      critChance: finiteNumber(build.stats?.critChance),
+      maxHealth: finiteNumber(build.stats?.maxHealth),
+      physicalProtection: finiteNumber(build.stats?.physicalProtection),
+      magicalProtection: finiteNumber(build.stats?.magicalProtection),
+      penFlat: finiteNumber(build.stats?.penFlat),
+      penPercent: finiteNumber(build.stats?.penPercent),
+      magicalPenFlat: finiteNumber(build.stats?.magicalPenFlat),
+      magicalPenPercent: finiteNumber(build.stats?.magicalPenPercent),
+    },
+  }
+}
+
+function sanitizeOptimizeResult(result: OptimizeResult): OptimizeResult {
+  const styleLeaders = result.styleLeaders
+    ? Object.fromEntries(
+        Object.entries(result.styleLeaders)
+          .filter((entry): entry is ['auto' | 'ability' | 'hybrid', NonNullable<NonNullable<OptimizeResult['styleLeaders']>[keyof NonNullable<OptimizeResult['styleLeaders']>]>] => {
+            const [style, leader] = entry
+            return (style === 'auto' || style === 'ability' || style === 'hybrid') && leader != null
+          })
+          .map(([style, leader]) => [
+            style,
+            {
+              items: Array.isArray(leader.items) ? leader.items.filter((item): item is string => typeof item === 'string') : [],
+              rankScore: finiteNumber(leader.rankScore),
+              baseScore: finiteNumber(leader.baseScore),
+              dps: finiteNumber(leader.dps),
+              totalDamage: finiteNumber(leader.totalDamage),
+              autoShare: finiteNumber(leader.autoShare),
+              abilityShare: finiteNumber(leader.abilityShare),
+              dominantStyle: leader.dominantStyle === 'auto' || leader.dominantStyle === 'ability' || leader.dominantStyle === 'hybrid'
+                ? leader.dominantStyle
+                : 'hybrid',
+            },
+          ]),
+      ) as OptimizeResult['styleLeaders']
+    : undefined
+
+  return {
+    searched: finiteNumber(result.searched),
+    total: finiteNumber(result.total),
+    results: Array.isArray(result.results) ? result.results.map(sanitizeOptimizedBuild) : [],
+    elapsedMs: finiteNumber(result.elapsedMs),
+    warnings: Array.isArray(result.warnings) ? result.warnings.filter((warning): warning is string => typeof warning === 'string') : [],
+    parallelismUsed: result.parallelismUsed == null ? undefined : finiteNumber(result.parallelismUsed),
+    styleLeaders,
+  }
+}
+
 interface OptimizeRequest {
   scenario: Scenario; itemPool?: string[]; buildSize?: number;
   requireOneStarter?: boolean; maxPermutations?: number; topN?: number;
-  rankBy?: 'total' | 'physical' | 'magical' | 'true' | 'dps' | 'ability' | 'brawling' | 'bruiser' | 'burst' | 'bruiserBurst'
+  rankBy?: 'total' | 'physical' | 'magical' | 'true' | 'dps' | 'ability' | 'brawling' | 'bruiser' | 'burst' | 'bruiserBurst' | 'powerSpike'
+  damageProfile?: 'any' | 'auto' | 'ability' | 'hybrid'
+  role?: 'carry' | 'mid' | 'solo' | 'jungle' | 'support'
+  gameMode?: 'casual' | 'ranked'
   rankByAbilityLabel?: string
   statMin?: Record<string, number>
   statMax?: Record<string, number>
@@ -252,6 +412,21 @@ function formatItemStats(r: ResolvedItemStats | undefined): string {
   return parts.join(' · ')
 }
 
+function isAspectActive(attacker: Scenario['attacker'], god: GodRef | null | undefined): boolean {
+  if (!god?.aspectSupported) return false
+  return Array.isArray(attacker.aspects) && attacker.aspects.length > 0
+}
+
+function effectiveItemStats(it: ItemRef, aspectActive: boolean): ResolvedItemStats | undefined {
+  if (aspectActive && it.aspectResolvedStats) return it.aspectResolvedStats
+  return it.resolvedStats
+}
+
+function effectiveItemPassive(it: ItemRef, aspectActive: boolean): string | null | undefined {
+  if (aspectActive && it.aspectPassive) return it.aspectPassive
+  return it.passive
+}
+
 function itemSubCategory(it: ItemRef): { label: string; rank: number } {
   const cats = it.categories ?? []
   if (cats.includes('Consumable')) return { label: 'CONSUMABLE', rank: 9 }
@@ -264,7 +439,14 @@ function itemSubCategory(it: ItemRef): { label: string; rank: number } {
   return { label: '', rank: 5 }
 }
 
-function ItemPicker(props: { items: ItemRef[]; onPick: (name: string) => void; onClose: () => void; title?: string; attackerGodId?: string }) {
+function ItemPicker(props: {
+  items: ItemRef[]
+  onPick: (name: string) => void
+  onClose: () => void
+  title?: string
+  attackerGodId?: string
+  aspectActive?: boolean
+}) {
   const [q, setQ] = useState('')
   const [filter, setFilter] = useState<'all' | 'starters' | 'relics' | 'core'>('all')
   // A "starter" for the picker is a tier=Starter that is NOT a Consumable —
@@ -293,7 +475,7 @@ function ItemPicker(props: { items: ItemRef[]; onPick: (name: string) => void; o
       if (ra !== rb) return ra - rb
       return (a.name ?? '').localeCompare(b.name ?? '')
     })
-  }, [props.items, q, filter])
+  }, [props.items, props.attackerGodId, q, filter])
   return (
     <div className="modal-backdrop" onClick={props.onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -312,9 +494,10 @@ function ItemPicker(props: { items: ItemRef[]; onPick: (name: string) => void; o
           <div className="picker-grid">
             {filtered.map((it) => {
               const sub = itemSubCategory(it)
-              const stats = formatItemStats(it.resolvedStats)
+              const stats = formatItemStats(effectiveItemStats(it, props.aspectActive === true))
+              const passive = effectiveItemPassive(it, props.aspectActive === true)
               return (
-                <div className="picker-item" key={it.key} onClick={() => props.onPick(it.name!)}>
+                <div className="picker-item" key={it.key} onClick={() => props.onPick(it.name!)} title={passive ?? undefined}>
                   <div className="name">{it.name}</div>
                   <div className="meta">{sub.label}{it.totalCost ? ` · ${it.totalCost}g` : ''}</div>
                   {stats && <div className="meta stats">{stats}</div>}
@@ -453,7 +636,9 @@ function CharactersTab(props: {
   godPrimaryStat: 'STR' | 'INT' | 'hybrid' | null
   onOptimize: (opts: {
     pool: string[]; buildSize: number; rankBy: OptimizeRequest['rankBy'];
+    damageProfile?: OptimizeRequest['damageProfile'];
     rankByAbilityLabel?: string;
+    role?: OptimizeRequest['role']; gameMode?: OptimizeRequest['gameMode'];
     requireStarter: boolean; max: number;
     statMin: Record<string, number>; statMax: Record<string, number>;
     evolveStacking: boolean; activeItems: string[];
@@ -468,17 +653,21 @@ function CharactersTab(props: {
   const [poolPreset, setPoolPreset] = useState<PoolPreset>('auto')
   const [buildSize, setBuildSize] = useState(6)
   const [rankBy, setRankBy] = useState<NonNullable<OptimizeRequest['rankBy']>>('total')
+  const [damageProfile, setDamageProfile] = useState<NonNullable<OptimizeRequest['damageProfile']>>('any')
   const [rankByAbilityLabel, setRankByAbilityLabel] = useState<string>('')
+  const [role, setRole] = useState<NonNullable<OptimizeRequest['role']>>('carry')
+  const [gameMode, setGameMode] = useState<NonNullable<OptimizeRequest['gameMode']>>('casual')
   // Builds must always contain exactly one starter — per SMITE 2 game design,
   // every final build has an upgraded starter slot. No toggle.
   const requireStarter = true
-  const [maxPerms, setMaxPerms] = useState(20000)
+  const [maxPerms, setMaxPerms] = useState(100000)
   const [sortCol, setSortCol] = useState<string>('total')
   const [evolveStacking, setEvolveStacking] = useState(true)
   // Item class toggles — both default ON. Turning off excludes the tagged
   // items from the pool (e.g. disable Crit if you never want RNG damage).
   const [allowCrit, setAllowCrit] = useState(true)
   const [allowEcho, setAllowEcho] = useState(true)
+  const [damageSourceMode, setDamageSourceMode] = useState<'grouped' | 'perHit'>('grouped')
   // Item display-names whose active is allowed to fire. Defaults to "all items
   // in the pool that have an On Use clause" so the first run isn't a pessimistic
   // stats-only run; user can toggle off per-item.
@@ -490,6 +679,12 @@ function CharactersTab(props: {
 
   const { scenario, setAttacker, setDefender, setOptions } = props
   const hasAttacker = scenario.attacker.godId.trim().length > 0
+  const attackerGod = props.gods.find((g) => g.id === scenario.attacker.godId) ?? null
+  const aspectActive = isAspectActive(scenario.attacker, attackerGod)
+  const topDamageSources = useMemo(
+    () => topN(damageSourceTotals(props.result?.damageEvents ?? [], damageSourceMode), 7),
+    [props.result, damageSourceMode],
+  )
   const attackerName = hasAttacker ? scenario.attacker.godId.replace(/_/g, ' ') : 'Pick a god'
   const effectivePoolPreset: Exclude<PoolPreset, 'auto'> = poolPreset === 'auto'
     ? props.godPrimaryStat === 'INT' ? 'magical' : 'physical'
@@ -572,12 +767,23 @@ function CharactersTab(props: {
         if (!it.name || excluded(it)) return false
         const cat = it.categories ?? []
         if (isHybridGod && isStrictDps && cat.includes('Hybrid')) return true
+        if (isStrictDps) {
+          return itemMatchesStrictOffensePreset(
+            {
+              categories: it.categories,
+              statTags: it.statTags,
+              resolvedStats: it.resolvedStats ?? null,
+            },
+            effectivePoolPreset,
+            isHybridGod,
+          )
+        }
         const tags = it.statTags ?? []
         return tags.some((t) => physOrMagTagSet.has(t))
       })
       .map((it) => it.name!)
       .filter(Boolean)
-  }, [props.items, effectivePoolPreset, scenario.attacker.items, allowCrit, allowEcho, props.godPrimaryStat])
+  }, [props.items, effectivePoolPreset, scenario.attacker.godId, scenario.attacker.items, allowCrit, allowEcho, props.godPrimaryStat])
 
   const displayScenario = pinnedOrCurrent(scenario, props.pinnedBuild)
   const displaySnapshot = props.pinnedBuild
@@ -617,6 +823,29 @@ function CharactersTab(props: {
                   <input type="number" min={1} max={20} value={scenario.attacker.level}
                     onChange={(e) => setAttacker({ ...scenario.attacker, level: Math.max(1, Math.min(20, Number(e.target.value))) })} />
                 </div>
+                {attackerGod?.aspectSupported && (
+                  <div className="char-meta" title={attackerGod.aspectDescription ?? 'Toggle this god\'s aspect on or off for the sim and optimizer.'}>
+                    <span>{attackerGod.aspectLabel ?? 'ASPECT'}</span>
+                    <div style={{ display: 'flex', gap: 4 }}>
+                      <button
+                        type="button"
+                        className={!aspectActive ? 'active' : 'ghost'}
+                        style={{ width: 'auto', padding: '4px 8px' }}
+                        onClick={() => setAttacker({ ...scenario.attacker, aspects: [] })}
+                      >
+                        Off
+                      </button>
+                      <button
+                        type="button"
+                        className={aspectActive ? 'active' : 'ghost'}
+                        style={{ width: 'auto', padding: '4px 8px' }}
+                        onClick={() => setAttacker({ ...scenario.attacker, aspects: [attackerGod.aspectKey ?? `${attackerGod.id}.aspect`] })}
+                      >
+                        On
+                      </button>
+                    </div>
+                  </div>
+                )}
                 <div className="ranks-row">
                   {(['A01', 'A02', 'A03', 'A04'] as AbilitySlot[]).map((slot) => (
                     <div className="rank-cell" key={slot}>
@@ -742,12 +971,22 @@ function CharactersTab(props: {
                       <option value="bruiserBurst">Bruiser Burst (EHP × burst)</option>
                       <option value="bruiser">Bruiser (EHP × dmg)</option>
                       <option value="brawling">Brawling (EHP × dmg + CDR)</option>
+                      <option value="powerSpike">Power Spike (timed prefix damage)</option>
                       <option value="physical">Physical</option>
                       <option value="magical">Magical</option>
                       <option value="true">True</option>
                       <option value="ability">Ability label</option>
                     </select>
                   </div>
+                </div>
+                <div style={{ marginBottom: 6 }}>
+                  <label title="Bias results toward basic-attack builds, ability builds, or builds that keep both relevant.">Damage focus</label>
+                  <select value={damageProfile} onChange={(e) => setDamageProfile(e.target.value as NonNullable<OptimizeRequest['damageProfile']>)}>
+                    <option value="any">Any</option>
+                    <option value="auto">Auto attack based</option>
+                    <option value="ability">Ability based</option>
+                    <option value="hybrid">Hybrid / mixed</option>
+                  </select>
                 </div>
                 {rankBy === 'ability' && (
                   <div style={{ marginBottom: 6 }}>
@@ -759,6 +998,29 @@ function CharactersTab(props: {
                     />
                   </div>
                 )}
+                {/* Role + game-mode drive power-spike scoring AND determine the
+                    recommended build-order timing on each result. Shown always
+                    when a role would help — even on non-powerSpike rank modes,
+                    the build order below each result uses these. */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4, marginBottom: 6 }}>
+                  <div>
+                    <label title="Role-specific GPM and queue timings come from data/role-metrics.json. Drives power-spike score and build-order timings.">Role</label>
+                    <select value={role} onChange={(e) => setRole(e.target.value as NonNullable<OptimizeRequest['role']>)}>
+                      <option value="carry">Carry / ADC</option>
+                      <option value="mid">Mid</option>
+                      <option value="solo">Solo</option>
+                      <option value="jungle">Jungle</option>
+                      <option value="support">Support</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label title="Queue-specific average game length and economy come from data/role-metrics.json. Affects power-spike uptime calculation.">Game mode</label>
+                    <select value={gameMode} onChange={(e) => setGameMode(e.target.value as NonNullable<OptimizeRequest['gameMode']>)}>
+                      <option value="casual">Casual</option>
+                      <option value="ranked">Ranked</option>
+                    </select>
+                  </div>
+                </div>
                 <div style={{ marginBottom: 6 }}>
                   <label>Stat min / max filters</label>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 52px 52px', gap: 4, alignItems: 'center' }}>
@@ -785,7 +1047,7 @@ function CharactersTab(props: {
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 4, marginBottom: 6 }}>
                   <div>
                     <label>Max perms</label>
-                    <input type="number" min={100} max={50000} step={500}
+                    <input type="number" min={100} max={500000} step={500}
                       value={maxPerms} onChange={(e) => setMaxPerms(Number(e.target.value))} />
                   </div>
                 </div>
@@ -844,7 +1106,9 @@ function CharactersTab(props: {
             <div className="panel-head">
               <h3>Optimizer Results</h3>
               <div style={{ color: 'var(--ink-faint)', fontSize: 9.5, letterSpacing: '0.1em' }}>
-                {props.optimized ? `${props.optimized.searched.toLocaleString()}/${props.optimized.total.toLocaleString()} · ${props.optimized.results.length} kept · ${(props.optimized.elapsedMs / 1000).toFixed(1)}s` : '—'}
+                {props.optimized
+                  ? `${props.optimized.searched.toLocaleString()}/${props.optimized.total.toLocaleString()} · ${props.optimized.results.length} kept · ${(props.optimized.elapsedMs / 1000).toFixed(1)}s${props.optimized.parallelismUsed ? ` · x${props.optimized.parallelismUsed} workers` : ''}`
+                  : '—'}
               </div>
             </div>
             <div className="panel-body pad-0">
@@ -853,6 +1117,25 @@ function CharactersTab(props: {
                   <div className="assumption-box">
                     <h4>Optimizer notes</h4>
                     <ul>{props.optimized.warnings.map((w, i) => <li key={i}>{w}</li>)}</ul>
+                  </div>
+                </div>
+              )}
+              {props.optimized?.styleLeaders && (
+                <div style={{ padding: '0 10px 8px' }}>
+                  <div className="assumption-box">
+                    <h4>Style Leaders</h4>
+                    <ul>
+                      {(['auto', 'ability', 'hybrid'] as const).map((style) => {
+                        const leader = props.optimized?.styleLeaders?.[style]
+                        if (!leader) return null
+                        const label = style === 'auto' ? 'Auto' : style === 'ability' ? 'Ability' : 'Hybrid'
+                        return (
+                          <li key={style}>
+                            {label}: {leader.dps.toFixed(0)} DPS · {leader.totalDamage.toFixed(0)} total · {(leader.autoShare * 100).toFixed(0)}% auto / {(leader.abilityShare * 100).toFixed(0)}% ability
+                          </li>
+                        )
+                      })}
+                    </ul>
                   </div>
                 </div>
               )}
@@ -891,12 +1174,58 @@ function CharactersTab(props: {
                     ))}
                   </div>
                 )}
+                {props.pinnedBuild?.profile && (
+                  <div style={{ marginTop: 8, fontSize: 10, color: 'var(--ink-faint)' }}>
+                    Damage profile: {props.pinnedBuild.profile.dominantStyle} · {(props.pinnedBuild.profile.autoShare * 100).toFixed(0)}% auto / {(props.pinnedBuild.profile.abilityShare * 100).toFixed(0)}% ability
+                  </div>
+                )}
+                {props.pinnedBuild?.buildOrder && props.pinnedBuild.buildOrder.length > 0 && (
+                  <div style={{ marginTop: 8 }}>
+                    <h4 style={{ marginBottom: 5 }}>Recommended Build Order</h4>
+                    <div style={{ fontSize: 10, color: 'var(--ink-faint)', marginBottom: 4 }}>
+                      Timed from role GPM. Damage is re-simmed at each projected purchase minute / level.
+                    </div>
+                    <ol style={{ paddingLeft: 18, margin: 0, color: 'var(--ink)' }}>
+                      {props.pinnedBuild.buildOrder.map((step, i) => (
+                        <li key={i} style={{ fontSize: 10.5, padding: '2px 0', display: 'flex', justifyContent: 'space-between', gap: 8 }}>
+                          <span>
+                            {step.name}
+                            <span style={{ color: 'var(--ink-faint)', marginLeft: 6 }}>
+                              +{step.marginalDamage.toFixed(0)} dmg
+                            </span>
+                          </span>
+                          <span style={{ color: 'var(--ink-faint)', fontVariantNumeric: 'tabular-nums', textAlign: 'right' }}>
+                            {step.cumulativeCost.toLocaleString()}g · ~{step.estimatedMinute.toFixed(1)}m · Lv {step.projectedLevel}
+                          </span>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
                 {props.result && (
                   <div style={{ marginTop: 8 }}>
-                    <h4 style={{ marginBottom: 5 }}>Top Damage Sources</h4>
-                    {topN(props.result.byLabel, 7).map(([lab, v]) => (
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginBottom: 5 }}>
+                      <h4 style={{ marginBottom: 0 }}>Top Damage Sources</h4>
+                      <div className="ctrl-buttons" style={{ width: 'auto' }}>
+                        <button
+                          className={`ghost ${damageSourceMode === 'grouped' ? 'active' : ''}`}
+                          onClick={() => setDamageSourceMode('grouped')}
+                          style={{ minWidth: 74 }}
+                        >
+                          Grouped
+                        </button>
+                        <button
+                          className={`ghost ${damageSourceMode === 'perHit' ? 'active' : ''}`}
+                          onClick={() => setDamageSourceMode('perHit')}
+                          style={{ minWidth: 74 }}
+                        >
+                          Per hit
+                        </button>
+                      </div>
+                    </div>
+                    {topDamageSources.map(([lab, v]) => (
                       <div className="bar" key={lab}>
-                        <div className="fill" style={{ width: `${(v / (topN(props.result!.byLabel, 1)[0]?.[1] ?? 1)) * 100}%` }} />
+                        <div className="fill" style={{ width: `${(v / (topDamageSources[0]?.[1] ?? 1)) * 100}%` }} />
                         <div className="text"><span>{lab}</span><span>{v.toFixed(0)}</span></div>
                       </div>
                     ))}
@@ -996,7 +1325,10 @@ function CharactersTab(props: {
                   pool: itemPool,
                   buildSize,
                   rankBy,
+                  damageProfile,
                   rankByAbilityLabel: rankBy === 'ability' ? rankByAbilityLabel : undefined,
+                  role,
+                  gameMode,
                   requireStarter,
                   max: maxPerms,
                   statMin: compactNumberRecord(statMin),
@@ -1019,6 +1351,9 @@ function CharactersTab(props: {
                   <div className="ctrl-row"><span className="k">Pool size</span><span className="v">{itemPool.length}</span></div>
                   <div className="ctrl-row"><span className="k">Searched</span><span className="v">{props.optimized.searched.toLocaleString()}</span></div>
                   <div className="ctrl-row"><span className="k">Total</span><span className="v">{props.optimized.total.toLocaleString()}</span></div>
+                  {props.optimized.parallelismUsed ? (
+                    <div className="ctrl-row"><span className="k">Workers</span><span className="v">{props.optimized.parallelismUsed}</span></div>
+                  ) : null}
                   <div className="ctrl-row"><span className="k">Results</span><span className="v">{props.optimized.results.length}</span></div>
                   <div className="ctrl-row"><span className="k">Elapsed</span><span className="v">{(props.optimized.elapsedMs / 1000).toFixed(2)}s</span></div>
                 </>
@@ -1036,7 +1371,19 @@ function CharactersTab(props: {
 
       {showGodPicker && (
         <GodPicker gods={props.gods}
-          onPick={(id) => { setAttacker({ ...scenario.attacker, godId: id }); setShowGodPicker(false) }}
+          onPick={(id) => {
+            const nextItems = scenario.attacker.items.filter((name) => {
+              const item = props.itemLookup.get(name)
+              return !item?.godLocked || item.godLocked === id
+            })
+            setAttacker({
+              ...scenario.attacker,
+              godId: id,
+              items: nextItems,
+              aspects: [],
+            })
+            setShowGodPicker(false)
+          }}
           onClose={() => setShowGodPicker(false)} />
       )}
       {showEnemyPicker && (
@@ -1047,6 +1394,7 @@ function CharactersTab(props: {
       {itemPickerIndex !== null && (
         <ItemPicker items={props.items}
           attackerGodId={scenario.attacker.godId}
+          aspectActive={aspectActive}
           onPick={(name) => {
             const next = [...scenario.attacker.items]
             next[itemPickerIndex] = name
@@ -1258,6 +1606,22 @@ function ehp(hp: number, prot: number): number {
   return hp * (1 + prot / 100)
 }
 
+function normalizeDamageSourceLabel(label: string): string {
+  return label.replace(/\s+\((?:[A-Za-z ]+ )?\d+\/\d+\)$/i, '')
+}
+
+function damageSourceTotals(
+  events: Array<{ label: string; postMitigation: number }>,
+  mode: 'grouped' | 'perHit',
+): Record<string, number> {
+  const totals: Record<string, number> = {}
+  for (const event of events) {
+    const key = mode === 'grouped' ? normalizeDamageSourceLabel(event.label) : event.label
+    totals[key] = (totals[key] ?? 0) + event.postMitigation
+  }
+  return totals
+}
+
 function topN(rec: Record<string, number>, n: number): Array<[string, number]> {
   return Object.entries(rec).sort((a, b) => b[1] - a[1]).slice(0, n)
 }
@@ -1270,9 +1634,54 @@ function OptimizerTable(props: {
 }) {
   if (props.results.length === 0) return null
 
-  const cols: Array<{ k: string; label: string; get: (b: OptimizedBuild) => number; fmt?: (n: number) => string }> = [
+  const cols: Array<{
+    k: string
+    label: string
+    get: (b: OptimizedBuild) => number
+    fmt?: (n: number) => string
+    render?: (b: OptimizedBuild, n: number) => React.ReactNode
+  }> = [
     { k: 'total', label: 'Total', get: (b) => b.totals.total },
     { k: 'dps',   label: 'DPS',   get: (b) => b.dps },
+    {
+      k: 'style',
+      label: 'Style',
+      get: (b) => {
+        const profile = b.profile
+        if (!profile) return 0
+        return profile.dominantStyle === 'hybrid'
+          ? 1 - Math.abs(profile.autoShare - profile.abilityShare)
+          : Math.max(profile.autoShare, profile.abilityShare)
+      },
+      render: (b) => {
+        const profile = b.profile
+        if (!profile) return <span className="heat-v">—</span>
+        return (
+          <span className="heat-v" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', lineHeight: 1.15 }}>
+            <span style={{ textTransform: 'capitalize' }}>{profile.dominantStyle}</span>
+            <span style={{ fontSize: 9, color: 'var(--ink-faint)' }}>
+              {(profile.autoShare * 100).toFixed(0)} / {(profile.abilityShare * 100).toFixed(0)}
+            </span>
+          </span>
+        )
+      },
+    },
+    {
+      k: 'spike',
+      label: 'Spike',
+      get: (b) => b.powerSpike?.averageDamage ?? 0,
+      render: (b, n) => {
+        const spike = b.powerSpike
+        return (
+          <span className="heat-v" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', lineHeight: 1.15 }}>
+            <span>{n.toFixed(0)}</span>
+            <span style={{ fontSize: 9, color: 'var(--ink-faint)' }}>
+              {spike ? `${spike.peakItem} · ${spike.peakMinute.toFixed(1)}m · +${spike.peakMarginalDamage.toFixed(0)}` : '—'}
+            </span>
+          </span>
+        )
+      },
+    },
     { k: 'combo', label: 'Combo', get: (b) => b.comboExecutionTime, fmt: (n) => n.toFixed(2) + 's' },
     { k: 'phys',  label: 'Phys',  get: (b) => b.totals.physical },
     { k: 'mag',   label: 'Mag',   get: (b) => b.totals.magical },
@@ -1321,7 +1730,7 @@ function OptimizerTable(props: {
                 return (
                   <td className="heat" key={c.k}>
                     <div className="heat-bg" style={{ background: color, width: `${frac * 100}%` }} />
-                    <span className="heat-v">{c.fmt ? c.fmt(v) : v.toFixed(0)}</span>
+                    {c.render ? c.render(b, v) : <span className="heat-v">{c.fmt ? c.fmt(v) : v.toFixed(0)}</span>}
                   </td>
                 )
               })}
@@ -1452,7 +1861,9 @@ export default function App() {
 
   async function doOptimize(opts: {
     pool: string[]; buildSize: number; rankBy: OptimizeRequest['rankBy'];
+    damageProfile?: OptimizeRequest['damageProfile'];
     rankByAbilityLabel?: string;
+    role?: OptimizeRequest['role']; gameMode?: OptimizeRequest['gameMode'];
     requireStarter: boolean; max: number;
     statMin: Record<string, number>; statMax: Record<string, number>;
     evolveStacking: boolean; activeItems: string[];
@@ -1470,7 +1881,9 @@ export default function App() {
         body: JSON.stringify({
           scenario, itemPool: opts.pool, buildSize: opts.buildSize,
           rankBy: opts.rankBy, requireOneStarter: opts.requireStarter,
+          damageProfile: opts.damageProfile,
           rankByAbilityLabel: opts.rankByAbilityLabel,
+          role: opts.role, gameMode: opts.gameMode,
           statMin: opts.statMin,
           statMax: opts.statMax,
           evolveStackingItems: opts.evolveStacking,
@@ -1480,7 +1893,7 @@ export default function App() {
         signal: ac.signal,
       })
       if (!r.ok) throw new Error(`optimize: ${r.status} ${await r.text()}`)
-      const result = await r.json()
+      const result = sanitizeOptimizeResult(await r.json() as OptimizeResult)
       if (optAbortRef.current === ac) setOptimized(result)
     } catch (e) {
       if ((e as Error).name !== 'AbortError' && optAbortRef.current === ac) {
@@ -1524,7 +1937,7 @@ export default function App() {
           snapshot={snapshot} result={result} error={error}
           optimized={optimized} optimizing={optimizing}
           onOptimize={doOptimize} onOptimizeCancel={cancelOptimize}
-          pinnedBuild={pinnedBuild} setPinnedBuild={(b) => { setPinnedBuild(b); setResult(null) }}
+          pinnedBuild={pinnedBuild} setPinnedBuild={(b) => { setPinnedBuild(b ? sanitizeOptimizedBuild(b) : null); setResult(null) }}
           godPrimaryStat={gods.find((g) => g.id === scenario.attacker.godId)?.primaryStat ?? null}
         />
       )}

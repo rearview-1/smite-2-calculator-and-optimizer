@@ -34,6 +34,9 @@ export interface PendingBasicDamageRider {
   strScaling: number
   intScaling: number
   expiresAt: number
+  delaySeconds?: number
+  source?: 'ability' | 'item' | 'passive'
+  notes?: string[]
 }
 
 export interface ActiveBasicProjectileRider {
@@ -42,8 +45,13 @@ export interface ActiveBasicProjectileRider {
   damageType: DamageType
   baseDamage: number
   inhandScaling: number
+  strScaling?: number
+  intScaling?: number
   hits: number
   expiresAt: number
+  remainingBasics?: number
+  source?: 'ability' | 'item' | 'passive'
+  notes?: string[]
 }
 
 export interface RiderState {

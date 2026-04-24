@@ -33,6 +33,7 @@ export type ItemProc =
   | { kind: 'onBasicOrHardCc_prechargedTargetHealthDamage'; targetMaxHealthPctPerStack: number; damageType: 'physical' | 'magical' | 'true'; id: string }
   | { kind: 'onEveryNthBasic_inhandScalingDamage'; every: number; baseDamage: number; inhandScaling: number; damageType: 'physical' | 'magical' | 'true'; id: string }
   | { kind: 'onAbilityHit_bonusDamage'; baseDamage: number; perLevelDamage: number; strScaling: number; intScaling: number; damageType: 'physical' | 'magical' | 'true'; cooldown: number; id: string }
+  | { kind: 'onHit_bonusDamage'; baseDamage: number; perLevelDamage: number; strScaling: number; intScaling: number; damageType: 'physical' | 'magical' | 'true'; cooldown: number; trigger: 'ability' | 'basic' | 'any'; id: string }
   | { kind: 'onAbilityHit_protectionScalingDamage'; baseDamage: number; itemProtectionScaling: number; damageType: 'physical' | 'magical' | 'true'; cooldown: number; id: string }
   | { kind: 'onAbilityHit_bleed'; damagePerTick: number; strScaling: number; intScaling: number; ticks: number; tickRate: number; damageType: 'physical' | 'magical' | 'true'; cooldown: number; id: string }
   | { kind: 'onAbilityHit_currentHealthDot'; flatDamage: number; currentHealthPct: number; ticks: number; tickRate: number; damageType: 'physical' | 'magical' | 'true'; repeatWindowSeconds: number; repeatMultiplier: number; id: string }
@@ -251,13 +252,14 @@ const HARD_CODED_ITEM_PROCS: Record<string, ItemProc[]> = {
   }],
   "item.Divine Ruin": [
     {
-      kind: 'onAbilityHit_bonusDamage',
+      kind: 'onHit_bonusDamage',
       baseDamage: 40,
       perLevelDamage: 0,
       strScaling: 0,
       intScaling: 0.2,
       damageType: 'magical',
       cooldown: 15,
+      trigger: 'any',
       id: 'divine-ruin-chain-lightning-primary',
     },
     {
@@ -326,6 +328,12 @@ const HARD_CODED_ITEM_PROCS: Record<string, ItemProc[]> = {
       cooldown: 120,
       id: 'circe-hexstone-hit',
     },
+    {
+      kind: 'activeUse_utility',
+      description: 'polymorphs the user, dashes forward, knocks up enemy gods hit, and refunds 40s cooldown on enemy-god hit.',
+      cooldown: 120,
+      id: 'circe-hexstone-utility',
+    },
   ],
   "item.Dreamer's Idol": [{
     kind: 'activeUse_selfBuff',
@@ -365,17 +373,25 @@ const HARD_CODED_ITEM_PROCS: Record<string, ItemProc[]> = {
     cooldown: 15,
     id: 'shield-splitter-projectile',
   }],
-  "item.LifeBinder": [{
-    kind: 'activeUse_instantDamage',
-    baseDamage: 60,
-    perLevelDamage: 8,
-    strScaling: 0,
-    intScaling: 0,
-    targetCurrentHealthPct: 0,
-    damageType: 'magical',
-    cooldown: 20,
-    id: 'lifebinder-projectile',
-  }],
+  "item.LifeBinder": [
+    {
+      kind: 'activeUse_instantDamage',
+      baseDamage: 60,
+      perLevelDamage: 8,
+      strScaling: 0,
+      intScaling: 0,
+      targetCurrentHealthPct: 0,
+      damageType: 'magical',
+      cooldown: 20,
+      id: 'lifebinder-projectile',
+    },
+    {
+      kind: 'activeUse_utility',
+      description: 'marks enemy gods for 6s; the first ally to damage the marked target heals and shields for 60 + 8 per level.',
+      cooldown: 20,
+      id: 'lifebinder-mark-heal-shield',
+    },
+  ],
   "item.LernaeanBow": [{
     kind: 'activeUse_inhandScalingDamage',
     baseDamage: 0,
@@ -441,13 +457,28 @@ const HARD_CODED_ITEM_PROCS: Record<string, ItemProc[]> = {
     cooldown: 45,
     id: 'pharaohs-curse-debuff',
   }],
-  "item.Screeching Gargoyle ": [{
-    kind: 'activeUse_enemyDebuff',
-    modifiers: { PhysicalProtectionPercent: -10, MagicalProtectionPercent: -10 },
-    durationSeconds: 4,
-    cooldown: 90,
-    id: 'screeching-gargoyle-prot-debuff',
-  }],
+  "item.Screeching Gargoyle ": [
+    {
+      kind: 'activeUse_cc',
+      flavor: 'silence',
+      durationSeconds: 1,
+      cooldown: 90,
+      id: 'screeching-gargoyle-silence',
+    },
+    {
+      kind: 'activeUse_enemyDebuff',
+      modifiers: { PhysicalProtectionPercent: -10, MagicalProtectionPercent: -10 },
+      durationSeconds: 4,
+      cooldown: 90,
+      id: 'screeching-gargoyle-prot-debuff',
+    },
+    {
+      kind: 'activeUse_utility',
+      description: 'during Moonlight Phase the silence lasts 1.5s and the protection debuff increases to 15%.',
+      cooldown: 90,
+      id: 'screeching-gargoyle-moonlight-phase',
+    },
+  ],
   "item.PendulumBlade": [{
     kind: 'activeUse_cdr',
     secondsReduced: 4,
@@ -919,7 +950,7 @@ export function parsePassiveForProcs(item: ItemCatalogEntry): ItemProc[] {
           tickRate: TICK_RATE,
           damageType: damageTypeFromText(m[0], 'physical'),
           repeatWindowSeconds: Number(subsequent[2]),
-          repeatMultiplier: Number(subsequent[1]) / 100,
+          repeatMultiplier: 1 + Number(subsequent[1]) / 100,
           id: `${idBase}-ability-current-health-dot`,
         })
       } else {
@@ -1017,9 +1048,10 @@ export function parsePassiveForProcs(item: ItemCatalogEntry): ItemProc[] {
     }
   }
 
-  // --- On Use: Teleport up to X.Ym  (Blink-style relics) ----------------
+  // --- On Use/Active: Teleport up to X.Ym  (Blink-style relics) ----------
   {
-    const m = /On Use:\s*Teleport\s*up to\s*(\d+(?:\.\d+)?)m/i.exec(passive)
+    const m = /(?:On Use|Active):\s*(?:You are\s+)?Teleported?\s+to\s+(?:a\s+targeted\s+location\s+)?up to\s*(\d+(?:\.\d+)?)m/i.exec(passive)
+      ?? /(?:On Use|Active):\s*Teleport\s*up to\s*(\d+(?:\.\d+)?)m/i.exec(passive)
     if (m) procs.push({
       kind: 'activeUse_teleport',
       rangeMeters: Number(m[1]),
@@ -1028,21 +1060,23 @@ export function parsePassiveForProcs(item: ItemCatalogEntry): ItemProc[] {
     })
   }
 
-  // --- On Use: Silence enemies for Xs ------------------------------------
+  // --- On Use/Active: Silence enemies for Xs -----------------------------
   {
-    const m = /On Use:[^.]*(Silence|Stun|Root)\s+(?:them|enemies|[a-z]+)\s+for\s+(\d+(?:\.\d+)?)s/i.exec(passive)
+    const m = /(?:On Use|Active):[^.]*(Silence|Stun|Root|Silenced|Stunned|Rooted)(?:\s+(?:them|enemies|[a-z]+))?\s+for\s+(\d+(?:\.\d+)?)s/i.exec(passive)
     if (m) procs.push({
       kind: 'activeUse_cc',
-      flavor: m[1].toLowerCase() as 'silence' | 'stun' | 'root',
+      flavor: m[1].toLowerCase().startsWith('sil') ? 'silence'
+        : m[1].toLowerCase().startsWith('stu') ? 'stun'
+        : 'root',
       durationSeconds: Number(m[2]),
       cooldown: activeCooldown,
       id: `${idBase}-active-cc`,
     })
   }
 
-  // --- On Use: +X% Strength / Intelligence / Speed for Ys ----------------
+  // --- On Use/Active: +X% Strength / Intelligence / Speed for Ys ---------
   {
-    const m = /On Use:\s*\+?(\d+(?:\.\d+)?)%?\s*(Strength|Intelligence|Movement Speed|Attack Speed|Protections)\s+(?:and\s+[A-Za-z\s]+?\s+)?for\s+(\d+(?:\.\d+)?)s/i.exec(passive)
+    const m = /(?:On Use|Active):\s*\+?(\d+(?:\.\d+)?)%?\s*(Strength|Intelligence|Movement Speed|Attack Speed|Protections)\s+(?:and\s+[A-Za-z\s]+?\s+)?for\s+(\d+(?:\.\d+)?)s/i.exec(passive)
     if (m) {
       const amt = Number(m[1])
       const statWord = m[2].toLowerCase()
@@ -1075,9 +1109,9 @@ export function parsePassiveForProcs(item: ItemCatalogEntry): ItemProc[] {
     }
   }
 
-  // --- On Use: movement-speed aura text split across bullets -------------
+  // --- On Use/Active: movement-speed aura text split across bullets ------
   {
-    const m = /On Use:[\s\S]*?\+?(\d+(?:\.\d+)?)%\s*Movement Speed[\s\S]*?over\s+(\d+(?:\.\d+)?)s/i.exec(passive)
+    const m = /(?:On Use|Active):[\s\S]*?\+?(\d+(?:\.\d+)?)%\s*Movement Speed[\s\S]*?over\s+(\d+(?:\.\d+)?)s/i.exec(passive)
     if (m) {
       procs.push({
         kind: 'activeUse_selfBuff',
@@ -1089,9 +1123,9 @@ export function parsePassiveForProcs(item: ItemCatalogEntry): ItemProc[] {
     }
   }
 
-  // --- On Use: Bleed/deal X (+Y per Level) True Damage N times over Ms ---
+  // --- On Use/Active: Bleed/deal X (+Y per Level) Damage N times over Ms --
   {
-    const m = /On Use:[^.]*(\d+(?:\.\d+)?)\s*(?:\(\+(\d+(?:\.\d+)?)\s*per Level\)\s*)?(Physical|Magical|True)\s+Damage\s*(\d+)\s*times\s*over\s*(\d+(?:\.\d+)?)s/i.exec(passive)
+    const m = /(?:On Use|Active):[^.]*(\d+(?:\.\d+)?)\s*(?:\(\+(\d+(?:\.\d+)?)\s*per Level\)\s*)?(Physical|Magical|True)\s+Damage\s*(\d+)\s*times\s*over\s*(\d+(?:\.\d+)?)s/i.exec(passive)
     if (m) {
       procs.push({
         kind: 'activeUse_damage',
@@ -1105,9 +1139,9 @@ export function parsePassiveForProcs(item: ItemCatalogEntry): ItemProc[] {
     }
   }
 
-  // --- On Use: instant active damage -------------------------------------
+  // --- On Use/Active: instant active damage ------------------------------
   {
-    const m = /On Use:[\s\S]*?(?:Deal(?:ing)?|deals|take Deal|projectile that deals)?\s*\+?(\d+(?:\.\d+)?)(?:\s*\(\+(\d+(?:\.\d+)?)\s*per Level\))?(?:\s*\(\+(\d+(?:\.\d+)?)%\s*Strength(?:\s*&\s*Intelligence)?\))?\s*(Physical|Magical|Magic|True)\s+Damage/i.exec(passive)
+    const m = /(?:On Use|Active):[\s\S]*?(?:Deal(?:ing)?|deals|take Deal|projectile that deals)?\s*\+?(\d+(?:\.\d+)?)(?:\s*\(\+(\d+(?:\.\d+)?)\s*per Level\))?(?:\s*\(\+(\d+(?:\.\d+)?)%\s*Strength(?:\s*&\s*Intelligence)?\))?\s*(Physical|Magical|Magic|True)\s+Damage/i.exec(passive)
     if (m && !/Damage\s+\d+\s+times\s+over/i.test(m[0])) {
       const scaling = m[3] ? Number(m[3]) / 100 : 0
       procs.push({
@@ -1124,9 +1158,9 @@ export function parsePassiveForProcs(item: ItemCatalogEntry): ItemProc[] {
     }
   }
 
-  // --- On Use: active enemy debuffs --------------------------------------
+  // --- On Use/Active: active enemy debuffs -------------------------------
   {
-    if (/On Use:/i.test(passive) && /-\d+(?:\.\d+)?%/.test(passive)) {
+    if (/(?:On Use|Active):/i.test(passive) && /-\d+(?:\.\d+)?%/.test(passive)) {
       const modifiers: Partial<Record<string, number>> = {}
       const movement = /-(\d+(?:\.\d+)?)%\s*Movement Speed/i.exec(passive)
       const attackSpeed = /-(\d+(?:\.\d+)?)%\s*Attack Speed/i.exec(passive)
@@ -1151,12 +1185,13 @@ export function parsePassiveForProcs(item: ItemCatalogEntry): ItemProc[] {
     }
   }
 
-  // --- On Use: Shield self/allies  (Pridwen, Shell, Phantom) -----------
+  // --- On Use/Active: Shield self/allies  (Pridwen, Shell, Phantom) -----
   {
-    const m = /On Use:[\s\S]*?\+?(\d+(?:\.\d+)?)\s*(?:\(\+(\d+(?:\.\d+)?)\s*per Level\)\s*)?(?:Health\s+)?Shield(?:\s+yourself|\s+and\s+allies)?/i.exec(passive)
+    const m = /(?:On Use|Active):[\s\S]*?(?:(\d+(?:\.\d+)?)\s*\+\s*(\d+(?:\.\d+)?)\*Level|(\d+(?:\.\d+)?)\s*(?:\(\+(\d+(?:\.\d+)?)\s*per Level\)\s*)?)\s*(?:HP\s+)?(?:Health\s+)?Shield(?:\s+yourself|\s+and\s+allies)?/i.exec(passive)
     if (m) {
-      const base = Number(m[1])
-      const perLevel = m[2] ? Number(m[2]) : 0
+      const base = Number(m[1] ?? m[3])
+      const perLevel = Number(m[2] ?? m[4] ?? 0)
+      const duration = /Shield[^.]*for\s+(\d+(?:\.\d+)?)s/i.exec(passive)
       procs.push({
         kind: 'activeUse_shield',
         flatShield: base,
@@ -1164,7 +1199,7 @@ export function parsePassiveForProcs(item: ItemCatalogEntry): ItemProc[] {
         maxHealthPct: 0,
         strengthFromItemsPct: 0,
         intelligenceFromItemsPct: 0,
-        durationSeconds: 3,
+        durationSeconds: duration ? Number(duration[1]) : 3,
         lifestealBonusPct: 0,
         cooldown: activeCooldown,
         id: `${idBase}-active-shield`,
@@ -1172,9 +1207,9 @@ export function parsePassiveForProcs(item: ItemCatalogEntry): ItemProc[] {
     }
   }
 
-  // --- On Use: Reveal enemies (Arondight, Eye of Erebus) ------------------
+  // --- On Use/Active: utility text we don't model numerically ------------
   {
-    const utilityMatch = /On Use:[\s\S]*?(Place a Ward|Place a jade current|Reveal|Dash|Stealthed|Protective Link|wall of light|Stasis|Pulse a reveal|Fire a traveling flare|Create a zone)/i.exec(passive)
+    const utilityMatch = /(?:On Use|Active):[\s\S]*?(Place a Ward|Place a jade current|Reveal|Dash|Stealthed|Protective Link|wall of light|Stasis|Pulse a reveal|Fire a traveling flare|Create a zone|Marks enemy Gods|Immune to Impediments|walk through player made walls)/i.exec(passive)
     const hasUnmodeledDamage = /(?:Deal|Deals|dealing|Damage equal|True Damage|Physical Damage|Magical Damage|Magic Damage)/i.test(passive)
     if (utilityMatch && !hasUnmodeledDamage) {
       procs.push({
@@ -1186,9 +1221,9 @@ export function parsePassiveForProcs(item: ItemCatalogEntry): ItemProc[] {
     }
   }
 
-  // --- On Use: Immune for Xs (Aegis, Time-lock) ---------------------------
+  // --- On Use/Active: Immune for Xs (Aegis, Time-lock) -------------------
   {
-    const m = /On Use:\s*(?:Become\s+)?Immune[^.]*for\s+(\d+(?:\.\d+)?)s/i.exec(passive)
+    const m = /(?:On Use|Active):\s*(?:Become\s+)?Immune[^.]*for\s+(\d+(?:\.\d+)?)s/i.exec(passive)
     if (m) procs.push({
       kind: 'activeUse_selfBuff',
       modifiers: { invulnerable: 1 },
@@ -1198,9 +1233,9 @@ export function parsePassiveForProcs(item: ItemCatalogEntry): ItemProc[] {
     })
   }
 
-  // --- On Use: CDR (Pendulum-style) --------------------------------------
+  // --- On Use/Active: CDR (Pendulum-style) -------------------------------
   {
-    const m = /On Use:[^.]*Reduce[^.]*(Cooldowns?|cooldown)\s+(?:by\s+)?(\d+(?:\.\d+)?)s/i.exec(passive)
+    const m = /(?:On Use|Active):[^.]*Reduce[^.]*(Cooldowns?|cooldown)\s+(?:by\s+)?(\d+(?:\.\d+)?)s/i.exec(passive)
     if (m) procs.push({
       kind: 'activeUse_cdr',
       secondsReduced: Number(m[2]),
