@@ -47,6 +47,7 @@ export function isCatalogHelperItem(item: ItemEligibilityLike): boolean {
 }
 
 export function hasMissingStatRows(item: ItemEligibilityLike): boolean {
+  if (categoriesOf(item).includes('GodLocked') || (item.sourceFile ?? '').startsWith('godLocked:')) return false
   return (item.statTags?.length ?? 0) > 0 && (item.storeFloats?.length ?? 0) === 0
 }
 

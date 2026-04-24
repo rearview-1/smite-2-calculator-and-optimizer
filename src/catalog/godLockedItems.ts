@@ -19,7 +19,7 @@
  *   - "Cooldown Rate" is a CDR-like stat.
  */
 
-import type { ResolvedItemStats } from './loadCatalogs.ts'
+import type { ItemCatalogEntry, ResolvedItemStats } from './loadCatalogs.ts'
 import type { DamageType } from '../sim/v3/types.ts'
 
 /**
@@ -28,8 +28,8 @@ import type { DamageType } from '../sim/v3/types.ts'
  * based on the scenario's aspect toggle.
  */
 export type AcornAbilityMod =
-  | { kind: 'addDamage'; label: string; baseDamageR1: number; baseDamageR5: number; strScaling: number; intScaling: number; damageType: DamageType }
-  | { kind: 'addAreaDamage'; label: string; baseDamageR1: number; baseDamageR5: number; strScaling: number; intScaling: number; targetMaxHpScaling?: number; damageType: DamageType }
+  | { kind: 'addDamage'; label: string; baseDamageR1: number; baseDamageR5: number; strScaling: number; intScaling: number; delaySeconds?: number; damageType: DamageType }
+  | { kind: 'addAreaDamage'; label: string; baseDamageR1: number; baseDamageR5: number; strScaling: number; intScaling: number; delaySeconds?: number; targetMaxHpScaling?: number; damageType: DamageType }
   | { kind: 'addDebuff'; label: string; modifiers: Record<string, number>; modifiersR1?: Record<string, number>; durationSeconds: number; maxStacks?: number }
   | { kind: 'addSelfBuff'; label: string; modifiers: Record<string, number>; modifiersR1?: Record<string, number>; durationSeconds: number; maxStacks?: number }
   | { kind: 'addSelfHeal'; label: string; pctMaxHealth: number }
@@ -132,6 +132,7 @@ export const RATATOSKR_ACORNS: GodLockedItem[] = [
         label: 'Briskberry Aspect explosion',
         baseDamageR1: 40, baseDamageR5: 120,
         strScaling: 0, intScaling: 0,
+        delaySeconds: 2.1,
         targetMaxHpScaling: 0.05,
         damageType: 'physical' },
     ],
@@ -197,23 +198,11 @@ export const RATATOSKR_ACORNS: GodLockedItem[] = [
       // No separate CT numbers — uses A03's own Damage curve.
       { kind: 'behavior', label: 'Attach+explode', description: 'Acorn Blast attaches to enemy gods, or stops at max range, and explodes after a delay.' },
     ],
+    // Numeric behavior is handled directly in the Ratatoskr A03 god handler so
+    // the sim can model all projectiles and delayed explosions without
+    // double-counting here.
     aspectAbilityMods: [
-      // Aspect: 5 projectiles, debuffs enemies hit to take +damage from Ratatoskr.
       { kind: 'behavior', label: '5 projectiles', description: 'Acorn Blast fires 5 projectiles.' },
-      { kind: 'addDamage',
-        label: 'Thistlethorn Aspect direct',
-        baseDamageR1: 40, baseDamageR5: 100,
-        strScaling: 0.4, intScaling: 0,
-        damageType: 'physical' },
-      { kind: 'addAreaDamage',
-        label: 'Thistlethorn Aspect explode AoE',
-        baseDamageR1: 30, baseDamageR5: 70,
-        strScaling: 0.25, intScaling: 0,
-        damageType: 'physical' },
-      { kind: 'addDebuff',
-        label: 'Thistlethorn Aspect vulnerability',
-        modifiers: { DamageTakenFromSourcePercent: 5 },
-        durationSeconds: 4 },
     ],
     nonAspectPassive: '+45 Strength, +5% Lifesteal. Acorn Blast attaches to enemy gods, or stops at max range, and explodes after a delay.',
     aspectPassive: '+400 Health, +10 Cooldown Rate. Acorn Blast fires 5 projectiles and debuffs enemies hit, causing them to take more damage from you.',
@@ -232,6 +221,20 @@ export function godLockedItemsFor(godId: string): GodLockedItem[] {
   return allGodLockedItems().filter((i) => i.godId === godId)
 }
 
+/** Look up a god-locked item by internal key or display name. */
+export function findGodLockedItem(displayNameOrKey: string): GodLockedItem | null {
+  const target = displayNameOrKey.toLowerCase()
+  return allGodLockedItems().find((item) =>
+    item.internalKey.toLowerCase() === target || item.displayName.toLowerCase() === target,
+  ) ?? null
+}
+
+/** Current UI uses a simple on/off aspect toggle. Any selected aspect enables
+ *  the god's aspect-driven item variant. */
+export function isAspectEnabled(aspects: string[] | null | undefined): boolean {
+  return Array.isArray(aspects) && aspects.length > 0
+}
+
 /** Return the adaptive Strength value for an acorn (all grant +STR in non-aspect
  *  mode; none in aspect mode). Used by the API to populate `adaptiveStrength`. */
 export function acornAdaptiveStrength(acorn: GodLockedItem, aspectActive: boolean): number {
@@ -239,4 +242,38 @@ export function acornAdaptiveStrength(acorn: GodLockedItem, aspectActive: boolea
   if (acorn.tier === 1) return 5
   if (acorn.tier === 2) return 15
   return 45  // all Tier-3 variants grant +45 STR non-aspect
+}
+
+/** Union of stats an acorn can expose across both non-aspect and aspect modes.
+ *  This lets picker/pool filters surface Ratatoskr acorns without needing a
+ *  second aspect-specific `/api/items` round-trip. */
+export function godLockedItemStatTags(acorn: GodLockedItem): string[] {
+  const tags = new Set<string>([
+    ...Object.keys(acorn.nonAspectStats),
+    ...Object.keys(acorn.aspectStats),
+  ])
+  if (acornAdaptiveStrength(acorn, false) > 0) tags.add('Strength')
+  return [...tags]
+}
+
+/** Convert a god-locked item into a synthetic catalog item so the sim/optimizer
+ *  can resolve it through the same item path as normal store items. */
+export function godLockedItemAsCatalogItem(acorn: GodLockedItem, aspectActive: boolean): ItemCatalogEntry {
+  return {
+    internalKey: acorn.internalKey,
+    displayName: acorn.displayName,
+    tier: `T${acorn.tier}`,
+    categories: ['GodLocked', 'Offensive'],
+    roles: [],
+    keywords: ['god-locked', 'acorn', acorn.godId.toLowerCase()],
+    statTags: godLockedItemStatTags(acorn),
+    storeFloats: [],
+    passive: aspectActive ? acorn.aspectPassive : acorn.nonAspectPassive,
+    passiveRaw: aspectActive ? acorn.aspectPassive : acorn.nonAspectPassive,
+    sourceFile: `godLocked:${acorn.internalKey}`,
+    recipeStepCost: null,
+    recipeComponents: null,
+    totalCost: null,
+    geEffects: [],
+  }
 }

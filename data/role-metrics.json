@@ -1,0 +1,157 @@
+{
+  "_schema": {
+    "description": "Empirical SMITE 2 Conquest macro-economy metrics generated from recent SmiteSource public match pages.",
+    "sourceMethod": "Scraped from SmiteSource matches sitemap + server-rendered match payloads embedded in HTML flight chunks.",
+    "assumptions": {
+      "firstTier3Cost": 2800,
+      "fullBuildCost": 14600,
+      "notes": [
+        "firstItemCompleteMin is derived as 2800g / median role GPM.",
+        "fullBuildMin is derived from an estimated starter + 5-item final build cost based on current catalog medians.",
+        "Role gold share is relative to the player team total at match end."
+      ]
+    },
+    "fetchedMatchPages": 500,
+    "requestedMatchesPerMode": 150
+  },
+  "avgGameLengthMin": {
+    "casual": 29.7,
+    "ranked": 34.6
+  },
+  "avgTeamGpm": {
+    "casual": 2318.3,
+    "ranked": 2265.3
+  },
+  "avgTeamGold": {
+    "casual": 70512,
+    "ranked": 80571
+  },
+  "levelPerMin": {
+    "casual": 0.544,
+    "ranked": 0.497
+  },
+  "modes": {
+    "casual": {
+      "avgGameLengthMin": 29.7,
+      "avgTeamGpm": 2318.3,
+      "avgTeamGold": 70512,
+      "avgXpPerMin": 448.2,
+      "levelPerMin": 0.544,
+      "sampleMatches": 101,
+      "samplePlayers": 1010
+    },
+    "ranked": {
+      "avgGameLengthMin": 34.6,
+      "avgTeamGpm": 2265.3,
+      "avgTeamGold": 80571,
+      "avgXpPerMin": 447.8,
+      "levelPerMin": 0.497,
+      "sampleMatches": 114,
+      "samplePlayers": 1140
+    }
+  },
+  "roles": {
+    "carry": {
+      "casual": {
+        "gpm": 465.3,
+        "xpPerMin": 454,
+        "levelPerMin": 0.544,
+        "firstItemCompleteMin": 6,
+        "fullBuildMin": 31.4,
+        "teamGoldShare": 0.201,
+        "samplePlayers": 202
+      },
+      "ranked": {
+        "gpm": 465.4,
+        "xpPerMin": 473.5,
+        "levelPerMin": 0.499,
+        "firstItemCompleteMin": 6,
+        "fullBuildMin": 31.4,
+        "teamGoldShare": 0.206,
+        "samplePlayers": 228
+      }
+    },
+    "mid": {
+      "casual": {
+        "gpm": 460.6,
+        "xpPerMin": 467.4,
+        "levelPerMin": 0.558,
+        "firstItemCompleteMin": 6.1,
+        "fullBuildMin": 31.7,
+        "teamGoldShare": 0.202,
+        "samplePlayers": 202
+      },
+      "ranked": {
+        "gpm": 452.6,
+        "xpPerMin": 463.6,
+        "levelPerMin": 0.511,
+        "firstItemCompleteMin": 6.2,
+        "fullBuildMin": 32.3,
+        "teamGoldShare": 0.202,
+        "samplePlayers": 228
+      }
+    },
+    "solo": {
+      "casual": {
+        "gpm": 470.2,
+        "xpPerMin": 475.6,
+        "levelPerMin": 0.565,
+        "firstItemCompleteMin": 6,
+        "fullBuildMin": 31.1,
+        "teamGoldShare": 0.203,
+        "samplePlayers": 202
+      },
+      "ranked": {
+        "gpm": 452.1,
+        "xpPerMin": 454.4,
+        "levelPerMin": 0.501,
+        "firstItemCompleteMin": 6.2,
+        "fullBuildMin": 32.3,
+        "teamGoldShare": 0.197,
+        "samplePlayers": 228
+      }
+    },
+    "jungle": {
+      "casual": {
+        "gpm": 470,
+        "xpPerMin": 462.3,
+        "levelPerMin": 0.543,
+        "firstItemCompleteMin": 6,
+        "fullBuildMin": 31.1,
+        "teamGoldShare": 0.205,
+        "samplePlayers": 202
+      },
+      "ranked": {
+        "gpm": 466.5,
+        "xpPerMin": 466.8,
+        "levelPerMin": 0.501,
+        "firstItemCompleteMin": 6,
+        "fullBuildMin": 31.3,
+        "teamGoldShare": 0.206,
+        "samplePlayers": 228
+      }
+    },
+    "support": {
+      "casual": {
+        "gpm": 429.9,
+        "xpPerMin": 400.8,
+        "levelPerMin": 0.511,
+        "firstItemCompleteMin": 6.5,
+        "fullBuildMin": 34,
+        "teamGoldShare": 0.186,
+        "samplePlayers": 202
+      },
+      "ranked": {
+        "gpm": 416.8,
+        "xpPerMin": 394.7,
+        "levelPerMin": 0.478,
+        "firstItemCompleteMin": 6.7,
+        "fullBuildMin": 35,
+        "teamGoldShare": 0.186,
+        "samplePlayers": 228
+      }
+    }
+  },
+  "lastUpdated": "2026-04-23",
+  "source": "SmiteSource public match pages sampled from https://smitesource.com/sitemaps/matches.xml. casual=101 matches, ranked=114 matches."
+}

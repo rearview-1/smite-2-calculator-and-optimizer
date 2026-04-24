@@ -1,6 +1,8 @@
 import { readFileSync } from 'node:fs'
 import { interp, type Curve } from './curve.ts'
 import { itemDisplayName, shouldPreferItemRecord } from './itemEligibility.ts'
+import { acornAdaptiveStrength, findGodLockedItem, godLockedItemAsCatalogItem, isAspectEnabled } from './godLockedItems.ts'
+import { getFallbackAbilityRows } from './abilityRowFallbacks.ts'
 
 // ---- Catalog JSON shapes (mirroring the Python-built artifacts) ----
 
@@ -74,11 +76,75 @@ export interface EffectsCatalog {
   }>
 }
 
+// ---- Aspect (talent) catalog ----
+
+/** One rank curve: linear/step with Keys[t,v]. Same shape as ability rankValues. */
+export interface AspectCurve {
+  interp: 'linear' | 'step'
+  keys: Array<{ t: number; v: number }>
+}
+
+export interface AspectTalentBlock {
+  talentIndex: number
+  folder: string
+  ctFile: string | null
+  /** Rows parsed from the dedicated talent CT (e.g. CT_Loki_Talent1_EffectValues). */
+  numericValues: Record<string, AspectCurve>
+  /** Grouped ability-level GE mods (CDR, damage adds, etc.) by slot. */
+  abilityMods: Partial<Record<'A01'|'A02'|'A03'|'A04', Array<{
+    kind: string
+    rank: number | null
+    file: string
+  }>>>
+  /** Aspect-level GE files (self-buff, debuff, root effect). */
+  rootEffects: Array<{ kind: string; file: string }>
+}
+
+export interface AspectEntry {
+  godId: string
+  aspectKeyPrefix: string | null
+  aspect: {
+    name: string | null
+    description: string | null
+    /** True when ST_HW_God_Talents has "DNT" / "Placeholder Desc" / "<God>_01" style sentinel. */
+    placeholder: boolean
+    /** True if per-god strings contain `<God>.Talent.*.PSV.*` keys → passive is replaced. */
+    replacesPassive: boolean
+    /** Per-ability tooltip overrides from `<God>.Talent.N.A0X.*`. */
+    abilityOverrides: Partial<Record<'A01'|'A02'|'A03'|'A04', string>>
+    /** One or more talent folders. Most gods have one (Bellona has two). */
+    talents: AspectTalentBlock[]
+    /** `Talent*`-prefixed rows found inside each ability's REGULAR CT — some gods
+     *  encode the aspect's numeric values there instead of a dedicated talent CT. */
+    baseAbilityTalentRows: Partial<Record<'A01'|'A02'|'A03'|'A04', Record<string, AspectCurve>>>
+    sources: { talentsTable: string | null; perGodStringTable: string | null }
+  }
+}
+
+export interface AspectsCatalog {
+  gods: Record<string, AspectEntry>
+  /** Catalog gods that have no extractable aspect data in the current probe dump. */
+  unmapped: string[]
+  lastUpdated: string
+}
+
+export interface BasicAttackCatalogEntry {
+  godId: string
+  damageType: 'physical' | 'magical' | 'true'
+  canCrit: boolean
+  sourceFiles: string[]
+  extraction: 'asset' | 'fallback'
+}
+
+export type BasicAttacksCatalog = Record<string, BasicAttackCatalogEntry>
+
 // ---- Singleton loaders (read once, cached in module-level) ----
 
 let _gods: Record<string, GodCatalogEntry> | null = null
 let _items: Record<string, ItemCatalogEntry> | null = null
 let _effects: EffectsCatalog | null = null
+let _aspects: AspectsCatalog | null = null
+let _basicAttacks: BasicAttacksCatalog | null = null
 
 function readJson<T>(path: string): T {
   return JSON.parse(readFileSync(path, 'utf-8')) as T
@@ -92,6 +158,31 @@ export function loadGods(): Record<string, GodCatalogEntry> {
 export function loadItems(): Record<string, ItemCatalogEntry> {
   if (!_items) _items = readJson('data/items-catalog.json')
   return _items!
+}
+
+export function loadAspects(): AspectsCatalog {
+  if (!_aspects) _aspects = readJson('data/aspects-catalog.json')
+  return _aspects!
+}
+
+export function loadBasicAttacks(): BasicAttacksCatalog {
+  if (!_basicAttacks) _basicAttacks = readJson('data/basic-attacks-catalog.json')
+  return _basicAttacks!
+}
+
+export function getBasicAttackMetadata(godIdOrName: string): BasicAttackCatalogEntry | null {
+  const basics = loadBasicAttacks()
+  if (godIdOrName in basics) return basics[godIdOrName]
+  const target = normKey(godIdOrName)
+  for (const [godId, entry] of Object.entries(basics)) {
+    if (normKey(godId) === target) return entry
+  }
+  return null
+}
+
+export function getAspect(godId: string): AspectEntry | null {
+  const cat = loadAspects()
+  return cat.gods[godId] ?? null
 }
 
 export function loadEffects(): EffectsCatalog {
@@ -182,7 +273,33 @@ export function getGod(idOrName: string): GodCatalogEntry {
   throw new Error(`God not found: ${idOrName}`)
 }
 
-export function getItem(displayNameOrKey: string): ItemCatalogEntry {
+/** SMITE 2 gods deal one primary damage type across their kit/basic attacks.
+ *  Infer that from the cataloged ability damage rows, preferring the majority
+ *  non-null ability type and falling back to the first resolved ability. */
+export function inferGodDamageType(god: GodCatalogEntry): 'physical' | 'magical' | 'true' {
+  const counts = new Map<'physical' | 'magical' | 'true', number>()
+  let firstResolved: 'physical' | 'magical' | 'true' | null = null
+  for (const ability of Object.values(god.abilities)) {
+    const type = ability?.damageType
+    if (!type) continue
+    firstResolved ??= type
+    counts.set(type, (counts.get(type) ?? 0) + 1)
+  }
+  let best: 'physical' | 'magical' | 'true' | null = null
+  let bestCount = -1
+  for (const [type, count] of counts.entries()) {
+    if (count > bestCount) {
+      best = type
+      bestCount = count
+    }
+  }
+  return best ?? firstResolved ?? 'physical'
+}
+
+export function getItem(
+  displayNameOrKey: string,
+  options?: { godId?: string; aspects?: string[] | null },
+): ItemCatalogEntry {
   const items = loadItems()
   if (displayNameOrKey in items) return items[displayNameOrKey]
   const target = normKey(displayNameOrKey)
@@ -199,6 +316,13 @@ export function getItem(displayNameOrKey: string): ItemCatalogEntry {
     if (shouldPreferItemRecord(v, best)) best = v
   }
   if (best) return best
+  const godLocked = findGodLockedItem(displayNameOrKey)
+  if (godLocked) {
+    if (options?.godId && godLocked.godId !== options.godId) {
+      throw new Error(`Item ${displayNameOrKey} is locked to ${godLocked.godId}, not ${options.godId}`)
+    }
+    return godLockedItemAsCatalogItem(godLocked, isAspectEnabled(options?.aspects))
+  }
   throw new Error(`Item not found: ${displayNameOrKey}`)
 }
 
@@ -227,12 +351,25 @@ export function abilityRowAt(
   row: string,
   rank: number,
 ): number | null {
-  const ability = god.abilities[slot]
-  if (!ability || !ability.rankValues) return null
-  const curve = ability.rankValues[row]
+  const curve = abilityRankValues(god, slot)?.[row]
   if (!curve) return null
   return interp(curve, rank)
 }
+
+export function abilityRankValues(
+  god: GodCatalogEntry,
+  slot: 'A01' | 'A02' | 'A03' | 'A04',
+): Record<string, Curve> | null {
+  const ability = god.abilities[slot]
+  const catalogRows = ability?.rankValues ?? null
+  const fallbackRows = getFallbackAbilityRows(god.god, slot)
+  if (!catalogRows && !fallbackRows) return null
+  return {
+    ...(catalogRows ?? {}),
+    ...(fallbackRows ?? {}),
+  }
+}
+
 
 // ---- Item stat mapping: catalog storeFloats paired with statTags ----
 // The catalog tags come alphabetized; the storeFloats are in struct-declaration order
@@ -534,6 +671,15 @@ export const MANUAL_ITEM_OVERRIDES: Record<string, ResolvedItemStats> = {
 }
 
 export function resolveItemStatsWithOverrides(item: ItemCatalogEntry): ResolvedItemStats {
+  const godLocked = item.internalKey ? findGodLockedItem(item.internalKey) : null
+  if (godLocked) {
+    const aspectActive = item.passive === godLocked.aspectPassive
+    return {
+      stats: aspectActive ? godLocked.aspectStats : godLocked.nonAspectStats,
+      adaptiveStrength: acornAdaptiveStrength(godLocked, aspectActive),
+      adaptiveIntelligence: 0,
+    }
+  }
   if (item.internalKey && item.internalKey in MANUAL_ITEM_OVERRIDES) {
     const override = MANUAL_ITEM_OVERRIDES[item.internalKey]
     return {

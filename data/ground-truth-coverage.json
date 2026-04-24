@@ -1,0 +1,2507 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-04-24T20:03:20.075Z",
+  "summary": {
+    "fixtures": 5,
+    "godsTotal": 81,
+    "godsWithAnyFixture": 2,
+    "godsFullyCovered": 0,
+    "finalItemsTotal": 140,
+    "finalItemsWithExplicitFixture": 0
+  },
+  "gods": [
+    {
+      "godId": "Achilles",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Agni",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Aladdin",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Amaterasu",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Anhur",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Anubis",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Aphrodite",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Apollo",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Ares",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Artemis",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Artio",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Athena",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Atlas",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Awilix",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Bacchus",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Bari",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Baron_Samedi",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Bellona",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Cabrakan",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Cerberus",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Cernunnos",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Chaac",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Charon",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Chiron",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Cupid",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "DaJi",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Danzaburou",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Discordia",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Eset",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Fenrir",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Ganesha",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Geb",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Gilgamesh",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Guan_Yu",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Hades",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Hecate",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Hercules",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "HouYi",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Hun_Batz",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Ishtar",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Izanami",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Janus",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "JingWei",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Jormungandr",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Kali",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Khepri",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Kukulkan",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Loki",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [
+        "A01",
+        "A02",
+        "A03",
+        "A04",
+        "basic"
+      ],
+      "missingAreas": [
+        "passive"
+      ],
+      "fixtureIds": [
+        "loki-a02-hit-count",
+        "loki-aa-combo-timing"
+      ],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Medusa",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Mercury",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Merlin",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Mordred",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "MorganLeFay",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Mulan",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Ne_Zha",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Neith",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Nu_Wa",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Nut",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Odin",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Osiris",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Pele",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Poseidon",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Ra",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Rama",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Ratatoskr",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Scylla",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Sobek",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Sol",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Sun_Wukong",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Susano",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Sylvanus",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Thanatos",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "The_Morrigan",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [
+        "A02",
+        "basic"
+      ],
+      "missingAreas": [
+        "passive",
+        "A01",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [
+        "the-morrigan-basic-vs-kukulkan-l20",
+        "the-morrigan-dark-omen-vs-kukulkan-l20",
+        "the-morrigan-aa-a02-aa-no-pop"
+      ],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Thor",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Tsukuyomi",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Ullr",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Vulcan",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Xbalanque",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Yemoja",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Ymir",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    },
+    {
+      "godId": "Zeus",
+      "expectedAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "coveredAreas": [],
+      "missingAreas": [
+        "basic",
+        "passive",
+        "A01",
+        "A02",
+        "A03",
+        "A04"
+      ],
+      "fixtureIds": [],
+      "fullyCovered": false
+    }
+  ],
+  "items": [
+    {
+      "itemName": "Alchemist Coat",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Amanita Charm",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Ancient Signet",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Ancile",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Archmage's Gem",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Arondight",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Avatar's Parashu",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Avenging Blade",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Bagua Mirror",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Bancroft's Talon",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Barbed Carver",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Berserker's Shield",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Blinking Amulet",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Blood-Bound Book",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Blood-soaked Shroud",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Bloodforge",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Bluestone Brooch",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Book of Thoth",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Bracer of The Abyss",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Bragi's Harp",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Brawler's Beat Stick",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Breastplate of Valor",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Bumba's Hammer",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Bumba's Spear",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Chandra's Grace",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Chronos' Pendant",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Circe's Hexstone",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Contagion",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Damaru",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Daybreak Gavel",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Death Metal",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Death's Embrace",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Deathbringer",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Demon Blade",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Demonic Grip",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Devourer's Gauntlet",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Divine Ruin",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Doom Orb",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Doublet of Binding",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Draconic Scale",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Dreamer's Idol",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Dwarven Plate",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Emblem of Namaka",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Erosion",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Eye of Erebus",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Eye of the Storm",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Freya's Tears",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Gauntlet of Thebes",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Gem of Focus",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Gem of Isolation",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Genji's Guard",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Gilded Arrow Upgrade",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Gladiator's Shield",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Glorious Pridwen",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Gluttonous Grimoire",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Golden Blade",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Hastened Fatalis",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Heartseeker",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Helm of Darkness",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Helm of Radiance",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Heroism",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Hide of the Nemean Lion",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Hunter's Cowl",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Hussar's Wings",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Hydra's Lament",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Jade Scepter",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Jotunn's Revenge",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Kinetic Cuirass",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Lernaean Bow",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Leviathan's Hide",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Lifebinder",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Magi's Cloak",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Mantle of Discord",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Mercury's Talaria",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Musashi's Dual Swords",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Mystical Mail",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Necronomicon",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Nimble Ring",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Oath-Sworn Spear",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Obsidian Shard",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Odysseus' Bow",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Omen Drum",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Oni Hunter's Garb",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Pendulum Blade",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Pendulum of the Ages",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Phantom Ring",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Pharaoh's Curse",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Phoenix Feather",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Polynomicon",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Prophetic Cloak",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Qin's Blade",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Radiant Bulwark",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Rage",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Ragnarok's Wake",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Regrowth Striders",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Resolute Mantle",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Riptalon",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Rod of Asclepius",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Rod of Tahuti",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Ruinous Ankh",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Runeforged Hammer",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Scepter of Dominion",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Shield Splitter",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Shield of the Phoenix",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Shogun's Ofuda",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Shroud Of Vengeance",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Soul Gem",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Soul Reaver",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Spear of Desolation",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Spectral Armor",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Sphere of Negation",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Spirit Robe",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Staff of Myrddin",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Stampede",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Stone of Binding",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Stygian Anchor",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Sun Beam Bow",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Sundering Axe Upgrade",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Tekko-Kagi",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "The Cosmic Horror",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "The Crusher",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "The Executioner",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "The Reaper",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "The World Stone",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Titan's Bane",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Totem of Death",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Transcendence",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Triton's Conch",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Typhon's Fang",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Typhon's Heart",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Tyrfing",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Umbral Link",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Vital Amplifier",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Void Shield",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Void Stone",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "War Banner",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Wish-Granting Pearl",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Wyrmskin Hide",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Xibalban Effigy",
+      "fixtureIds": [],
+      "covered": false
+    },
+    {
+      "itemName": "Yogi's Necklace",
+      "fixtureIds": [],
+      "covered": false
+    }
+  ]
+}

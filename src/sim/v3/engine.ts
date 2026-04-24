@@ -12,15 +12,20 @@
 import {
   getGod, getItem,
   getAbilityTiming,
+  getBasicAttackMetadata,
   getBasicChain,
+  inferGodDamageType,
   resolveItemStatsWithOverrides,
   statAt,
   abilityRowAt,
   type GodCatalogEntry,
   type ItemCatalogEntry,
 } from '../../catalog/loadCatalogs.ts'
+import { interp } from '../../catalog/curve.ts'
+import { getAspectAbilityRows } from '../../catalog/aspectCurves.ts'
 import { applyDefense } from '../formula.ts'
 import { conditionalBonusFor } from '../../catalog/conditionalItems.ts'
+import { findGodLockedItem, interpRank, type AcornAbilityMod } from '../../catalog/godLockedItems.ts'
 import { hasMissingStatRows } from '../../catalog/itemEligibility.ts'
 import {
   buildAbilityPlan,
@@ -50,6 +55,17 @@ const BASIC_CHAIN_DEFAULTS: Record<string, number[]> = {
   // Default for any unknown god — treat as single-hit basics with 1.0 scale
   __default: [1.0],
 }
+const MORRIGAN_DARK_OMEN_EXPIRES_KEY = 'TheMorrigan.A02.omen.expires'
+const MORRIGAN_DARK_OMEN_BASE_KEY = 'TheMorrigan.A02.omen.base'
+const MORRIGAN_DARK_OMEN_SCALE_KEY = 'TheMorrigan.A02.omen.intScale'
+const NUT_CONVERGENCE_ACTIVE_KEY = 'Nut.A01.active'
+const NUT_CONVERGENCE_SIDE_BASE_KEY = 'Nut.A01.sideBaseDamage'
+const NUT_CONVERGENCE_SIDE_STR_KEY = 'Nut.A01.sideStrengthScaling'
+const NUT_CONVERGENCE_SIDE_INT_KEY = 'Nut.A01.sideIntScaling'
+const NUT_CONVERGENCE_SIDE_COUNT_KEY = 'Nut.A01.sideProjectileCount'
+const NUT_CONVERGENCE_PROT_PCT_KEY = 'Nut.A01.protDebuffPct'
+const NUT_CONVERGENCE_PROT_DEBUFF_KEY = 'Nut.A01.protDebuff'
+const NUT_CONVERGENCE_PROT_DEBUFF_DURATION = 5
 
 interface AttackerSnapshot {
   god: GodCatalogEntry
@@ -85,6 +101,8 @@ interface AttackerSnapshot {
   lifestealMagical: number
   lifestealPhysicalInhand: number
   lifestealPhysicalAbility: number
+  basicAttackDamageType: DamageType
+  basicAttacksCanCrit: boolean
   primaryStat: 'STR' | 'INT' | 'hybrid'
 }
 
@@ -416,8 +434,8 @@ export function inferPrimaryStat(god: GodCatalogEntry): 'STR' | 'INT' | 'hybrid'
 export function snapshotAttacker(scenario: Scenario): AttackerSnapshot {
   const build = scenario.attacker
   const god = getGod(build.godId)
-  const items = build.items.map(getItem)
-  const relics = (build.relics ?? []).map(getItem)
+  const items = build.items.map((name) => getItem(name, { godId: build.godId, aspects: build.aspects }))
+  const relics = (build.relics ?? []).map((name) => getItem(name, { godId: build.godId, aspects: build.aspects }))
   const primaryStat = inferPrimaryStat(god)
   const forceConditional = scenario.options?.forceConditionalItemEffects === true
   const { flat, str, int } = sumItemStats(items, build.partialStacks ?? {}, primaryStat, forceConditional, build.level)
@@ -453,6 +471,8 @@ export function snapshotAttacker(scenario: Scenario): AttackerSnapshot {
     : 0
   const asTotal = attackSpeedPct + (flat.AttackSpeedPercent ?? 0) + nimbleRingBonus
   const cooldownStat = flat.CooldownReductionPercent ?? 0
+  const basicAttackMeta = getBasicAttackMetadata(build.godId)
+  const basicAttackDamageType = basicAttackMeta?.damageType ?? inferGodDamageType(god)
 
   return {
     god,
@@ -488,6 +508,8 @@ export function snapshotAttacker(scenario: Scenario): AttackerSnapshot {
     lifestealMagical: flat.MagicalLifestealPercent ?? 0,
     lifestealPhysicalInhand: flat.PhysicalInhandLifestealPercent ?? 0,
     lifestealPhysicalAbility: flat.PhysicalAbilityLifestealPercent ?? 0,
+    basicAttackDamageType,
+    basicAttacksCanCrit: basicAttackMeta?.canCrit ?? true,
     primaryStat,
   }
 }
@@ -495,7 +517,7 @@ export function snapshotAttacker(scenario: Scenario): AttackerSnapshot {
 export function snapshotDefender(scenario: Scenario): DefenderSnapshot {
   const enemy = scenario.defender
   const god = getGod(enemy.godId)
-  const items = enemy.items?.map(getItem) ?? []
+  const items = enemy.items?.map((name) => getItem(name, { godId: enemy.godId })) ?? []
   const { flat } = sumItemStats(items, {}, inferPrimaryStat(god), false, enemy.level)
   const baseHealth = statAt(god, 'MaxHealth', enemy.level)
   const basePhysProt = statAt(god, 'PhysicalProtection', enemy.level)
@@ -540,6 +562,7 @@ function queuePostAbilityItemRiders(ctx: DamageCtx) {
           strScaling: proc.strScaling,
           intScaling: proc.intScaling,
           expiresAt: ctx.state.t + proc.durationSeconds,
+          source: 'item',
         })
         ctx.state.cooldowns.actives[cooldownKey] = ctx.state.t + proc.cooldown
       } else if (proc.kind === 'onAbilityCast_selfBuff') {
@@ -573,10 +596,10 @@ function emitDamage(
   source: DamageEvent['source'], notes?: string[], suppressDamageEcho = false,
 ) {
   const adjustedPre = applyOutgoingDamageModifiers(ctx, source, preMitigation)
-  const penFlat = damageType === 'physical' ? ctx.attacker.penFlat : ctx.attacker.magicalPenFlat
+  const penFlat = currentPenFlat(ctx, damageType)
   const basePenPercent = damageType === 'physical'
-    ? ctx.attacker.penPercent
-    : ctx.attacker.magicalPenPercent
+    ? currentPenPercent(ctx, 'physical')
+    : currentPenPercent(ctx, 'magical')
   const penPercent = ctx.options.penPercentOverride ?? basePenPercent
   const prot = currentProt(ctx, damageType)
   const post = applyDefense(adjustedPre, {
@@ -594,9 +617,11 @@ function emitDamage(
     postMitigation: post,
     notes,
   }
-  // Crit expected-value bump for basics/abilities that can crit (physical basics only — magical has no crit in SMITE 2)
+  // Basic-attack crit is an inhand property, not a physical-only property.
+  // The extracted inhand GameplayEffects expose CanCrit on magical and physical
+  // gods alike, so only the source check matters here.
   const critChance = currentCritChance(ctx)
-  if (source === 'basic' && damageType === 'physical' && critChance > 0) {
+  if (source === 'basic' && ctx.attacker.basicAttacksCanCrit && critChance > 0) {
     const critMode = ctx.options.critMode ?? 'expected'
     const critBonus = 0.75 + currentCritDamageBonus(ctx) / 100
     if (critMode === 'alwaysCrit') {
@@ -619,6 +644,35 @@ function emitDamage(
   if (!suppressDamageEcho) {
     emitDamageEcho(ctx, source, adjustedPre)
   }
+  maybeTriggerTheMorriganDarkOmen(ctx, source, label, notes)
+}
+
+function maybeTriggerTheMorriganDarkOmen(
+  ctx: DamageCtx,
+  source: DamageEvent['source'],
+  label: string,
+  notes?: string[],
+) {
+  if (ctx.attacker.god.god !== 'The_Morrigan') return
+  const expiresAt = ctx.state.cooldowns.actives[MORRIGAN_DARK_OMEN_EXPIRES_KEY] ?? 0
+  if (expiresAt <= ctx.state.t) return
+  if (label === 'Dark Omen (trigger)') return
+
+  const noteText = (notes ?? []).join(' ').toLowerCase()
+  const fromGodAbility =
+    source === 'dot'
+    || (source === 'ability' && noteText.length === 0)
+  if (!fromGodAbility) return
+
+  const base = ctx.state.cooldowns.actives[MORRIGAN_DARK_OMEN_BASE_KEY] ?? 0
+  const intScale = ctx.state.cooldowns.actives[MORRIGAN_DARK_OMEN_SCALE_KEY] ?? 0
+  delete ctx.state.cooldowns.actives[MORRIGAN_DARK_OMEN_EXPIRES_KEY]
+  delete ctx.state.cooldowns.actives[MORRIGAN_DARK_OMEN_BASE_KEY]
+  delete ctx.state.cooldowns.actives[MORRIGAN_DARK_OMEN_SCALE_KEY]
+
+  const pre = base + currentAdaptiveIntelligence(ctx) * intScale
+  if (pre <= 0) return
+  emitDamage(ctx, 'magical', pre, 'Dark Omen (trigger)', 'ability', ['The Morrigan Dark Omen mark'])
 }
 
 function applyOutgoingDamageModifiers(
@@ -632,7 +686,8 @@ function applyOutgoingDamageModifiers(
       : (source === 'ability' || source === 'dot')
         ? buffStatDelta(ctx.state, 'AbilityDamagePercent')
         : 0
-  return preMitigation * (1 + pct / 100)
+  const sourceVulnerability = enemyDebuffStatDelta(ctx.state, 'DamageTakenFromSourcePercent')
+  return preMitigation * (1 + (pct + sourceVulnerability) / 100)
 }
 
 function emitDamageEcho(
@@ -756,6 +811,26 @@ function currentCritDamageBonus(ctx: DamageCtx): number {
   return Math.max(0, ctx.attacker.critDamageBonus + buffStatDelta(ctx.state, 'CritDamageBonus'))
 }
 
+function currentPenFlat(ctx: DamageCtx, damageType: DamageType): number {
+  if (damageType === 'physical') {
+    return ctx.attacker.penFlat + buffStatDelta(ctx.state, 'PhysicalPenetrationFlat')
+  }
+  if (damageType === 'magical') {
+    return ctx.attacker.magicalPenFlat + buffStatDelta(ctx.state, 'MagicalPenetrationFlat')
+  }
+  return 0
+}
+
+function currentPenPercent(ctx: DamageCtx, damageType: DamageType): number {
+  if (damageType === 'physical') {
+    return ctx.attacker.penPercent + buffStatDelta(ctx.state, 'PhysicalPenetrationPercent')
+  }
+  if (damageType === 'magical') {
+    return ctx.attacker.magicalPenPercent + buffStatDelta(ctx.state, 'MagicalPenetrationPercent')
+  }
+  return 0
+}
+
 function currentLifestealPercent(ctx: DamageCtx): number {
   return Math.max(
     0,
@@ -767,7 +842,12 @@ function currentLifestealPercent(ctx: DamageCtx): number {
 }
 
 function currentInhandAttackDamage(ctx: DamageCtx): number {
-  return ctx.attacker.inhandPower + buffStatDelta(ctx.state, 'InhandPower') + currentAdaptiveStrength(ctx)
+  return (
+    ctx.attacker.inhandPower
+    + buffStatDelta(ctx.state, 'InhandPower')
+    + currentAdaptiveStrength(ctx)
+    + currentAdaptiveIntelligence(ctx) * 0.2
+  )
 }
 
 function currentAttackerProtectionTotal(ctx: DamageCtx): number {
@@ -875,25 +955,15 @@ function advanceUntilAbilityReady(ctx: DamageCtx, slot: AbilitySlot) {
   }
 }
 
+function cancelCastDurationOverride(ctx: DamageCtx, slot: AbilitySlot): number | null {
+  if (ctx.attacker.god.god === 'Susano' && slot === 'A01') return 0.15
+  return null
+}
+
 // --- Ability execution ---
 
 function executeAbility(ctx: DamageCtx, slot: AbilitySlot, label: string, opts?: { cancel?: boolean }) {
   const rank = ctx.attacker.abilityRanks[slot] ?? 1
-
-  // Auto-attack cancel path: fire cooldown, emit the cast event, apply
-  // on-ability-cast item riders (Hydra / Poly / Bumba next-basic bonuses),
-  // but skip the ability's own damage components. Models a player cancelling
-  // an ability windup purely to trigger item procs.
-  if (opts?.cancel) {
-    const plan = buildAbilityPlan(ctx.attacker.god, slot, rank)
-    const cdSec = plan?.cooldownSeconds ?? 0
-    ctx.state.events.push({ kind: 'ability-cast', t: ctx.state.t, slot, label: `${label} (cancel)` })
-    const cdr = currentCdrPercent(ctx) / 100
-    ctx.state.cooldowns.abilities[slot] = ctx.state.t + cdSec * (1 - cdr)
-    queuePostAbilityItemRiders(ctx)
-    consumeNextNonUltimateNoCooldown(ctx, slot)
-    return
-  }
 
   // Per-god custom handler takes precedence when registered (Loki A01, etc.)
   const godHandler = getGodHandler(ctx.attacker.god.god, slot)
@@ -908,13 +978,17 @@ function executeAbility(ctx: DamageCtx, slot: AbilitySlot, label: string, opts?:
         applyAbilityHitItemProcs,
         applyRepeatableAbilityHitItemProcs,
         applyOnBasicHitSplashProcs,
+        attacker: { ...ctx.attacker, aspects: ctx.attacker.aspects },
         currentAdaptiveStrength: () => currentAdaptiveStrength(ctx),
         currentAdaptiveIntelligence: () => currentAdaptiveIntelligence(ctx),
         currentCdrPercent: () => currentCdrPercent(ctx),
+        cancel: opts?.cancel,
       } as unknown as HandlerContext,
       rank,
     )
     if (handled) {
+      applyAspectAbilityMods(ctx, slot, rank)
+      applyAcornAbilityMods(ctx, slot, rank)
       // Still queue next-basic riders (Bumba post-ability, Hydra multiplier)
       queuePostAbilityItemRiders(ctx)
       consumeNextNonUltimateNoCooldown(ctx, slot)
@@ -922,8 +996,23 @@ function executeAbility(ctx: DamageCtx, slot: AbilitySlot, label: string, opts?:
     }
   }
 
+  // Auto-attack cancel path: fire cooldown, emit the cast event, apply
+  // on-ability-cast item riders (Hydra / Poly / Bumba next-basic bonuses),
+  // but skip the ability's own damage components. Models a player cancelling
+  // an ability windup purely to trigger item procs.
+  if (opts?.cancel) {
+    const plan = buildAbilityPlan(ctx.attacker.god, slot, rank, { aspectActive: ctx.attacker.aspects.length > 0 })
+    const cdSec = plan?.cooldownSeconds ?? 0
+    ctx.state.events.push({ kind: 'ability-cast', t: ctx.state.t, slot, label: `${label} (cancel)` })
+    const cdr = currentCdrPercent(ctx) / 100
+    ctx.state.cooldowns.abilities[slot] = ctx.state.t + cdSec * (1 - cdr)
+    queuePostAbilityItemRiders(ctx)
+    consumeNextNonUltimateNoCooldown(ctx, slot)
+    return
+  }
+
   const plan: AbilityPlan | null = buildAbilityPlan(
-    ctx.attacker.god, slot, rank,
+    ctx.attacker.god, slot, rank, { aspectActive: ctx.attacker.aspects.length > 0 },
   )
   if (!plan) return
 
@@ -947,9 +1036,46 @@ function executeAbility(ctx: DamageCtx, slot: AbilitySlot, label: string, opts?:
     applyProcsOnceOnHit()
     applyRepeatableAbilityHitItemProcs(ctx)
   }
+  const preDamageSelfBuffs = plan.components
+    .filter((component): component is Extract<typeof component, { kind: 'self-buff' }> =>
+      component.kind === 'self-buff' && component.applyBeforeDamage === true)
+  for (const component of preDamageSelfBuffs) {
+    applyOrRefreshBuff(ctx.state, {
+      key: component.key,
+      label: component.label,
+      expiresAt: ctx.state.t + component.durationSeconds,
+      modifiers: component.modifiers,
+    })
+  }
+  const onHitEnemyDebuffs = plan.components
+    .filter((component): component is Extract<typeof component, { kind: 'enemy-debuff' }> =>
+      component.kind === 'enemy-debuff' && component.applyOnEachDamageHit === true)
+  const applyOnHitEnemyDebuffs = () => {
+    for (const component of onHitEnemyDebuffs) {
+      applyOrRefreshDebuff(ctx.state, {
+        key: component.key,
+        label: component.label,
+        expiresAt: ctx.state.t + component.durationSeconds,
+        modifiers: normalizeEnemyDebuffModifiers(ctx, component.modifiers),
+        stacksMax: component.stacksMax,
+        addStacks: component.addStacks ?? 1,
+      })
+    }
+  }
 
   for (const component of plan.components) {
     if (component.kind === 'direct') {
+      const savedT = ctx.state.t
+      const timing = getAbilityTiming(ctx.attacker.god.god, slot)
+      const baseDelay = component.delaySeconds ?? timing.damageApplyOffset ?? 0
+      const multiHitInterval =
+        component.hits > 1 && timing.shape === 'channel'
+          ? Math.max(0.05, timing.hitInterval)
+          : 0
+      if (baseDelay > 0) {
+        ctx.state.t = savedT + baseDelay
+        expireTimedEffects(ctx.state)
+      }
       const pre = directPre(ctx, component)
       // Multi-hit direct abilities (Da Ji A02 3-hit combo, Ratatoskr A02 dash)
       // can be truncated via `options.tickOverrides` so the user can model
@@ -959,22 +1085,39 @@ function executeAbility(ctx: DamageCtx, slot: AbilitySlot, label: string, opts?:
         ? Math.max(0, Math.min(component.hits, Math.floor(override)))
         : component.hits
       for (let h = 0; h < actualHits; h++) {
-        const hitLabel = component.hits > 1 ? `${label} (hit ${h + 1}/${actualHits})` : label
+        if (h > 0 && multiHitInterval > 0) {
+          ctx.state.t = savedT + baseDelay + h * multiHitInterval
+          expireTimedEffects(ctx.state)
+        }
+        const hitLabel = component.hits > 1 ? `${component.label} (hit ${h + 1}/${actualHits})` : component.label
         emitDamage(ctx, component.damageType, pre, hitLabel, 'ability')
+        applyOnHitEnemyDebuffs()
         // Once-per-ability procs apply after first contact; repeatable
         // ability-hit items (Bluestone) apply on every actual hit.
         applyAllAbilityHitProcs()
       }
+      ctx.state.t = savedT
     } else if (component.kind === 'dot') {
       schedDot(ctx, component, label, applyAllAbilityHitProcs)
     } else if (component.kind === 'bleed') {
       schedDot(ctx, component, label, applyAllAbilityHitProcs)
     } else if (component.kind === 'self-buff') {
+      if (component.applyBeforeDamage) continue
       applyOrRefreshBuff(ctx.state, {
         key: component.key,
         label: component.label,
         expiresAt: ctx.state.t + component.durationSeconds,
         modifiers: component.modifiers,
+      })
+    } else if (component.kind === 'enemy-debuff') {
+      if (component.applyOnEachDamageHit) continue
+      applyOrRefreshDebuff(ctx.state, {
+        key: component.key,
+        label: component.label,
+        expiresAt: ctx.state.t + component.durationSeconds,
+        modifiers: normalizeEnemyDebuffModifiers(ctx, component.modifiers),
+        stacksMax: component.stacksMax,
+        addStacks: component.addStacks ?? 1,
       })
     } else if (component.kind === 'next-basic-bonus') {
       ctx.state.riders.nextBasicBonusDamages.push({
@@ -984,6 +1127,7 @@ function executeAbility(ctx: DamageCtx, slot: AbilitySlot, label: string, opts?:
         strScaling: component.strScaling,
         intScaling: component.intScaling,
         expiresAt: ctx.state.t + component.durationSeconds,
+        source: 'ability',
       })
       ctx.state.events.push({
         kind: 'buff-apply',
@@ -1005,6 +1149,9 @@ function executeAbility(ctx: DamageCtx, slot: AbilitySlot, label: string, opts?:
       // heals aren't damage; skip for now (logged in damage series as 0 would be misleading).
     }
   }
+
+  applyAspectAbilityMods(ctx, slot, rank)
+  applyAcornAbilityMods(ctx, slot, rank)
 
   // Ability-use item riders queued on next basic.
   queuePostAbilityItemRiders(ctx)
@@ -1038,6 +1185,133 @@ function directPre(ctx: DamageCtx, plan: Pick<DamagePlan, 'baseDamage' | 'strSca
   return plan.baseDamage + strTotal * plan.strScaling + intTotal * plan.intScaling
 }
 
+function aspectRowValue(ctx: DamageCtx, slot: AbilitySlot, rowName: string, rank: number): number {
+  const rows = getAspectAbilityRows(ctx.attacker.god.god, slot)
+  const curve = rows[rowName]
+  return curve ? interp(curve, rank) : 0
+}
+
+function acornModifierMapAt(
+  modifiers: Record<string, number>,
+  modifiersR1: Record<string, number> | undefined,
+  rank: number,
+): Record<string, number> {
+  if (!modifiersR1) return modifiers
+  const out: Record<string, number> = {}
+  const keys = new Set([...Object.keys(modifiers), ...Object.keys(modifiersR1)])
+  for (const key of keys) {
+    out[key] = interpRank(modifiersR1[key] ?? modifiers[key] ?? 0, modifiers[key] ?? modifiersR1[key] ?? 0, rank)
+  }
+  return out
+}
+
+function equippedAcornMods(ctx: DamageCtx, slot: AbilitySlot): AcornAbilityMod[] {
+  const mods: AcornAbilityMod[] = []
+  const aspectActive = ctx.attacker.aspects.length > 0
+  for (const item of ctx.attacker.items) {
+    const acorn = findGodLockedItem(item.internalKey ?? item.displayName ?? '')
+    if (!acorn || acorn.abilitySlot !== slot) continue
+    mods.push(...(aspectActive ? acorn.aspectAbilityMods : acorn.abilityMods))
+  }
+  return mods
+}
+
+function applyAcornAbilityMods(ctx: DamageCtx, slot: AbilitySlot, rank: number) {
+  const mods = equippedAcornMods(ctx, slot)
+  if (mods.length === 0) return
+  for (const mod of mods) {
+    if (mod.kind === 'addDamage' || mod.kind === 'addAreaDamage') {
+      const savedT = ctx.state.t
+      if (mod.delaySeconds) ctx.state.t = savedT + mod.delaySeconds
+      const pre =
+        interpRank(mod.baseDamageR1, mod.baseDamageR5, rank)
+        + currentAdaptiveStrength(ctx) * mod.strScaling
+        + currentAdaptiveIntelligence(ctx) * mod.intScaling
+        + ctx.defender.maxHealth * ('targetMaxHpScaling' in mod ? (mod.targetMaxHpScaling ?? 0) : 0)
+      emitDamage(ctx, mod.damageType, pre, mod.label, 'ability', ['god-locked aspect modifier'])
+      ctx.state.t = savedT
+    } else if (mod.kind === 'addSelfBuff') {
+      applyOrRefreshBuff(ctx.state, {
+        key: `acorn:${slot}:${mod.label}`,
+        label: mod.label,
+        expiresAt: ctx.state.t + mod.durationSeconds,
+        modifiers: acornModifierMapAt(mod.modifiers, mod.modifiersR1, rank),
+        stacksMax: mod.maxStacks,
+        addStacks: 1,
+      })
+    } else if (mod.kind === 'addDebuff') {
+      applyOrRefreshDebuff(ctx.state, {
+        key: `acorn:${slot}:${mod.label}`,
+        label: mod.label,
+        expiresAt: ctx.state.t + mod.durationSeconds,
+        modifiers: acornModifierMapAt(mod.modifiers, mod.modifiersR1, rank),
+        stacksMax: mod.maxStacks,
+        addStacks: 1,
+      })
+    } else if (mod.kind === 'cdrOnHit') {
+      const reducedBy = mod.secondsReduced * (mod.maxResetsPerCast ?? 1)
+      ctx.state.cooldowns.abilities[slot] = Math.max(ctx.state.t, ctx.state.cooldowns.abilities[slot] - reducedBy)
+    }
+  }
+}
+
+function applyAspectAbilityMods(ctx: DamageCtx, slot: AbilitySlot, rank: number) {
+  if (ctx.attacker.aspects.length === 0) return
+  const godId = ctx.attacker.god.god
+
+  if (godId === 'Poseidon' && slot === 'A02') {
+    const baseDamage = aspectRowValue(ctx, slot, 'Aspect Projectile Base Damage', rank)
+    const duration = aspectRowValue(ctx, slot, 'Aspect Projectile Duration', rank)
+      || (abilityRowAt(ctx.attacker.god, slot, 'Buff Duration', rank) ?? 0)
+    const inhandScaling = aspectRowValue(ctx, slot, 'Aspect Projectile Inhand Scaling', rank)
+    if (baseDamage > 0 && duration > 0) {
+      ctx.state.riders.activeBasicProjectiles.push({
+        key: 'Poseidon.aspect.A02',
+        label: 'Trident aspect side shot',
+        damageType: 'magical',
+        baseDamage,
+        inhandScaling,
+        hits: 2,
+        expiresAt: ctx.state.t + duration,
+        source: 'ability',
+      })
+    }
+  }
+
+  if (godId === 'Ra' && slot === 'A02') {
+    const baseDamage = aspectRowValue(ctx, slot, 'Aspect Projectile Base Damage', rank)
+    const intScaling = aspectRowValue(ctx, slot, 'Aspect Projectile Int Scaling', rank)
+    const duration = abilityRowAt(ctx.attacker.god, slot, 'Enhanced Attack Duration', rank) ?? 0
+    if (baseDamage > 0 && duration > 0) {
+      ctx.state.riders.activeBasicProjectiles.push({
+        key: 'Ra.aspect.A02',
+        label: 'Divine Light aspect ray',
+        damageType: 'magical',
+        baseDamage,
+        inhandScaling: 0,
+        intScaling,
+        hits: 1,
+        expiresAt: ctx.state.t + duration,
+        source: 'ability',
+      })
+    }
+  }
+
+  if (godId === 'Thanatos' && slot === 'A03') {
+    const maxHpScaling = aspectRowValue(ctx, slot, 'Aspect Target Max HP Scaling', rank)
+    if (maxHpScaling > 0) {
+      emitDamage(
+        ctx,
+        'physical',
+        ctx.defender.maxHealth * maxHpScaling,
+        'Soul Reap (aspect max HP)',
+        'ability',
+        [`${(maxHpScaling * 100).toFixed(1)}% target max HP`],
+      )
+    }
+  }
+}
+
 function kaliRupturePre(ctx: DamageCtx, slot: AbilitySlot, rank: number, stacks: number): number {
   const base = abilityRowAt(ctx.attacker.god, slot, 'Passive Bonus Damage Base Damage', rank)
   if (base == null) return 0
@@ -1062,8 +1336,9 @@ function schedDot(
   const tickOverride = ctx.options.tickOverrides?.[`${ctx.attacker.god.god}.${label}`]
   const actualTicks = tickOverride ?? plan.ticks
   const savedT = ctx.state.t
+  const firstTickDelay = plan.delaySeconds ?? plan.tickRate
   for (let i = 1; i <= actualTicks; i++) {
-    ctx.state.t = savedT + i * plan.tickRate
+    ctx.state.t = savedT + firstTickDelay + (i - 1) * plan.tickRate
     expireTimedEffects(ctx.state)
     // Recompute pre each tick in case buffs/debuffs mid-DoT changed the values
     const pre = directPre(ctx, plan)
@@ -1108,24 +1383,89 @@ function executeBasic(ctx: DamageCtx, label: string) {
     ctx.state.riders.nextBasicMultiplier = null
   }
 
-  emitDamage(ctx, 'physical', pre, label, 'basic',
+  emitDamage(ctx, ctx.attacker.basicAttackDamageType, pre, label, 'basic',
     hydraMult ? [`×${hydraMult} next-basic multiplier`] : undefined)
   applyOnBasicHitSplashProcs(ctx, pre)
 
-  ctx.state.riders.activeBasicProjectiles = ctx.state.riders.activeBasicProjectiles
-    .filter((rider) => rider.expiresAt > ctx.state.t)
-  for (const rider of ctx.state.riders.activeBasicProjectiles) {
-    const projectilePre = rider.baseDamage + currentInhandAttackDamage(ctx) * rider.inhandScaling
-    for (let i = 1; i <= rider.hits; i++) {
-      emitDamage(ctx, rider.damageType, projectilePre, `${rider.label} (projectile ${i}/${rider.hits})`, 'item',
-        ['active item extra basic projectile'])
+  const nutConvergence = ctx.attacker.god.god === 'Nut'
+    ? ctx.state.attackerBuffs.get(NUT_CONVERGENCE_ACTIVE_KEY)
+    : undefined
+  if (nutConvergence && nutConvergence.expiresAt > ctx.state.t && nutConvergence.stacks > 0) {
+    const projectileCount = Math.max(0, Math.floor(ctx.state.cooldowns.actives[NUT_CONVERGENCE_SIDE_COUNT_KEY] ?? 2))
+    const sideBase = ctx.state.cooldowns.actives[NUT_CONVERGENCE_SIDE_BASE_KEY] ?? 0
+    const sideStrScaling = ctx.state.cooldowns.actives[NUT_CONVERGENCE_SIDE_STR_KEY] ?? 0
+    const sideIntScaling = ctx.state.cooldowns.actives[NUT_CONVERGENCE_SIDE_INT_KEY] ?? 0
+    let abilityHitProcsApplied = false
+    for (let i = 1; i <= projectileCount; i++) {
+      const sidePre =
+        sideBase
+        + currentAdaptiveStrength(ctx) * sideStrScaling
+        + currentAdaptiveIntelligence(ctx) * sideIntScaling
+      emitDamage(
+        ctx,
+        'magical',
+        sidePre,
+        `Convergence side shot (${i}/${projectileCount})`,
+        'ability',
+        ['asset-backed Nut A01 side projectile'],
+      )
+      if (!abilityHitProcsApplied) {
+        applyAbilityHitItemProcs(ctx)
+        abilityHitProcsApplied = true
+      }
+      applyRepeatableAbilityHitItemProcs(ctx)
+    }
+
+    const protDebuffPct = ctx.state.cooldowns.actives[NUT_CONVERGENCE_PROT_PCT_KEY] ?? 0
+    if (protDebuffPct > 0) {
+      applyOrRefreshDebuff(ctx.state, {
+        key: NUT_CONVERGENCE_PROT_DEBUFF_KEY,
+        label: 'Convergence protection shred',
+        expiresAt: ctx.state.t + NUT_CONVERGENCE_PROT_DEBUFF_DURATION,
+        modifiers: {
+          PhysicalProtection: -ctx.defender.physicalProtection * protDebuffPct,
+          MagicalProtection: -ctx.defender.magicalProtection * protDebuffPct,
+        },
+      })
+    }
+
+    nutConvergence.stacks -= 1
+    if (nutConvergence.stacks <= 0) {
+      ctx.state.attackerBuffs.delete(NUT_CONVERGENCE_ACTIVE_KEY)
+      delete ctx.state.cooldowns.actives[NUT_CONVERGENCE_SIDE_BASE_KEY]
+      delete ctx.state.cooldowns.actives[NUT_CONVERGENCE_SIDE_STR_KEY]
+      delete ctx.state.cooldowns.actives[NUT_CONVERGENCE_SIDE_INT_KEY]
+      delete ctx.state.cooldowns.actives[NUT_CONVERGENCE_SIDE_COUNT_KEY]
+      delete ctx.state.cooldowns.actives[NUT_CONVERGENCE_PROT_PCT_KEY]
+      ctx.state.events.push({ kind: 'buff-expire', t: ctx.state.t, label: nutConvergence.label, target: 'self' })
     }
   }
+
+  ctx.state.riders.activeBasicProjectiles = ctx.state.riders.activeBasicProjectiles
+    .filter((rider) => rider.expiresAt > ctx.state.t && (rider.remainingBasics == null || rider.remainingBasics > 0))
+  for (const rider of ctx.state.riders.activeBasicProjectiles) {
+    const projectilePre =
+      rider.baseDamage
+      + currentInhandAttackDamage(ctx) * rider.inhandScaling
+      + currentAdaptiveStrength(ctx) * (rider.strScaling ?? 0)
+      + currentAdaptiveIntelligence(ctx) * (rider.intScaling ?? 0)
+    for (let i = 1; i <= rider.hits; i++) {
+      emitDamage(ctx, rider.damageType, projectilePre, `${rider.label} (projectile ${i}/${rider.hits})`, rider.source ?? 'item',
+        rider.notes ?? [(rider.source ?? 'item') === 'ability' ? 'ability-follow-up basic projectile' : 'active item extra basic projectile'])
+    }
+    if (rider.remainingBasics != null) rider.remainingBasics -= 1
+  }
+  ctx.state.riders.activeBasicProjectiles = ctx.state.riders.activeBasicProjectiles
+    .filter((rider) => rider.expiresAt > ctx.state.t && (rider.remainingBasics == null || rider.remainingBasics > 0))
 
   const pendingBonusDamages = ctx.state.riders.nextBasicBonusDamages
     .filter((rider) => rider.expiresAt >= ctx.state.t)
   for (const rider of pendingBonusDamages) {
-    emitDamage(ctx, rider.damageType, directPre(ctx, rider), rider.label, 'ability', ['next-basic bonus damage'])
+    const savedT = ctx.state.t
+    if (rider.delaySeconds) ctx.state.t = savedT + rider.delaySeconds
+    emitDamage(ctx, rider.damageType, directPre(ctx, rider), rider.label, rider.source ?? 'item',
+      rider.notes ?? [(rider.source ?? 'item') === 'ability' ? 'next-basic ability bonus damage' : 'next-basic item bonus damage'])
+    ctx.state.t = savedT
   }
   ctx.state.riders.nextBasicBonusDamages = []
 
@@ -1151,6 +1491,16 @@ function executeBasic(ctx: DamageCtx, label: string) {
           itemLabel(item, proc.id),
           'item',
           ['basic-hit item proc'],
+        )
+      } else if (proc.kind === 'onHit_bonusDamage' && proc.trigger !== 'ability') {
+        if (!consumeItemProcCooldown(ctx, proc.id, proc.cooldown)) continue
+        emitDamage(
+          ctx,
+          proc.damageType,
+          procPre(ctx, proc.baseDamage, proc.perLevelDamage, proc.strScaling, proc.intScaling),
+          itemLabel(item, proc.id),
+          'item',
+          ['on-hit item proc'],
         )
       } else if (proc.kind === 'onBasicHit_protectionScalingDamage') {
         if (!consumeItemProcCooldown(ctx, proc.id, proc.cooldown)) continue
@@ -1261,6 +1611,20 @@ function executeBasic(ctx: DamageCtx, label: string) {
       }
     }
   }
+  if (ctx.attacker.god.god === 'Anhur' && ctx.attacker.aspects.length > 0) {
+    const attackSpeedPerStack = aspectRowValue(ctx, 'A02', 'Attack Speed Buff', 1)
+    const duration = aspectRowValue(ctx, 'A02', 'Buff Duration', 1)
+    if (attackSpeedPerStack > 0 && duration > 0) {
+      applyOrRefreshBuff(ctx.state, {
+        key: 'Anhur.aspect.attack_speed',
+        label: 'Aspect of Pride',
+        expiresAt: ctx.state.t + duration,
+        modifiers: { AttackSpeedPercent: attackSpeedPerStack },
+        stacksMax: Math.max(1, Math.round(100 / attackSpeedPerStack)),
+        addStacks: 1,
+      })
+    }
+  }
   // Queued Bumba post-ability bonus
   if (ctx.state.riders.nextBasicBonusTrue > 0) {
     const v = ctx.state.riders.nextBasicBonusTrue
@@ -1331,6 +1695,16 @@ function applyAbilityHitItemProcs(ctx: DamageCtx) {
           itemLabel(item, proc.id),
           'item',
           ['ability-hit item proc'],
+        )
+      } else if (proc.kind === 'onHit_bonusDamage' && proc.trigger !== 'basic') {
+        if (!consumeItemProcCooldown(ctx, proc.id, proc.cooldown)) continue
+        emitDamage(
+          ctx,
+          proc.damageType,
+          procPre(ctx, proc.baseDamage, proc.perLevelDamage, proc.strScaling, proc.intScaling),
+          itemLabel(item, proc.id),
+          'item',
+          ['on-hit item proc'],
         )
       } else if (proc.kind === 'onAbilityHit_protectionScalingDamage') {
         if (!consumeItemProcCooldown(ctx, proc.id, proc.cooldown)) continue
@@ -1550,6 +1924,7 @@ function activateItem(
         inhandScaling: proc.inhandScaling,
         hits: proc.hits,
         expiresAt: ctx.state.t + proc.durationSeconds,
+        source: 'item' as const,
       }
       ctx.state.riders.activeBasicProjectiles = ctx.state.riders.activeBasicProjectiles
         .filter((existing) => existing.key !== rider.key)
@@ -1860,7 +2235,7 @@ function runSingleScenario(scenario: Scenario): SimResult {
   }
   if (scenario.attacker.aspects && scenario.attacker.aspects.length > 0) {
     const aspectNames = scenario.attacker.aspects.join(', ')
-    assumptions.push(`Aspect(s) equipped (${aspectNames}) — base kit ability rank values used; per-talent row substitution is a future slice.`)
+    assumptions.push(`Aspect(s) equipped (${aspectNames}) — aspect rank rows and wired god-locked modifiers are applied where extracted formulas exist.`)
   }
 
   for (const item of attacker.items) {
@@ -1979,7 +2354,9 @@ function walkAction(ctx: DamageCtx, action: RotationAction) {
     // catalog; per-action `castDuration` override takes precedence (used for
     // cancelled channels).
     const timing = getAbilityTiming(ctx.attacker.god.god, action.slot)
-    const castDur = action.castDuration ?? timing.castDuration
+    const castDur = action.castDuration
+      ?? (action.cancel ? cancelCastDurationOverride(ctx, action.slot) : null)
+      ?? timing.castDuration
     if (castDur > 0) {
       const endT = startT + castDur
       if (state.t < endT) advanceTime(ctx, endT)
@@ -2001,8 +2378,8 @@ function walkAction(ctx: DamageCtx, action: RotationAction) {
     const chain = getBasicChain(godId) ?? [1.0]
     const swingChainIdx = state.riders.basicSwingChainIndex % chain.length
     const chainMult = chain[swingChainIdx]
-    const baseAS = ctx.attacker.totalAttackSpeed
-    const swingTime = chainMult / Math.max(0.01, baseAS)
+    const currentAS = currentTotalAttackSpeed(ctx)
+    const swingTime = chainMult / Math.max(0.01, currentAS)
     executeBasic(ctx, action.label ?? `AA${state.riders.basicChainIndex + 1}`)
     state.riders.basicSwingChainIndex += 1
     // Basic-to-basic: full chain-position swing time.

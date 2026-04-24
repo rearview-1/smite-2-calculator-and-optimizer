@@ -182,10 +182,13 @@ def build_god_passives():
 
         primary_key, primary = pick_primary(passive_descs)
 
-        # Look for talent variants that replace the passive
+        # Look for ANY talent-tagged entry. Two forms exist in SMITE 2:
+        #   * TheMorrigan.Talent.1.A03.InGame.Short  → talent overrides ability A03
+        #   * Loki.Talent.1.PSV.Ingame               → talent overrides passive
+        # Keep them all so the aspects-catalog build can sort them later.
         talent_passive_descs = {}
         for k, v in descs.items():
-            if '.Talent.' in k and ('.PSV' in k or '.Passive' in k):
+            if '.Talent.' in k:
                 talent_passive_descs[k] = v
 
         # Also grab per-ability names/descriptions for completeness

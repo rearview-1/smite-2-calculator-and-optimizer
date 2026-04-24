@@ -365,6 +365,14 @@
     ]
   },
   {
+    "god": "Nu_Wa",
+    "slot": "A01",
+    "name": "Mysterious Fog",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
+    ]
+  },
+  {
     "god": "Nut",
     "slot": "A04",
     "name": "Skyfall",
@@ -402,6 +410,14 @@
     "name": "Radiance",
     "coverage": [
       "AttackCount token covered by custom handler/hit-count override"
+    ]
+  },
+  {
+    "god": "The_Morrigan",
+    "slot": "A02",
+    "name": "Dark Omen",
+    "coverage": [
+      "multi-phase rows covered by generic phase resolver"
     ]
   },
   {

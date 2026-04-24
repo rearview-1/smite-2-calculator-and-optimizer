@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 1,
+  "fixtures": [
+    {
+      "id": "the-morrigan-basic-vs-kukulkan-l20",
+      "description": "Naked The Morrigan basic attack against level 20 Kukulkan.",
+      "source": {
+        "kind": "user_report",
+        "capturedAt": "2026-04-23",
+        "notes": "User reported ~60 damage per naked basic; use a loose tolerance until a raw combat-log capture is stored."
+      },
+      "scenario": {
+        "title": "The Morrigan naked basic vs Kukulkan",
+        "attacker": {
+          "godId": "The_Morrigan",
+          "level": 20,
+          "abilityRanks": { "A01": 5, "A02": 5, "A03": 5, "A04": 5 },
+          "items": []
+        },
+        "defender": { "godId": "Kukulkan", "level": 20 },
+        "rotation": [
+          { "kind": "basic", "label": "AA1" }
+        ]
+      },
+      "coverage": {
+        "godId": "The_Morrigan",
+        "areas": ["basic"]
+      },
+      "totals": {
+        "total": { "expected": 60, "tolerance": 2 }
+      },
+      "eventCountAssertions": [
+        {
+          "match": {
+            "label": "AA",
+            "labelMode": "startsWith",
+            "source": "basic",
+            "damageType": "magical"
+          },
+          "expected": 1
+        }
+      ],
+      "eventValueAssertions": [
+        {
+          "match": {
+            "label": "AA",
+            "labelMode": "startsWith",
+            "source": "basic",
+            "damageType": "magical"
+          },
+          "field": "postMitigation",
+          "expected": 60,
+          "tolerance": 2
+        }
+      ]
+    },
+    {
+      "id": "the-morrigan-dark-omen-vs-kukulkan-l20",
+      "description": "Naked The Morrigan Dark Omen against level 20 Kukulkan.",
+      "source": {
+        "kind": "user_report",
+        "capturedAt": "2026-04-23",
+        "notes": "User reported ~113 damage for the naked A02 hit; use a loose tolerance until a raw combat-log capture is stored."
+      },
+      "scenario": {
+        "title": "The Morrigan naked Dark Omen vs Kukulkan",
+        "attacker": {
+          "godId": "The_Morrigan",
+          "level": 20,
+          "abilityRanks": { "A01": 5, "A02": 5, "A03": 5, "A04": 5 },
+          "items": []
+        },
+        "defender": { "godId": "Kukulkan", "level": 20 },
+        "rotation": [
+          { "kind": "ability", "slot": "A02", "label": "Dark Omen" }
+        ]
+      },
+      "coverage": {
+        "godId": "The_Morrigan",
+        "areas": ["A02"]
+      },
+      "totals": {
+        "total": { "expected": 113, "tolerance": 2 }
+      },
+      "eventCountAssertions": [
+        {
+          "match": {
+            "label": "Dark Omen",
+            "labelMode": "exact",
+            "source": "ability",
+            "damageType": "magical"
+          },
+          "expected": 1
+        }
+      ],
+      "eventValueAssertions": [
+        {
+          "match": {
+            "label": "Dark Omen",
+            "labelMode": "exact",
+            "source": "ability",
+            "damageType": "magical"
+          },
+          "field": "postMitigation",
+          "expected": 113,
+          "tolerance": 2
+        }
+      ]
+    },
+    {
+      "id": "the-morrigan-aa-a02-aa-no-pop",
+      "description": "AA -> A02 -> AA should not pop Dark Omen from basics.",
+      "source": {
+        "kind": "user_report",
+        "capturedAt": "2026-04-23",
+        "notes": "User reported the combo should not include an omen trigger or burst pop."
+      },
+      "scenario": {
+        "title": "The Morrigan AA -> A02 -> AA no omen pop",
+        "attacker": {
+          "godId": "The_Morrigan",
+          "level": 20,
+          "abilityRanks": { "A01": 5, "A02": 5, "A03": 5, "A04": 5 },
+          "items": []
+        },
+        "defender": { "godId": "Kukulkan", "level": 20 },
+        "rotation": [
+          { "kind": "basic", "label": "AA1" },
+          { "kind": "ability", "slot": "A02", "label": "Dark Omen" },
+          { "kind": "basic", "label": "AA2" }
+        ]
+      },
+      "coverage": {
+        "godId": "The_Morrigan",
+        "areas": ["basic", "A02"]
+      },
+      "eventCountAssertions": [
+        {
+          "match": {
+            "label": "AA",
+            "labelMode": "startsWith",
+            "source": "basic",
+            "damageType": "magical"
+          },
+          "expected": 2
+        },
+        {
+          "match": {
+            "label": "Dark Omen",
+            "labelMode": "exact",
+            "source": "ability",
+            "damageType": "magical"
+          },
+          "expected": 1
+        },
+        {
+          "match": {
+            "label": "Dark Omen (trigger)",
+            "labelMode": "exact",
+            "damageType": "magical"
+          },
+          "expected": 0
+        }
+      ]
+    },
+    {
+      "id": "loki-a02-hit-count",
+      "description": "Loki Agonizing Visions should hit 8 times per combat-log validation.",
+      "source": {
+        "kind": "combat_log",
+        "notes": "Existing repo note in abilityResolver/godHandlers says the in-game combat log shows 8 hits."
+      },
+      "scenario": {
+        "title": "Loki A02 hit count",
+        "attacker": {
+          "godId": "Loki",
+          "level": 20,
+          "abilityRanks": { "A01": 5, "A02": 5, "A03": 5, "A04": 5 },
+          "items": []
+        },
+        "defender": { "godId": "Kukulkan", "level": 20 },
+        "rotation": [
+          { "kind": "ability", "slot": "A02", "label": "Agonizing Visions" }
+        ]
+      },
+      "coverage": {
+        "godId": "Loki",
+        "areas": ["A02"]
+      },
+      "eventCountAssertions": [
+        {
+          "match": {
+            "label": "Agonizing Visions",
+            "labelMode": "startsWith",
+            "source": "ability",
+            "damageType": "physical"
+          },
+          "expected": 8
+        }
+      ]
+    },
+    {
+      "id": "loki-aa-combo-timing",
+      "description": "Loki AA weave combo timing from user-measured capture.",
+      "source": {
+        "kind": "repo_note",
+        "notes": "README records user-measured combo time at 2.83s for 1 -> AA -> 2 -> AA -> 4 -> AA -> 3(cancel) -> AA."
+      },
+      "scenario": {
+        "title": "Loki AA weave combo timing",
+        "attacker": {
+          "godId": "Loki",
+          "level": 20,
+          "abilityRanks": { "A01": 5, "A02": 5, "A03": 5, "A04": 5 },
+          "items": ["Oath-Sworn Spear"]
+        },
+        "defender": { "godId": "Kukulkan", "level": 20 },
+        "rotation": [
+          { "kind": "ability", "slot": "A01", "label": "Vanish (+ stealth shot)" },
+          { "kind": "ability", "slot": "A02", "label": "Agonizing Visions" },
+          { "kind": "basic", "label": "AA (post-2)" },
+          { "kind": "ability", "slot": "A04", "label": "Assassinate" },
+          { "kind": "basic", "label": "AA (post-4)" },
+          { "kind": "ability", "slot": "A03", "label": "Flurry Strike (cancelled)", "castDuration": 1.3 },
+          { "kind": "basic", "label": "AA (post-3 cancel)" }
+        ]
+      },
+      "coverage": {
+        "godId": "Loki",
+        "areas": ["basic", "A01", "A02", "A03", "A04"]
+      },
+      "scalarAssertions": [
+        { "field": "comboExecutionTime", "expected": 2.83, "tolerance": 0.12 }
+      ]
+    }
+  ]
+}

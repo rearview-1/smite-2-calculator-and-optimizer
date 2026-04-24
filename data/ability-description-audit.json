@@ -1,0 +1,14 @@
+{
+  "generatedAt": "2026-04-24T19:44:57.781Z",
+  "issueCount": 0,
+  "byIssue": {
+    "explicit-hit-count-mismatch": 0,
+    "row-hit-count-mismatch": 0,
+    "damage-falloff-not-modeled": 0,
+    "damage-not-modeled": 0,
+    "delayed-damage-not-timed": 0,
+    "secondary-damage-not-modeled": 0,
+    "enemy-debuff-not-emitted": 0
+  },
+  "issues": []
+}

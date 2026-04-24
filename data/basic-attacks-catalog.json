@@ -1,0 +1,824 @@
+{
+  "Achilles": {
+    "godId": "Achilles",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Achilles_Common_Abilities_BasicAttack_GameplayEffects_GE_Achilles_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Agni": {
+    "godId": "Agni",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Agni_Common_Abilities_BasicAttack_GameplayEffects_GE_Agni_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Aladdin": {
+    "godId": "Aladdin",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [],
+    "extraction": "fallback"
+  },
+  "Amaterasu": {
+    "godId": "Amaterasu",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Amaterasu_Common_Abilities_BasicAttack_GameplayEffects_GE_Amaterasu_Inhand_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Amaterasu_Common_Abilities_BasicAttack_GameplayEffects_GE_Amaterasu_Inhand_Damage_hit2.structure.json",
+      "Hemingway_Content_Characters_GODS_Amaterasu_Common_Abilities_BasicAttack_GameplayEffects_GE_Amaterasu_Inhand_Damage_hit3.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Anhur": {
+    "godId": "Anhur",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [],
+    "extraction": "fallback"
+  },
+  "Anubis": {
+    "godId": "Anubis",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Anubis_Common_Abilities_BasicAttack_GameplayEffects_GE_Anubis_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Aphrodite": {
+    "godId": "Aphrodite",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Aphrodite_Common_Abilities_BasicAttack_GameplayEffects_GE_Aphrodite_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Apollo": {
+    "godId": "Apollo",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Apollo_Common_Abilities_BasicAttack_GameplayEffects_GE_Apollo_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Ares": {
+    "godId": "Ares",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Ares_Common_Abilities_BasicAttack_GameplayEffects_GE_Ares_Inhand_Damage_1.structure.json",
+      "Hemingway_Content_Characters_GODS_Ares_Common_Abilities_BasicAttack_GameplayEffects_GE_Ares_Inhand_Damage_2.structure.json",
+      "Hemingway_Content_Characters_GODS_Ares_Common_Abilities_BasicAttack_GameplayEffects_GE_Ares_Inhand_Damage_3.structure.json",
+      "Hemingway_Content_Characters_GODS_Ares_Common_Abilities_BasicAttack_GameplayEffects_GE_Ares_Inhand_Damage_4.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Artemis": {
+    "godId": "Artemis",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Artemis_Common_Abilities_BasicAttack_GameplayEffects_GE_Artemis_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Artio": {
+    "godId": "Artio",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Artio_Common_Abilities_BasicAttack_GameplayEffects_GE_Artio_Inhand_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Artio_Common_Abilities_BearBasicAttack_GameplayEffects_GE_Artio_Inhand_Damage_Bear.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Athena": {
+    "godId": "Athena",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Athena_Common_Abilities_BasicAttack_GameplayEffects_GE_Athena_Inhand_1.structure.json",
+      "Hemingway_Content_Characters_GODS_Athena_Common_Abilities_BasicAttack_GameplayEffects_GE_Athena_Inhand_2.structure.json",
+      "Hemingway_Content_Characters_GODS_Athena_Common_Abilities_BasicAttack_GameplayEffects_GE_Athena_Inhand_3.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Atlas": {
+    "godId": "Atlas",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Atlas_Common_Abilities_BasicAttack_GameplayEffects_GE_Atlas_Inhand_Cleave_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Atlas_Common_Abilities_BasicAttack_GameplayEffects_GE_Atlas_Inhand_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Atlas_Common_Abilities_BasicAttack_GameplayEffects_GE_Atlas_Inhand_Pulse_DamageGods.structure.json",
+      "Hemingway_Content_Characters_GODS_Atlas_Common_Abilities_BasicAttack_GameplayEffects_GE_Atlas_Inhand_Pulse_DamageMinions.structure.json",
+      "Hemingway_Content_Characters_GODS_Atlas_Common_Abilities_BasicAttack_Passive_GameplayEffects_GE_Atlas_Inhand_Psv_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Awilix": {
+    "godId": "Awilix",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Awilix_Common_Abilities_BasicAttack_GameplayEffects_GE_Awilix_Inhand_Damage_1.structure.json",
+      "Hemingway_Content_Characters_GODS_Awilix_Common_Abilities_BasicAttack_GameplayEffects_GE_Awilix_Inhand_Damage_2.structure.json",
+      "Hemingway_Content_Characters_GODS_Awilix_Common_Abilities_BasicAttack_GameplayEffects_GE_Awilix_Inhand_Damage_3.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Bacchus": {
+    "godId": "Bacchus",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Bacchus_Common_Abilities_BasicAttack_GameplayEffects_GE_Bacchus_BasicAttack_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Bari": {
+    "godId": "Bari",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Bari_Common_Abilities_BasicAttack_GameplayEffects_GE_Bari_Inhand_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Bari_Common_Abilities_BasicAttack_GameplayEffects_GE_Bari_Inhand_ExplosionDamage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Baron_Samedi": {
+    "godId": "Baron_Samedi",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Baron_Samedi_Common_Abilities_InhandAttack_GameplayEffects_GE_BaronSamedi_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Bellona": {
+    "godId": "Bellona",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Bellona_Common_Abilities_BasicAttack_ChainWhip_GameplayEffects_GE_Bellona_Inhand_Whip_Damage_1.structure.json",
+      "Hemingway_Content_Characters_GODS_Bellona_Common_Abilities_BasicAttack_ChainWhip_GameplayEffects_GE_Bellona_Inhand_Whip_Damage_2.structure.json",
+      "Hemingway_Content_Characters_GODS_Bellona_Common_Abilities_BasicAttack_ChainWhip_GameplayEffects_GE_Bellona_Inhand_Whip_Damage_3.structure.json",
+      "Hemingway_Content_Characters_GODS_Bellona_Common_Abilities_BasicAttack_Hammer_GameplayEffects_GE_Bellona_Inhand_Hammer_Damage_1.structure.json",
+      "Hemingway_Content_Characters_GODS_Bellona_Common_Abilities_BasicAttack_Hammer_GameplayEffects_GE_Bellona_Inhand_Hammer_Damage_1_Cleave.structure.json",
+      "Hemingway_Content_Characters_GODS_Bellona_Common_Abilities_BasicAttack_Hammer_GameplayEffects_GE_Bellona_Inhand_Hammer_Damage_2.structure.json",
+      "Hemingway_Content_Characters_GODS_Bellona_Common_Abilities_BasicAttack_Hammer_GameplayEffects_GE_Bellona_Inhand_Hammer_Damage_2_Cleave.structure.json",
+      "Hemingway_Content_Characters_GODS_Bellona_Common_Abilities_BasicAttack_Hammer_GameplayEffects_GE_Bellona_Inhand_Hammer_Damage_3.structure.json",
+      "Hemingway_Content_Characters_GODS_Bellona_Common_Abilities_BasicAttack_Hammer_GameplayEffects_GE_Bellona_Inhand_Hammer_Damage_3_Cleave.structure.json",
+      "Hemingway_Content_Characters_GODS_Bellona_Common_Abilities_BasicAttack_Standard_GameplayEffects_GE_Bellona_Inhand_Standard_Damage_1.structure.json",
+      "Hemingway_Content_Characters_GODS_Bellona_Common_Abilities_BasicAttack_Standard_GameplayEffects_GE_Bellona_Inhand_Standard_Damage_2.structure.json",
+      "Hemingway_Content_Characters_GODS_Bellona_Common_Abilities_BasicAttack_Standard_GameplayEffects_GE_Bellona_Inhand_Standard_Damage_3.structure.json",
+      "Hemingway_Content_Characters_GODS_Bellona_Common_Abilities_BasicAttack_SwordShield_GameplayEffects_GE_Bellona_Inhand_Shield_Damage_1.structure.json",
+      "Hemingway_Content_Characters_GODS_Bellona_Common_Abilities_BasicAttack_SwordShield_GameplayEffects_GE_Bellona_Inhand_Shield_Damage_2.structure.json",
+      "Hemingway_Content_Characters_GODS_Bellona_Common_Abilities_BasicAttack_SwordShield_GameplayEffects_GE_Bellona_Inhand_Shield_Damage_3.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Cabrakan": {
+    "godId": "Cabrakan",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Cabrakan_Common_Abilities_BasicAttack_GameplayEffects_GE_Cabrakan_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Cerberus": {
+    "godId": "Cerberus",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Cerberus_Common_Abilities_BasicAttack_GameplayEffects_GE_Cerberus_Inhand_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Cerberus_Common_Abilities_BasicAttack_GameplayEffects_GE_Cerberus_Inhand_Damage1.structure.json",
+      "Hemingway_Content_Characters_GODS_Cerberus_Common_Abilities_BasicAttack_GameplayEffects_GE_Cerberus_Inhand_Damage2.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Cernunnos": {
+    "godId": "Cernunnos",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Cernunnos_Common_Abilities_Inhand_GameplayEffects_GE_Cernunnos_HeavyGlaive_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Cernunnos_Common_Abilities_Inhand_GameplayEffects_GE_Cernunnos_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Chaac": {
+    "godId": "Chaac",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Chaac_Common_Abilities_BasicAttack_GameplayEffects_GE_Chaac_Inhand_Damage_1.structure.json",
+      "Hemingway_Content_Characters_GODS_Chaac_Common_Abilities_BasicAttack_GameplayEffects_GE_Chaac_Inhand_Damage_2.structure.json",
+      "Hemingway_Content_Characters_GODS_Chaac_Common_Abilities_BasicAttack_GameplayEffects_GE_Chaac_Inhand_Damage_3.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Charon": {
+    "godId": "Charon",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Charon_Common_Abilities_BasicAttack_GameplayEffects_GE_Charon_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Chiron": {
+    "godId": "Chiron",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Chiron_Common_Abilities_BasicAttack_GameplayEffects_GE_Chiron_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Cupid": {
+    "godId": "Cupid",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Cupid_Common_Abilities_BasicAttack_GameplayEffects_GE_Cupid_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "DaJi": {
+    "godId": "DaJi",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_DaJi_Common_Abilities_BasicAttack_GameplayEffects_GE_Daji_Inhand_Damage_Left.structure.json",
+      "Hemingway_Content_Characters_GODS_DaJi_Common_Abilities_BasicAttack_GameplayEffects_GE_Daji_Inhand_Damage_Right.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Danzaburou": {
+    "godId": "Danzaburou",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [],
+    "extraction": "fallback"
+  },
+  "Discordia": {
+    "godId": "Discordia",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Discordia_Common_Abilities_BasicAttack_GameplayEffects_GE_Discordia_Inhand_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Discordia_Common_Abilities_BasicAttack_GameplayEffects_GE_Discordia_Inhand_TalentDamage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Eset": {
+    "godId": "Eset",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Eset_Common_Abilities_BasicAttack_GameplayEffects_GE_Eset_Inhand_Cleave_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Eset_Common_Abilities_BasicAttack_GameplayEffects_GE_Eset_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Fenrir": {
+    "godId": "Fenrir",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Fenrir_Common_Abilities_BasicAttack_GameplayEffects_GE_Fenrir_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Ganesha": {
+    "godId": "Ganesha",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Ganesha_Common_Abilities_BasicAttack_GameplayEffects_GE_Ganesha_Inhand_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Ganesha_Common_Abilities_BasicAttack_GameplayEffects_GE_Ganesha_Inhand_Damage2.structure.json",
+      "Hemingway_Content_Characters_GODS_Ganesha_Common_Abilities_BasicAttack_GameplayEffects_GE_Ganesha_Inhand_Damage3.structure.json",
+      "Hemingway_Content_Characters_GODS_Ganesha_Common_Abilities_BasicAttack_GameplayEffects_GE_Ganesha_Inhand_Damage4.structure.json",
+      "Hemingway_Content_Characters_GODS_Ganesha_Common_Abilities_BasicAttack_GameplayEffects_GE_Ganesha_Inhand_Damage5.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Geb": {
+    "godId": "Geb",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Geb_Common_Abilities_BasicAttack_GameplayEffects_GE_Geb_Inhand_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Geb_Common_Abilities_BasicAttack_Talent_GameplayEffects_GE_Geb_Inhand_Damage_Talent.structure.json",
+      "Hemingway_Content_Characters_GODS_Geb_Common_Abilities_BasicAttack_Talent_GameplayEffects_GE_Geb_Inhand_Damage_Talent_Subsequent.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Gilgamesh": {
+    "godId": "Gilgamesh",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Gilgamesh_Common_Abilities_BasicAttack_GameplayEffects_GE_Gilgamesh_Inhand_Damage_1.structure.json",
+      "Hemingway_Content_Characters_GODS_Gilgamesh_Common_Abilities_BasicAttack_GameplayEffects_GE_Gilgamesh_Inhand_Damage_2.structure.json",
+      "Hemingway_Content_Characters_GODS_Gilgamesh_Common_Abilities_BasicAttack_GameplayEffects_GE_Gilgamesh_Inhand_Damage_3.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Guan_Yu": {
+    "godId": "Guan_Yu",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Guan_Yu_Common_Abilities_BasicAttack_GameplayEffects_GE_Guan_Yu_Inhand_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Guan_Yu_Common_Abilities_BasicAttack_GameplayEffects_GE_Guan_Yu_Inhand_Damage_2.structure.json",
+      "Hemingway_Content_Characters_GODS_Guan_Yu_Common_Abilities_BasicAttack_GameplayEffects_GE_Guan_Yu_Inhand_Damage_3.structure.json",
+      "Hemingway_Content_Characters_GODS_Guan_Yu_Common_Abilities_BasicAttack_GameplayEffects_GE_Guan_Yu_Inhand_Damage_4.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Hades": {
+    "godId": "Hades",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Hades_Common_Abilities_BasicAttack_GameplayEffects_GE_Hades_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Hecate": {
+    "godId": "Hecate",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Hecate_Common_Abilities_BasicAttack_GameplayEffects_GE_Hecate_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Hercules": {
+    "godId": "Hercules",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Hercules_Common_Abilities_BasicAttacks_GameplayEffects_GE_Hercules_Inhand_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Hercules_Common_Abilities_BasicAttacks_GameplayEffects_GE_Hercules_Inhand_Damage_hit2.structure.json",
+      "Hemingway_Content_Characters_GODS_Hercules_Common_Abilities_BasicAttacks_GameplayEffects_GE_Hercules_Inhand_Damage_hit3.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "HouYi": {
+    "godId": "HouYi",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_HouYi_Common_Abilities_BasicAttack_GameplayEffects_GE_Hou_Yi_Inhand_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_HouYi_Common_Abilities_BasicAttack_GameplayEffects_GE_Hou_Yi_Inhand_Damage_Half.structure.json",
+      "Hemingway_Content_Characters_GODS_HouYi_Common_Abilities_BasicAttack_GameplayEffects_GE_Hou_Yi_Inhand_Talent_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Hun_Batz": {
+    "godId": "Hun_Batz",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Hun_Batz_Common_Abilities_BasicAttack_GameplayEffects_GE_Hun_Batz_Inhand_Damage1.structure.json",
+      "Hemingway_Content_Characters_GODS_Hun_Batz_Common_Abilities_BasicAttack_GameplayEffects_GE_Hun_Batz_Inhand_Damage2.structure.json",
+      "Hemingway_Content_Characters_GODS_Hun_Batz_Common_Abilities_BasicAttack_GameplayEffects_GE_Hun_Batz_Inhand_Damage3.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Ishtar": {
+    "godId": "Ishtar",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Ishtar_Common_Abilities_BasicAttack_GameplayEffects_GE_Ishtar_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Izanami": {
+    "godId": "Izanami",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Izanami_Common_Abilities_BasicAttack_Ability1_GameplayEffect_GE_Izanami_A01_Inhand_Damage.uasset.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Janus": {
+    "godId": "Janus",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Janus_Common_Abilities_BasicAttack_GameplayEffects_GE_Janus_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "JingWei": {
+    "godId": "JingWei",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_JingWei_Common_Abilities_BasicAttack_GameplayEffects_GE_JingWei_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Jormungandr": {
+    "godId": "Jormungandr",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Jormungandr_Common_Abilities_BasicAttack_GameplayEffects_GE_Jormungandr_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Kali": {
+    "godId": "Kali",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Kali_Common_Abilities_Inhands_GameplayEffects_GE_Kali_Inhand_Damage_Strong.structure.json",
+      "Hemingway_Content_Characters_GODS_Kali_Common_Abilities_Inhands_GameplayEffects_GE_Kali_Inhand_Damage_Weak.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Khepri": {
+    "godId": "Khepri",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Khepri_Common_Abilities_BasicAttack_GameplayEffects_GE_Khepri_BasicAttack_Damage_1.structure.json",
+      "Hemingway_Content_Characters_GODS_Khepri_Common_Abilities_BasicAttack_GameplayEffects_GE_Khepri_BasicAttack_Damage_2.structure.json",
+      "Hemingway_Content_Characters_GODS_Khepri_Common_Abilities_BasicAttack_GameplayEffects_GE_Khepri_BasicAttack_Damage_3.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Kukulkan": {
+    "godId": "Kukulkan",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Kukulkan_Common_Abilities_BasicAttack_GameplayEffects_GE_Kukulkan_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Loki": {
+    "godId": "Loki",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Loki_Common_Abilities_BasicAttack_GameplayEffects_GE_Loki_Inhand_Damage_1.structure.json",
+      "Hemingway_Content_Characters_GODS_Loki_Common_Abilities_BasicAttack_GameplayEffects_GE_Loki_Inhand_Damage_1_Backstab.structure.json",
+      "Hemingway_Content_Characters_GODS_Loki_Common_Abilities_BasicAttack_GameplayEffects_GE_Loki_Inhand_Damage_2.structure.json",
+      "Hemingway_Content_Characters_GODS_Loki_Common_Abilities_BasicAttack_GameplayEffects_GE_Loki_Inhand_Damage_2_Backstab.structure.json",
+      "Hemingway_Content_Characters_GODS_Loki_Common_Abilities_BasicAttack_GameplayEffects_GE_Loki_Inhand_Damage_3.structure.json",
+      "Hemingway_Content_Characters_GODS_Loki_Common_Abilities_BasicAttack_GameplayEffects_GE_Loki_Inhand_Damage_3_Backstab.structure.json",
+      "Hemingway_Content_Characters_GODS_Loki_Common_Abilities_BasicAttack_GameplayEffects_GE_Loki_Inhand_Damage_4.structure.json",
+      "Hemingway_Content_Characters_GODS_Loki_Common_Abilities_BasicAttack_GameplayEffects_GE_Loki_Inhand_Damage_4_Backstab.structure.json",
+      "Hemingway_Content_Characters_GODS_Loki_Common_Abilities_BasicAttack_GameplayEffects_GE_Loki_Inhand_Damage_5.structure.json",
+      "Hemingway_Content_Characters_GODS_Loki_Common_Abilities_BasicAttack_GameplayEffects_GE_Loki_Inhand_Damage_5_Backstab.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Medusa": {
+    "godId": "Medusa",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Medusa_Common_Abilities_BasicAttack_GameplayEffects_GE_Medusa_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Mercury": {
+    "godId": "Mercury",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Mercury_Common_Abilities_BasicAttack_GameplayEffects_GE_Mercury_Inhand_Damage_1.structure.json",
+      "Hemingway_Content_Characters_GODS_Mercury_Common_Abilities_BasicAttack_GameplayEffects_GE_Mercury_Inhand_Damage_2.structure.json",
+      "Hemingway_Content_Characters_GODS_Mercury_Common_Abilities_BasicAttack_GameplayEffects_GE_Mercury_Inhand_Damage_3.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Merlin": {
+    "godId": "Merlin",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Merlin_Common_Abilities_BasicAttack_GameplayEffects_GE_Merlin_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Mordred": {
+    "godId": "Mordred",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Mordred_Common_Abilities_BasicAttack_GameplayEffects_GE_Mordred_Inhand_Damage_1.structure.json",
+      "Hemingway_Content_Characters_GODS_Mordred_Common_Abilities_BasicAttack_GameplayEffects_GE_Mordred_Inhand_Damage_2.structure.json",
+      "Hemingway_Content_Characters_GODS_Mordred_Common_Abilities_BasicAttack_GameplayEffects_GE_Mordred_Inhand_Damage_3.structure.json",
+      "Hemingway_Content_Characters_GODS_Mordred_Common_Abilities_BasicAttack_GameplayEffects_GE_Mordred_Inhand_Damage_4.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "MorganLeFay": {
+    "godId": "MorganLeFay",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_MorganLeFay_Common_Abilities_BasicAttack_GameplayEffects_GE_MorganLeFay_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Mulan": {
+    "godId": "Mulan",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Mulan_Common_Abilities_BasicAttack_GameplayEffects_GE_Mulan_Inhand_Damage_1.structure.json",
+      "Hemingway_Content_Characters_GODS_Mulan_Common_Abilities_BasicAttack_GameplayEffects_GE_Mulan_Inhand_Damage_2.structure.json",
+      "Hemingway_Content_Characters_GODS_Mulan_Common_Abilities_BasicAttack_GameplayEffects_GE_Mulan_Inhand_Damage_3.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Ne_Zha": {
+    "godId": "Ne_Zha",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Ne_Zha_Common_Abilities_BasicAttack_GameplayEffects_GE_Ne_Zha_Inhand_Damage_1.structure.json",
+      "Hemingway_Content_Characters_GODS_Ne_Zha_Common_Abilities_BasicAttack_GameplayEffects_GE_Ne_Zha_Inhand_Damage_2.structure.json",
+      "Hemingway_Content_Characters_GODS_Ne_Zha_Common_Abilities_BasicAttack_GameplayEffects_GE_Ne_Zha_Inhand_Damage_3.structure.json",
+      "Hemingway_Content_Characters_GODS_Ne_Zha_Common_Abilities_BasicAttack_GameplayEffects_GE_Ne_Zha_Inhand_Damage_4.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Neith": {
+    "godId": "Neith",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [],
+    "extraction": "fallback"
+  },
+  "Nu_Wa": {
+    "godId": "Nu_Wa",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Nu_Wa_Common_Abilities_BasicAttack_GameplayEffects_GE_NuWa_Inhand_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Nu_Wa_Common_Abilities_BasicAttack_GameplayEffects_GE_NuWa_Inhand_MetalHit.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Nut": {
+    "godId": "Nut",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Nut_Common_Abilities_BasicAttack_GameplayEffects_GE_Nut_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Odin": {
+    "godId": "Odin",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Odin_Common_Abilities_InhandAttack_GameplayEffects_GE_Odin_Inhand_Damage_1.structure.json",
+      "Hemingway_Content_Characters_GODS_Odin_Common_Abilities_InhandAttack_GameplayEffects_GE_Odin_Inhand_Damage_2.structure.json",
+      "Hemingway_Content_Characters_GODS_Odin_Common_Abilities_InhandAttack_GameplayEffects_GE_Odin_Inhand_Damage_3.structure.json",
+      "Hemingway_Content_Characters_GODS_Odin_Common_Abilities_InhandAttack_GameplayEffects_GE_Odin_Inhand_Damage_4.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Osiris": {
+    "godId": "Osiris",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Osiris_Common_Abilities_BasicAttack_GameplayEffects_GE_Osiris_Inhand_DamageStrong.structure.json",
+      "Hemingway_Content_Characters_GODS_Osiris_Common_Abilities_BasicAttack_GameplayEffects_GE_Osiris_Inhand_DamageStrongFinal.structure.json",
+      "Hemingway_Content_Characters_GODS_Osiris_Common_Abilities_BasicAttack_GameplayEffects_GE_Osiris_Inhand_DamageWeak.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Pele": {
+    "godId": "Pele",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Pele_Common_Abilities_BasicAttack_GameplayEffects_GE_Pele_BasicAttack_Damage_1.structure.json",
+      "Hemingway_Content_Characters_GODS_Pele_Common_Abilities_BasicAttack_GameplayEffects_GE_Pele_BasicAttack_Damage_2.structure.json",
+      "Hemingway_Content_Characters_GODS_Pele_Common_Abilities_BasicAttack_GameplayEffects_GE_Pele_BasicAttack_Damage_3.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Poseidon": {
+    "godId": "Poseidon",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Poseidon_Common_Abilities_BasicAttack_GameplayEffects_GE_Poseidon_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Ra": {
+    "godId": "Ra",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Ra_Common_Abilities_BasicAttack_GameplayEffects_GE_Ra_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Rama": {
+    "godId": "Rama",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Rama_Common_Abilities_BasicAttack_GameplayEffects_GE_Rama_Inhand_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Rama_Common_Abilities_BasicAttack_GameplayEffects_GE_Rama_Inhand_DamageReduced.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Ratatoskr": {
+    "godId": "Ratatoskr",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Ratatoskr_Common_Abilities_BasicAttack_GameplayEffects_GE_Ratatoskr_Inhand_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Ratatoskr_Common_Abilities_BasicAttack_GameplayEffects_GE_Ratatoskr_Inhand_Damage_2.structure.json",
+      "Hemingway_Content_Characters_GODS_Ratatoskr_Common_Abilities_BasicAttack_GameplayEffects_GE_Ratatoskr_Inhand_Damage_3.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Scylla": {
+    "godId": "Scylla",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Scylla_Common_Abilities_BasicAttack_GameplayEffects_GE_Scylla_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Sobek": {
+    "godId": "Sobek",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Sobek_Common_Abilities_BasicAttack_GameplayEffects_GE_Sobek_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Sol": {
+    "godId": "Sol",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Sol_Common_Abilities_BasicAttack_GameplayEffects_GE_Sol_InhandDamage.structure.json",
+      "Hemingway_Content_Characters_GODS_Sol_Common_Abilities_BasicAttack_GameplayEffects_GE_Sol_InhandDamage_FullHeat.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Sun_Wukong": {
+    "godId": "Sun_Wukong",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Sun_Wukong_Common_Abilities_BasicAttack_GameplayEffects_GE_Sun_Wukong_Inhand_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Sun_Wukong_Common_Abilities_BasicAttack_GameplayEffects_GE_Sun_Wukong_Inhand_Damage2.structure.json",
+      "Hemingway_Content_Characters_GODS_Sun_Wukong_Common_Abilities_BasicAttack_GameplayEffects_GE_Sun_Wukong_Inhand_Damage3.structure.json",
+      "Hemingway_Content_Characters_GODS_Sun_Wukong_Common_Abilities_BasicAttack_GameplayEffects_GE_Sun_Wukong_Inhand_Damage4.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Susano": {
+    "godId": "Susano",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Susano_Common_Abilities_BasicAttack_GameplayEffects_GE_Susano_Inhand_Damage_1.structure.json",
+      "Hemingway_Content_Characters_GODS_Susano_Common_Abilities_BasicAttack_GameplayEffects_GE_Susano_Inhand_Damage_2.structure.json",
+      "Hemingway_Content_Characters_GODS_Susano_Common_Abilities_BasicAttack_GameplayEffects_GE_Susano_Inhand_Damage_3.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Sylvanus": {
+    "godId": "Sylvanus",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Sylvanus_Common_Abilities_BasicAttack_GameplayEffects_GE_Sylvanus_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Thanatos": {
+    "godId": "Thanatos",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Thanatos_Common_Abilities_BasicAttack_GameplayEffects_GE_Thanatos_Inhand_Damage1.structure.json",
+      "Hemingway_Content_Characters_GODS_Thanatos_Common_Abilities_BasicAttack_GameplayEffects_GE_Thanatos_Inhand_Damage2.structure.json",
+      "Hemingway_Content_Characters_GODS_Thanatos_Common_Abilities_BasicAttack_GameplayEffects_GE_Thanatos_Inhand_Damage3.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "The_Morrigan": {
+    "godId": "The_Morrigan",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [],
+    "extraction": "fallback"
+  },
+  "Thor": {
+    "godId": "Thor",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Thor_Common_Abilities_BasicAttack_GameplayEffects_GE_Thor_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Tsukuyomi": {
+    "godId": "Tsukuyomi",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Tsukuyomi_Common_Abilities_BasicAttack_GameplayEffects_GE_Tsukuyomi_Inhand_Mangetsu_Bonus_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Tsukuyomi_Common_Abilities_BasicAttack_GameplayEffects_GE_Tsukuyomi_Inhand_Mangetsu_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Tsukuyomi_Common_Abilities_BasicAttack_GameplayEffects_GE_Tsukuyomi_Inhand_Mangetsu_DamageProj.structure.json",
+      "Hemingway_Content_Characters_GODS_Tsukuyomi_Common_Abilities_BasicAttack_GameplayEffects_GE_Tsukuyomi_Inhand_Shingetsu_Cleave_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Tsukuyomi_Common_Abilities_BasicAttack_GameplayEffects_GE_Tsukuyomi_Inhand_Shingetsu_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Tsukuyomi_Common_Abilities_BasicAttack_GameplayEffects_GE_Tsukuyomi_Inhand_Shingetsu_DamageProj.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Ullr": {
+    "godId": "Ullr",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Ullr_Common_Abilities_BasicAttack_GameplayEffects_GE_Ullr_Inhand_Damage_Axe_1.structure.json",
+      "Hemingway_Content_Characters_GODS_Ullr_Common_Abilities_BasicAttack_GameplayEffects_GE_Ullr_Inhand_Damage_Axe_2.structure.json",
+      "Hemingway_Content_Characters_GODS_Ullr_Common_Abilities_BasicAttack_GameplayEffects_GE_Ullr_Inhand_Damage_Axe_3.structure.json",
+      "Hemingway_Content_Characters_GODS_Ullr_Common_Abilities_BasicAttack_GameplayEffects_GE_Ullr_Inhand_Damage_Axe_4.structure.json",
+      "Hemingway_Content_Characters_GODS_Ullr_Common_Abilities_BasicAttack_GameplayEffects_GE_Ullr_Inhand_Damage_Bow.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Vulcan": {
+    "godId": "Vulcan",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Vulcan_Common_Abilities_BasicAttack_GameplayEffects_GE_Vulcan_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Xbalanque": {
+    "godId": "Xbalanque",
+    "damageType": "physical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Xbalanque_Common_Abilities_BasicAttack_GameplayEffects_GE_Xbalanque_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Yemoja": {
+    "godId": "Yemoja",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Yemoja_Common_Abilities_BasicAttack_GameplayEffects_GE_Yemoja_Inhand_Damage.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Ymir": {
+    "godId": "Ymir",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [
+      "Hemingway_Content_Characters_GODS_Ymir_Common_Abilities_BasicAttack_GameplayEffects_GE_Ymir_BasicAttack_Damage.structure.json",
+      "Hemingway_Content_Characters_GODS_Ymir_Common_Abilities_BasicAttack_GameplayEffects_GE_Ymir_BasicAttack_Damage_PSVBonus.structure.json"
+    ],
+    "extraction": "asset"
+  },
+  "Zeus": {
+    "godId": "Zeus",
+    "damageType": "magical",
+    "canCrit": true,
+    "sourceFiles": [],
+    "extraction": "fallback"
+  }
+}

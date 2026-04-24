@@ -64,20 +64,59 @@ def read_curve_table(path):
     return out
 
 
+# Folder names under /GODS_/ that are NPC/familiar assets, not playable gods.
+# They have their own CT_*_Stats but belong to their owner god and must not
+# produce a standalone catalog entry.
+FAMILIAR_EXCLUDES = {
+    'Artemis_Familiar',
+    'Cerberus_Familiar',
+    'Vulcan_Familiar',
+    'Vulcan_Familiar_Thumper',
+}
+
+
 def discover_gods():
-    """Find every god by looking for CT_<God>_Stats files on disk."""
-    gods = set()
-    for p in OUT_DIR.glob('Hemingway_Content_Characters_GODS_*_CT_*_Stats.structure.json'):
-        # Filename: Hemingway_Content_Characters_GODS_<God>_CT_<God>_Stats.structure.json
-        m = re.match(r'Hemingway_Content_Characters_GODS_(.+?)_CT_\1_Stats\.structure\.json$', p.name)
-        if m:
-            gods.add(m.group(1))
-    return sorted(gods)
+    """Find every god by enumerating CT_*_Stats files. Returns a list of
+    (folder_name, ct_stem) tuples because a handful of gods have folder-vs-CT
+    filename drift we must tolerate:
+        The_Morrigan -> CT_Morrigan_Stats
+        Baron_Samedi -> CT_BaronSamedi_Stats
+        Nu_Wa        -> CT_NuWa_Stats
+        DaJi         -> CT_Daji_Stats
+    Downstream code uses `folder` for ability globbing and `ct_stem` for the
+    stats file only.
+    """
+    prefix = 'Hemingway_Content_Characters_GODS_'
+    suffix = '_Stats.structure.json'
+    seen: dict[str, str] = {}
+    for p in OUT_DIR.glob(f'{prefix}*_CT_*_Stats.structure.json'):
+        name = p.name
+        if not (name.startswith(prefix) and name.endswith(suffix)):
+            continue
+        core = name[len(prefix):-len(suffix)]
+        # core = <folder>_CT_<ct_stem>. Folders can contain underscores, so
+        # anchor on the LAST '_CT_' separator.
+        idx = core.rfind('_CT_')
+        if idx < 0:
+            continue
+        folder = core[:idx]
+        ct_stem = core[idx + 4:]
+        if folder in FAMILIAR_EXCLUDES:
+            continue
+        # Dedup: keep the shortest ct_stem if two match the same folder (there
+        # shouldn't be, but be defensive).
+        if folder not in seen or len(ct_stem) < len(seen[folder]):
+            seen[folder] = ct_stem
+    return sorted(seen.items())
 
 
-def read_stats(god):
-    """Return {statName: curve} for this god's base stats."""
-    path = OUT_DIR / f'Hemingway_Content_Characters_GODS_{god}_CT_{god}_Stats.exports.json'
+def read_stats(god_folder, ct_stem=None):
+    """Return {statName: curve} for this god's base stats. Most gods have
+    `ct_stem == god_folder`; a few (The_Morrigan, Baron_Samedi, Nu_Wa, DaJi)
+    use a differently-spelled CT file — pass the CT stem explicitly."""
+    if ct_stem is None:
+        ct_stem = god_folder
+    path = OUT_DIR / f'Hemingway_Content_Characters_GODS_{god_folder}_CT_{ct_stem}_Stats.exports.json'
     if not path.exists():
         return {}
     curves = read_curve_table(path)
@@ -141,36 +180,56 @@ def read_ability_values(god, slot):
 
 
 def read_damage_ge(god, slot):
-    """Read the main damage GE for this ability to pull tags. Some abilities have no damage GE."""
-    # Look for ALL damage-ish GE files for this ability; combine their tags
+    """Read GE files for this ability and pull damage-type / scaling tags.
+
+    We used to glob only `GE_*Damage*` files, which missed abilities whose damage
+    lives in differently-named GEs (Hades Pillar → GE_*_Hit, Chaac Thunder → GE_*_Tick,
+    Artemis Boar → GE_*_BoarAttack, etc.). Instead, scan EVERY GE for the ability
+    slot and accept the file if its `names` list contains `Effect.Type.Damage.*`
+    — that's the authoritative marker for "this GE applies damage".
+    """
     tags = set()
     damage_type = None
     scaling_tags = set()
     damage_ge_files = []
-    ge_patterns = [
-        f'Hemingway_Content_Characters_GODS_{god}_Common_Abilities_Ability{slot}*_GameplayEffects_GE_*Damage*.structure.json',
-        f'Hemingway_Content_Characters_GODS_{god}_Common_Ablities_Ability{slot}*_GameplayEffects_GE_*Damage*.structure.json',
-        f'Hemingway_Content_Characters_GODS_{god}_Common_Abilities_A0{slot}*_GameplayEffects_GE_*Damage*.structure.json',
+    all_ge_patterns = [
+        f'Hemingway_Content_Characters_GODS_{god}_Common_Abilities_Ability{slot}*_GameplayEffects_GE_*.structure.json',
+        f'Hemingway_Content_Characters_GODS_{god}_Common_Ablities_Ability{slot}*_GameplayEffects_GE_*.structure.json',
+        f'Hemingway_Content_Characters_GODS_{god}_Common_Abilities_A0{slot}*_GameplayEffects_GE_*.structure.json',
     ]
-    for pattern in ge_patterns:
-     for p in OUT_DIR.glob(pattern):
-        damage_ge_files.append(p.name)
-        with open(p, encoding='utf-8') as f:
-            d = json.load(f)
-        for n in d.get('names', []) or []:
-            tags.add(n)
-            if n == 'Effect.Type.Damage.Physical':
-                if damage_type is None: damage_type = 'physical'
-            elif n == 'Effect.Type.Damage.Magical':
-                if damage_type is None: damage_type = 'magical'
-            elif n == 'Effect.Type.Damage.True':
-                if damage_type is None: damage_type = 'true'
-            elif n.startswith('Effect.Config.AttackPowerScaling.'):
-                scaling_tags.add(n.split('.', 3)[-1])  # 'Physical' / 'Magical'
-            elif n == 'Strength Scaling':
-                scaling_tags.add('Strength')
-            elif n == 'Intelligence Scaling' or n == 'Int Scaling':
-                scaling_tags.add('Intelligence')
+    for pattern in all_ge_patterns:
+        for p in OUT_DIR.glob(pattern):
+            # Skip gameplay cues (visual/audio effects) only. Some gods' GE
+            # files live under `.uasset.structure.json` (Anhur's folder is
+            # typo'd as `Ablities` and has no plain `.structure.json` variant),
+            # so we must accept .uasset.structure.json files.
+            if '_GC_' in p.name:
+                continue
+            try:
+                with open(p, encoding='utf-8') as f:
+                    d = json.load(f)
+            except Exception:
+                continue
+            names = d.get('names', []) or []
+            # Only treat this GE as a damage source if it declares a damage type
+            has_damage_type = any(n.startswith('Effect.Type.Damage.') for n in names)
+            if not has_damage_type:
+                continue
+            damage_ge_files.append(p.name)
+            for n in names:
+                tags.add(n)
+                if n == 'Effect.Type.Damage.Physical':
+                    if damage_type is None: damage_type = 'physical'
+                elif n == 'Effect.Type.Damage.Magical':
+                    if damage_type is None: damage_type = 'magical'
+                elif n == 'Effect.Type.Damage.True':
+                    if damage_type is None: damage_type = 'true'
+                elif n.startswith('Effect.Config.AttackPowerScaling.'):
+                    scaling_tags.add(n.split('.', 3)[-1])  # 'Physical' / 'Magical'
+                elif n == 'Strength Scaling':
+                    scaling_tags.add('Strength')
+                elif n == 'Intelligence Scaling' or n == 'Int Scaling':
+                    scaling_tags.add('Intelligence')
     return {
         'damageType': damage_type,
         'scalingTags': sorted(scaling_tags),
@@ -208,7 +267,7 @@ def main():
     print(f'Gods discovered: {len(gods)}')
 
     catalog = {}
-    for god in gods:
+    for god, ct_stem in gods:
         effects_key = canonical_god_key(god, god_passives)
         eff = god_passives.get(effects_key, {}) if effects_key else {}
         eff_abilities = eff.get('abilities', {}) or {}
@@ -243,11 +302,11 @@ def main():
         catalog[god] = {
             'god': god,
             'effectsKey': effects_key,
-            'stats': read_stats(god),
+            'stats': read_stats(god, ct_stem),
             'abilities': abilities,
             'passive': passive,
             'sources': {
-                'stats': f'CT_{god}_Stats',
+                'stats': f'CT_{ct_stem}_Stats',
             },
         }
 

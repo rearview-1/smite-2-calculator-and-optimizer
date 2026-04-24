@@ -35,7 +35,7 @@ export interface BuildInput {
   level: number
   abilityRanks: Record<AbilitySlot, number>
   items: string[] // display names or internal keys
-  // aspects: string[]  // planned for the aspect slice
+  aspects?: string[]
   // activeBuffs: string[] // planned for the buff slice
 }
 
@@ -113,7 +113,7 @@ function sumItemStats(items: ItemCatalogEntry[]) {
 
 export function snapshotAttacker(build: BuildInput): AttackerSnapshot {
   const god = getGod(build.godId)
-  const items = build.items.map(getItem)
+  const items = build.items.map((name) => getItem(name, { godId: build.godId, aspects: build.aspects }))
   const { flat, str, int } = sumItemStats(items)
 
   // Catalog strips the 'Character.Stat.' prefix when extracting. Use bare names.
@@ -156,7 +156,7 @@ export function snapshotAttacker(build: BuildInput): AttackerSnapshot {
 
 export function snapshotDefender(enemy: EnemyInput): DefenderSnapshot {
   const god = getGod(enemy.godId)
-  const items = enemy.items?.map(getItem) ?? []
+  const items = enemy.items?.map((name) => getItem(name, { godId: enemy.godId })) ?? []
   const { flat } = sumItemStats(items)
   const baseHealth = statAt(god, 'MaxHealth', enemy.level)
   const basePhysProt = statAt(god, 'PhysicalProtection', enemy.level)
