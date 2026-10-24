@@ -13,6 +13,8 @@
     "extract:smite-assets": "node scripts/extract-smite-install-assets.mjs",
     "probe:smite-files": "dotnet build tools\\SmiteAssetProbe\\SmiteAssetProbe.csproj -c Release && dotnet tools\\SmiteAssetProbe\\bin\\Release\\net8.0\\SmiteAssetProbe.dll",
     "audit:sim-data": "python scripts/audit-sim-data.py",
+    "audit:patch-freshness": "python scripts/audit-patch-freshness.py",
+    "test:patch-freshness": "python scripts/test-patch-freshness.py",
     "audit:god-basics": "tsx scripts/audit-god-basics.ts",
     "audit:ability-hits": "tsx scripts/audit-ability-hit-counts.ts",
     "audit:ability-descriptions": "tsx scripts/audit-ability-descriptions.ts",
