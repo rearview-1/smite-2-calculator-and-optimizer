@@ -140,6 +140,7 @@ If you want to re-mine catalogs from a newer SMITE 2 patch:
    npm run probe:smite-files -- --asset-registry
    npm run probe:smite-files -- --anim-timings
    npm run probe:smite-files -- --raw-dump --query=Mon_Offhand
+   python scripts/build-effects-catalog.py
    python scripts/build-gods-catalog.py
    python scripts/build-items-catalog.py
    python scripts/mine-montage-durations.py
@@ -147,6 +148,56 @@ If you want to re-mine catalogs from a newer SMITE 2 patch:
    ```
 
 Note: game assets (`.uasset`, `.pak`, etc.) are Hi-Rez's IP and are `.gitignore`d. You bring your own from your SMITE 2 install.
+
+### Patch-freshness audit
+
+Coverage and description audits can pass on old data. Run the independent provenance
+audit before relying on results for a new patch (Python 3.10+, standard library only):
+
+```bat
+npm run audit:patch-freshness -- --expected-patch YOUR_LIVE_BUILD_ID
+npm run audit:patch-freshness -- --expected-patch YOUR_LIVE_BUILD_ID --strict --json
+npm run test:patch-freshness
+```
+
+Use one exact patch/build ID consistently, taken from a verified current game build
+or official release. This is an **offline attestation check**, not a live patch lookup:
+an omitted target is reported as unknown, never as fresh. The default 30-day maximum
+verification age is a review policy, not proof that a patch happened; override with
+`--max-age-days N`. IDs are compared for equality, not ordered as semantic versions.
+
+The audit follows the existing `audit:*` console-report pattern. Default mode reports
+findings and exits 0; `--strict` exits 1 on any finding. Invalid CLI arguments or a
+failed recording exit 2. `--json` emits the report to stdout for optional CI collection.
+Existing `check`, `review:project`, simulation and parity audit commands are unchanged.
+
+`data/catalog-provenance.json` records each of gods, items, effects and timings
+separately. The audit reports missing/malformed catalogs or provenance, unknown or
+mixed patches, disagreement with the supplied patch, stale/future verification dates,
+and changed catalog content. Hashes ignore JSON formatting and object-key order.
+God provenance also captures the effects hash; timing provenance captures the gods
+hash, so refreshing an upstream catalog invalidates its downstream verification.
+The initial empty manifest intentionally marks all existing catalogs unverified:
+their source patch cannot be inferred from Git dates or file modification times.
+
+After extracting a **clean, complete export from the intended game build**, rebuilding
+in dependency order (effects before gods, gods and montage durations before timings),
+applying any catalog augmentations, and running the existing validation audits, record
+only catalogs actually reviewed against that build:
+
+```bat
+npm run audit:patch-freshness -- --record effects gods items timings --patch YOUR_LIVE_BUILD_ID --expected-patch YOUR_LIVE_BUILD_ID --strict
+```
+
+Commit the manifest with the reviewed catalogs. For a partial refresh, pass only the
+reviewed names after `--record`; other entries retain their old patch/date/hash.
+Recording is an explicit maintainer attestation, not validation or a rebuild. Do not
+record unchanged old exports merely to clear warnings. Generators deliberately do
+not stamp provenance automatically: they read local probe output that may itself be
+old, and later augmentation scripts can modify their output. This small check cannot
+prove the raw exports match the live install, detect an unannounced patch without an
+updated target ID, or validate combat math; existing simulation/description audits
+remain necessary. `--data-dir PATH` supports isolated fixtures or another catalog set.
 
 ## Dev notes
 
